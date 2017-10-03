@@ -1,0 +1,21 @@
+<chromakeySettings>
+	<greenscreenSettings>
+		<bgColorPos>924.735, 414.367</bgColorPos>
+		<bgColorROIsize>39.844</bgColorROIsize>
+		<bgColor>0.00392157, 0, 1, 1</bgColor>
+		<baseMaskStrength>0.452</baseMaskStrength>
+		<chromaMaskStrength>0.908</chromaMaskStrength>
+		<greenspillStrength>0.324</greenspillStrength>
+		<multiplyFilterHueOffset>0.364</multiplyFilterHueOffset>
+		<blurValue>376.832</blurValue>
+		<dilateStep>0</dilateStep>
+		<erodeStep>0</erodeStep>
+		<baseMaskClip_b_w_>0.453061, 0.6</baseMaskClip_b_w_>
+		<detailMaskClip_b_w_>0.591837, 0.652424</detailMaskClip_b_w_>
+		<endMaskClip_b_w_>0.0693878, 0.669388</endMaskClip_b_w_>
+		<clippingMask_TL_>0, 0</clippingMask_TL_>
+		<clippingMask_BR_>1920, 1080</clippingMask_BR_>
+		<photoOffset>-101.878, 0</photoOffset>
+		<photoZoom>1</photoZoom>
+	</greenscreenSettings>
+</chromakeySettings>
