@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VIDEOS>
+    <GROUP>
+      <NAME> Heavy Snowfall Deposits Snow on Juncos </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS></LOOPS>
+      <FIRST_FRAME_1960>1</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>250</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS></LOOPS>
+      <FIRST_FRAME_1960>251</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>500</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS></LOOPS>
+      <FIRST_FRAME_1960>501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>750</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior/Light Snow In Background </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>1000</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>1001</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>1250</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior/Light Snow In Background </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>1251</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>1500</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>1501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>1750</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>1751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>1950</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Departs/Snow Melts A Little </NAME>
+      <STILL>Still_EmptySceneWithLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>1951</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>2125</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Light Snow On Ground </NAME>
+      <STILL>Still_EmptySceneWithLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>2126</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>2175</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> All Snow Melts </NAME>
+      <STILL>Still_EmptySceneWithNoLeaves.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>2176</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>2250</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Raining </NAME>
+      <STILL>Still_EmptySceneWithNoLeaves.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>2251</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>2500</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Raining </NAME>
+      <STILL>Still_EmptySceneWithNoLeaves.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>2501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>2750</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Raining </NAME>
+      <STILL>Still_EmptySceneWithNoLeaves.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>2751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3000</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Plants Bloom As Wood Thrush Male Arrives </NAME>
+      <STILL>Still_MaleArrived.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleSings.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3001</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3225</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Male Sings </NAME>
+      <STILL>Still_MaleArrived.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleSings.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3226</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3350</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Wood Thrush Female Arrives </NAME>
+      <STILL>Still_FemaleArrived.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleFemaleCallToEachother.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3351</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3450</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Male and Female Call To Eachother </NAME>
+      <STILL>Still_FemaleArrived.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleFemaleCallToEachother.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3451</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3525</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Mating Flight </NAME>
+      <STILL>Still_MaleAndFemaleSitTogether.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_AdditionalMatingFlight.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3526</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3950</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Additional Mating Flight </NAME>
+      <STILL>Still_MaleAndFemaleSitTogether.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_AdditionalMatingFlight.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3951</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>4050</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Nesting </NAME>
+      <STILL>Still_FemaleSitsInNest.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_BuildingNest.mp4</FILENAME>
+        <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>4051</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>4425</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Eggs Laid </NAME>
+      <STILL>Still_FemaleSitsInNest.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleFeedsBroodingFemale.mp4</FILENAME>
+        <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>4426</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>4500</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Female Shows Male Eggs </NAME>
+      <STILL>Still_FemaleSitsInNest.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleFeedsBroodingFemale.mp4</FILENAME>
+        <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>4501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>4725</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Eggs Hatch and Are Fed </NAME>
+      <STILL>WT_FemaleWatchesYoung.mp4</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleFeedsYoungSingsInFlight.mp4</FILENAME>
+        <FILENAME>WT_FemaleFeedsYoung.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>4726</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>5000</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Young Fledge </NAME>
+      <STILL>Still_FlyingLessonsFromFemale.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>5001</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>5225</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Flying Lessons With Female </NAME>
+      <STILL>Still_FirstFledglingHasFlown.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>5226</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>5400</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Flying Lessons With Male </NAME>
+      <STILL>Still_FlyingLessonsFromMale.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>5401</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>5650</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Parents Leave Fledglings </NAME>
+      <STILL>Still_FledglingsPracticeFlying.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_FemaleFeedsFledgling.mp4</FILENAME>
+        <FILENAME>WT_MaleFeedsFledgling.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>5651</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6000</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Fledglings Fly Out Of Scene </NAME>
+      <STILL>Still_EmptySceneWithNest.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_FlightInDistance1.mp4</FILENAME>
+        <FILENAME>WT_FlightInDistance2.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>6001</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6250</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Male Enters Scene Late Summer </NAME>
+      <STILL>Still_MaleSitsLateSummer.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleCalls.mp4</FILENAME>
+        <FILENAME>WT_FlightInDistance1.mp4</FILENAME>
+        <FILENAME>WT_FlightInDistance2.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>6251</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6375</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Wood Thrush Departs </NAME>
+      <STILL>Still_EmptySceneLateSummer.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>6376</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6500</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Empty Scene </NAME>
+      <STILL>Still_EmptySceneLateSummer.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>6501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6625</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Leaves Turn Colors Pt. 1 </NAME>
+      <STILL>Still_EmptySceneLateSummer.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>6626</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6750</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Leaves Turn Colors Pt. 2 </NAME>
+      <STILL>Still_EmptySceneLateSummer.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>6751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6925</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Leaves Brown </NAME>
+      <STILL>Still_EmptySceneLateSummer.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>6926</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>7125</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Leaves Fall Off Of Trees </NAME>
+      <STILL>Still_EmptyScene.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>7126</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>7375</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Empty Scene </NAME>
+      <STILL>Still_EmptyScene.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>7376</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>7500</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Arrives </NAME>
+      <STILL>Still_JuncosStanding.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>7501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>7750</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Light Snowfall On Juncos </NAME>
+      <STILL>Still_JuncosInLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>7751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>8000</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>8001</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>8250</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>8251</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>8500</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>8501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>8750</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>8751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>9000</LAST_FRAME_1960>
+    </GROUP>
+</VIDEOS>
