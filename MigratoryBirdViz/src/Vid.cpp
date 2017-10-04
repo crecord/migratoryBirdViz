@@ -24,7 +24,7 @@ string Vid::mons[12] = {
 };
 
 float Vid::percent = 0;
-int Vid::frame = 1;
+int Vid::frame = 0;
 bool Vid::isAfter = false;
 
 void Vid::setup(string name, string stillName, int firstFrame_1960, int lastFrame_1960, vector <string> loopFiles){
@@ -71,7 +71,7 @@ void Vid::update(){
     
     // looking at the 1960s
     else{
-      if (frame >= startFrame_1960 & frame < endFrame_1960) {
+      if (frame >= startFrame_1960 & frame <= endFrame_1960) {
         if (!isCurrentlyPlaying){
           setupVideoBlock();
           isCurrentlyPlaying = true;

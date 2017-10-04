@@ -31,7 +31,6 @@ class ofApp : public ofBaseApp{
     void drawCheckerboard(float x, float y, int width, int height, int size);
     float setPosition;
     int setFrame;
-    std::queue<int> frameQ;
   
     // === Variables =============================
     ofImage bg_image;
@@ -62,6 +61,7 @@ class ofApp : public ofBaseApp{
     ofXml scheduleOfVideos;
     
     vector<Vid> allVids;
+    vector<string> fullScene_1960;
     
     // arduino variables
     ofArduino ard;

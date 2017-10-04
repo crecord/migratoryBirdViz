@@ -4,7 +4,7 @@
 void ofApp::setup(){
   
     setPosition = 0;
-    setFrame = 4000;
+    setFrame = 0;
   
     ofSetFullscreen(false);
     
@@ -39,8 +39,24 @@ void ofApp::setup(){
         temp.setup( name, still, firstFrame_1960, lastFrame_1960, loopFiles);
         allVids.push_back(temp);
     }
-    
-    ard.connect("tty.usbmodem1421", 57600);
+  
+    ofLog() << "loading all images 1 - 9000 ....";
+    for (int i = 0; i < 9000; i++){
+      ofImage temp;
+      string leadingZeros = "";
+      if (i < 10) {
+        leadingZeros = "000";
+      } else if (i < 100) {
+        leadingZeros = "00";
+      } else if (i < 1000) {
+        leadingZeros = "0";
+      }
+      string imageURL = "./videos/1960_" + leadingZeros + ofToString(i) + ".jpg";
+      fullScene_1960.push_back(imageURL);
+    }
+    ofLog() << "...loaded all images 9000";
+  
+    ard.connect("cu.usbmodem14111", 57600);
     // listen for EInitialized notification. this indicates that
     // the arduino is ready to receive commands and it is safe to
     // call setupArduino()
@@ -53,14 +69,18 @@ void ofApp::setup(){
     lastSensorValue = -20;
     
     isSpinMode = false;
-    lastValue =0;
+    lastValue = 0;
     diffCount = 0;
     diffList.assign(5, 0);
     
     spinLevelVid.load("1960.mp4");
     spinLevelVid.setLoopState(OF_LOOP_NORMAL);
-    spinLevelVid.setFrame(setFrame - 1);
+    spinLevelVid.setFrame(setFrame);
+    spinLevelVid.stop();
     spinLevelVid.update();
+  
+    ofLog() << "FRAMES = " << spinLevelVid.getTotalNumFrames();
+    ofLog() << "FRAME = " << spinLevelVid.getCurrentFrame();
 }
 
 
@@ -85,14 +105,12 @@ void ofApp::setupArduino(const int & version) {
 //--------------------------------------------------------------
 void ofApp::update(){
     if(!isSpinMode){
+      diffList.push_front(0);
+      diffList.pop_back();
       allVids.at(0).frame = setFrame;
       for(int i =0; i < allVids.size(); i++){
           allVids.at(i).update();
       }
-    }
-    else{
-      spinLevelVid.setFrame(setFrame - 1); // only conversion to 0d index
-      spinLevelVid.update();
     }
   
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
@@ -106,11 +124,19 @@ void ofApp::draw(){
     ofBackground(0);
     ofSetColor(255, 255, 255);
   
+  
+    if(!isSpinMode) {
+      ofClear(255, 0, 0);
+    } else {
+      ofClear(0, 255, 0);
+    }
+
+  
     drawAllVid.begin();
     ofClear(0, 0, 0, 0);
   
+    string debugInfo = "";
     if(!isSpinMode){
-      ofClear(0,70,0);
       // draw the currently active loops or still
       for(int i =0; i < allVids.size(); i++){
         if((allVids.at(i).isCurrentlyPlaying)){
@@ -119,21 +145,26 @@ void ofApp::draw(){
           } else {
               allVids.at(i).draw();
           }
-          ofDrawBitmapString(allVids.at(i).debugInfo, 10 + 200, 50);
+          debugInfo = allVids.at(i).debugInfo;
         }
       }
     }
     else {
-      ofClear(70,0,0);
-      spinLevelVid.draw(0, 0);
+      ofImage temp;
+      temp.load(fullScene_1960.at(setFrame));
+      temp.draw(0, 0);
     }
   
     drawAllVid.end();
     bezManager.draw();
     
-    ofSetColor(255, 0, 0);
+    ofSetColor(0, 0, 255);
     ofDrawBitmapString(encoderVal, 10, 20);
     ofDrawBitmapString(setFrame, 10, 40);
+    ofDrawBitmapString("month = " + ofToString(Vid::mons[(int)trunc((setFrame / 9000.0) * 12)]), 10, 60);
+    ofDrawBitmapString("day = ", 150, 60);
+    ofDrawBitmapString("year = 1960", 300, 60);
+    ofDrawBitmapString(debugInfo, 10, 80);
 }
 
 
@@ -157,17 +188,16 @@ void ofApp::keyPressed(int key){
     }
     if(key == 'q'){
         isSpinMode = true;
-        setFrame -= 25;
-        if(setFrame < 1){
-            setFrame = 9000;
-            //vidTwo.setPaused(true);
+        setFrame -= 5;
+        if(setFrame < 0){
+            setFrame = 8999;
         }
     }
    if(key == 'w'){
         isSpinMode = true;
-        setFrame += 25;
-        if(setFrame > 9000){
-         setFrame = 1;
+        setFrame += 5;
+        if(setFrame >= 9000){
+         setFrame = 0;
         }
     }
     if (key == 'a'){
@@ -176,16 +206,16 @@ void ofApp::keyPressed(int key){
     if (key == 'g'){
         bShowGui = !bShowGui;
     }
-    
 }
 
 void ofApp::keyReleased(int key){
    if(key == 'q'){
     isSpinMode = false;
-    
   }
   if(key == 'w'){
     isSpinMode = false;
+  } if (key == 'p') {
+    isSpinMode = !isSpinMode;
   }
 }
 
@@ -252,21 +282,19 @@ void ofApp::analogPinChanged(const int & pinNum) {
     float averageDiff = averageOfList(diffList);
     
     
-    if(averageDiff > 3){
+    if(averageDiff > 1){
+        // In update, I added 0s to diffList if spin mode = false (not moving)
+        // seems to be working well and we can go a little slower
         diffCount++;
         isSpinMode = true;
-    }
-    else if(averageDiff < 2){
-        isSpinMode =false;
-    }
-
-    
-    
-    if(abs(result - lastSensorValue) > 3 ){
         setPosition = ofMap(result, 0, 735, 0, 1);
-        setFrame = int(ofMap(result, 0, 735, 1, 9000, true));
+        setFrame = int(ofMap(result, 0, 735, 0, 8999, true));
         lastSensorValue = result;
     }
+    else if(averageDiff < 1){
+      isSpinMode = false;
+    }
+
     
     encoderVal = "analog pin: " + ofToString(pinNum) + " = " + ofToString(result);
 }
