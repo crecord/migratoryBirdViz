@@ -68,7 +68,6 @@ class ofApp : public ofBaseApp{
     bool bSetupArduino;
     void setupArduino(const int & version);
     void analogPinChanged(const int & pinNum);
-    void digitalPinChanged(const int & pinNum);
     void updateArduino();
     
     string encoderVal;
@@ -89,8 +88,5 @@ class ofApp : public ofBaseApp{
     float averageOfList(deque<int> list);
     
     ofVideoPlayer spinLevelVid;
-    
-    bool buttonOneState;
-    bool buttonTwoState;
     
 };

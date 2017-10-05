@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B66227C1F8687D600AE9A68 /* ofxBezierWarp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0B6622781F8687D600AE9A68 /* ofxBezierWarp.cpp */; };
-		0B66227D1F8687D600AE9A68 /* ofxBezierWarpManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0B66227A1F8687D600AE9A68 /* ofxBezierWarpManager.cpp */; };
+		0B6622851F86927600AE9A68 /* ofxBezierWarp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0B6622811F86927600AE9A68 /* ofxBezierWarp.cpp */; };
+		0B6622861F86927600AE9A68 /* ofxBezierWarpManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0B6622831F86927600AE9A68 /* ofxBezierWarpManager.cpp */; };
 		10B69DE456AED1288FC9316B /* Tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A810DF70319A10353588F5DB /* Tracker.cpp */; };
 		169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A03390302D5A2C9F0E4AB /* ofxCvFloatImage.cpp */; };
 		1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 907C5B5E104864A2D3A25745 /* ofxToggle.cpp */; };
@@ -108,10 +108,10 @@
 		096CB33CAD6C5A446E7026E9 /* dynamic_bitset.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = dynamic_bitset.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/dynamic_bitset.h; sourceTree = SOURCE_ROOT; };
 		0A1DAC09F322AE313A40706D /* ofxToggle.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxToggle.h; path = ../../../addons/ofxGui/src/ofxToggle.h; sourceTree = SOURCE_ROOT; };
 		0ADD044A3066779F3673F1FE /* static_check.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = static_check.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/gpu/device/static_check.hpp; sourceTree = SOURCE_ROOT; };
-		0B6622781F8687D600AE9A68 /* ofxBezierWarp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBezierWarp.cpp; sourceTree = "<group>"; };
-		0B6622791F8687D600AE9A68 /* ofxBezierWarp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBezierWarp.h; sourceTree = "<group>"; };
-		0B66227A1F8687D600AE9A68 /* ofxBezierWarpManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBezierWarpManager.cpp; sourceTree = "<group>"; };
-		0B66227B1F8687D600AE9A68 /* ofxBezierWarpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBezierWarpManager.h; sourceTree = "<group>"; };
+		0B6622811F86927600AE9A68 /* ofxBezierWarp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBezierWarp.cpp; sourceTree = "<group>"; };
+		0B6622821F86927600AE9A68 /* ofxBezierWarp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBezierWarp.h; sourceTree = "<group>"; };
+		0B6622831F86927600AE9A68 /* ofxBezierWarpManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBezierWarpManager.cpp; sourceTree = "<group>"; };
+		0B6622841F86927600AE9A68 /* ofxBezierWarpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBezierWarpManager.h; sourceTree = "<group>"; };
 		0B87BF43E5302005FEF650B6 /* ios.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ios.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/highgui/ios.h; sourceTree = SOURCE_ROOT; };
 		0CEC1FE946DBDBAB82AF6FE3 /* global_motion.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = global_motion.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/videostab/global_motion.hpp; sourceTree = SOURCE_ROOT; };
 		0CF0AA3895D28E97D8A1E4A9 /* ground_truth.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ground_truth.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/ground_truth.h; sourceTree = SOURCE_ROOT; };
@@ -392,21 +392,21 @@
 			path = bin/data/stills;
 			sourceTree = "<group>";
 		};
-		0B6622761F8687D600AE9A68 /* ofxBezierWarp */ = {
+		0B66227F1F86927600AE9A68 /* ofxBezierWarp */ = {
 			isa = PBXGroup;
 			children = (
-				0B6622771F8687D600AE9A68 /* src */,
+				0B6622801F86927600AE9A68 /* src */,
 			);
 			name = ofxBezierWarp;
 			sourceTree = "<group>";
 		};
-		0B6622771F8687D600AE9A68 /* src */ = {
+		0B6622801F86927600AE9A68 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				0B6622781F8687D600AE9A68 /* ofxBezierWarp.cpp */,
-				0B6622791F8687D600AE9A68 /* ofxBezierWarp.h */,
-				0B66227A1F8687D600AE9A68 /* ofxBezierWarpManager.cpp */,
-				0B66227B1F8687D600AE9A68 /* ofxBezierWarpManager.h */,
+				0B6622811F86927600AE9A68 /* ofxBezierWarp.cpp */,
+				0B6622821F86927600AE9A68 /* ofxBezierWarp.h */,
+				0B6622831F86927600AE9A68 /* ofxBezierWarpManager.cpp */,
+				0B6622841F86927600AE9A68 /* ofxBezierWarpManager.h */,
 			);
 			name = src;
 			path = ../../../addons/ofxBezierWarp/src;
@@ -867,7 +867,7 @@
 				480A780D8D0308AE4A368801 /* ofxGui */,
 				A0B90D3B0ADB9C1716816714 /* ofxOpenCv */,
 				1F4FB5C423662B96ADFDCC0B /* ofxXmlSettings */,
-				0B6622761F8687D600AE9A68 /* ofxBezierWarp */,
+				0B66227F1F86927600AE9A68 /* ofxBezierWarp */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -1145,7 +1145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B66227C1F8687D600AE9A68 /* ofxBezierWarp.cpp in Sources */,
+				0B6622851F86927600AE9A68 /* ofxBezierWarp.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				FF539B8346B1D0B49B7F140A /* Vid.cpp in Sources */,
@@ -1161,7 +1161,7 @@
 				C602002DE761F9B52DB4400A /* ObjectFinder.cpp in Sources */,
 				7CDAD32BE4FA46701E3552C7 /* RunningBackground.cpp in Sources */,
 				10B69DE456AED1288FC9316B /* Tracker.cpp in Sources */,
-				0B66227D1F8687D600AE9A68 /* ofxBezierWarpManager.cpp in Sources */,
+				0B6622861F86927600AE9A68 /* ofxBezierWarpManager.cpp in Sources */,
 				A6668C5B1272D7FCD5B5A16F /* Utilities.cpp in Sources */,
 				DBCB84A37F9AECC254870D79 /* Wrappers.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,

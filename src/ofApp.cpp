@@ -56,7 +56,7 @@ void ofApp::setup(){
     }
     ofLog() << "...loaded all images 9000";
   
-    ard.connect("cu.usbmodem1421", 57600);
+    ard.connect("tty.usbmodem1421", 57600);
     // listen for EInitialized notification. this indicates that
     // the arduino is ready to receive commands and it is safe to
     // call setupArduino()
@@ -81,10 +81,6 @@ void ofApp::setup(){
   
     ofLog() << "FRAMES = " << spinLevelVid.getTotalNumFrames();
     ofLog() << "FRAME = " << spinLevelVid.getCurrentFrame();
-    
-    buttonOneState = false;
-    buttonTwoState = false;
-    // to do initialize one on the start up to be active.
 }
 
 
@@ -102,10 +98,7 @@ void ofApp::setupArduino(const int & version) {
     
     // set pin A0 to analog input
     ard.sendAnalogPinReporting(0, ARD_ANALOG);
-    ard.sendDigitalPinMode(2, ARD_INPUT);
-    ard.sendDigitalPinMode(3, ARD_INPUT);
-    
-    ofAddListener(ard.EDigitalPinChanged, this, &ofApp::digitalPinChanged);
+
     ofAddListener(ard.EAnalogPinChanged, this, &ofApp::analogPinChanged);
 }
 
@@ -304,19 +297,6 @@ void ofApp::analogPinChanged(const int & pinNum) {
 
     
     encoderVal = "analog pin: " + ofToString(pinNum) + " = " + ofToString(result);
-}
-
-//--------------------------------------------------------------
-void ofApp::digitalPinChanged(const int & pinNum) {
-    // do something with the digital input. here we're simply going to print the pin number and
-    // value to the screen each time it changes
-    ofLog()<< ofToString(pinNum)<< "value: "<<ofToString(ard.getDigital(pinNum));
-    if(pinNum == 2){
-        buttonOneState =ard.getDigital(pinNum);
-    }
-    else if(pinNum == 3){
-        buttonTwoState = ard.getDigital(pinNum);
-    }
 }
 
 
