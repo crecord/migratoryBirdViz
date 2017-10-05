@@ -1,0 +1,6 @@
+ofxBezierWarpManager
+ofxChromaKeyShader
+ofxCv
+ofxGui
+ofxOpenCv
+ofxXmlSettings

@@ -27,16 +27,14 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-        void drawDebugMasks();
-        void drawCheckerboard(float x, float y, int width, int height, int size);
-
-    
-    
-        float setPosition;
-    
+    void drawDebugMasks();
+    void drawCheckerboard(float x, float y, int width, int height, int size);
+    float setPosition;
+    int setFrame;
+  
     // === Variables =============================
     ofImage bg_image;
-    
+  
     ofxChromaKeyShader *chromakey;
     ofxChromaKeyShader *chromakey1;
     ofVideoGrabber webcam;
@@ -47,8 +45,7 @@ class ofApp : public ofBaseApp{
     ofxPanel chromaGui;
     bool bShowGui;
     bool bUpdateBgColor;
-    
-    
+  
     ofFbo drawAllVid;
     
     //ofFbo allThelayers;
@@ -59,19 +56,19 @@ class ofApp : public ofBaseApp{
     
     bool showGuide;
     ofxBezierWarpManager bezManager;
-    
-
-    
+  
     // load in the schedule
     ofXml scheduleOfVideos;
     
     vector<Vid> allVids;
+    vector<string> fullScene_1960;
     
     // arduino variables
     ofArduino ard;
     bool bSetupArduino;
     void setupArduino(const int & version);
     void analogPinChanged(const int & pinNum);
+    void digitalPinChanged(const int & pinNum);
     void updateArduino();
     
     string encoderVal;
@@ -92,5 +89,8 @@ class ofApp : public ofBaseApp{
     float averageOfList(deque<int> list);
     
     ofVideoPlayer spinLevelVid;
+    
+    bool buttonOneState;
+    bool buttonTwoState;
     
 };

@@ -1,334 +1,374 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <VIDEOS>
     <GROUP>
-        <ID>1</ID>
-        <VIDS>
-            <FILENAME>Backdrop.png</FILENAME>
-        </VIDS>
-        <DATE_AFTER>may 1-July 25</DATE_AFTER>
-        <DATE_BEFORE>may 1-July 25</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>1,1</ALPHA>
+      <NAME> Heavy Snowfall Deposits Snow on Juncos </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+        <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>0</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>250</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>1</ID>
-        <VIDS>
-            <FILENAME>WT_MaleArrives</FILENAME>
-            <FILENAME>WT_MaleSings</FILENAME>
-        </VIDS>
-        <DATE_AFTER>may 1-may 5</DATE_AFTER>
-        <DATE_BEFORE>may 1-may 5</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.12,0.781</ALPHA>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+        <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>251</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>500</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>2</ID>
-        <VIDS>
-            <FILENAME>WT_MaleSings</FILENAME>
-        </VIDS>
-        <DATE_AFTER>may 5-May 10</DATE_AFTER>
-        <DATE_BEFORE>may 5-May 10</DATE_BEFORE>
-        <LOOP>1</LOOP>
-        <ALPHA>0.12,0.781</ALPHA>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+        <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>750</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>3</ID>
-        <VIDS>
-            <FILENAME>WT_FemaleArrives</FILENAME>
-        </VIDS>
-        <DATE_AFTER>may 10-May 15</DATE_AFTER>
-        <DATE_BEFORE>may 10-May 15</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.12,0.781</ALPHA>
+      <NAME> Junco Flock Behavior/Light Snow In Background </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+        <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>1000</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>4</ID>
-        <VIDS>
-            <FILENAME>WT_MaleFemaleCallToEachother</FILENAME>
-        </VIDS>
-        <DATE_AFTER>May 15-may 16</DATE_AFTER>
-        <DATE_BEFORE>May 15-may 16</DATE_BEFORE>
-        <LOOP>1</LOOP>
-        <ALPHA>0.12,0.781</ALPHA>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+        <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>1001</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>1250</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>5</ID>
-        <VIDS>
-            <FILENAME>WT_MatingFlight</FILENAME>
-        </VIDS>
-        <DATE_AFTER>may 16-May 17</DATE_AFTER>
-        <DATE_BEFORE>may 16-May 17</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.12,0.781</ALPHA>g
+      <NAME> Junco Flock Behavior/Light Snow In Background </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+        <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>1251</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>1500</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>6</ID>
-        <VIDS>
-            <FILENAME>WT_AdditionalMatingFlight</FILENAME>
-        </VIDS>
-        <DATE_AFTER>May 17-may 19</DATE_AFTER>
-        <DATE_BEFORE>May 17-may 19</DATE_BEFORE>
-        <LOOP>1</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+        <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>1501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>1750</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>7</ID>
-        <VIDS>
-            <FILENAME>WT_PickNestSite</FILENAME>
-        </VIDS>
-        <DATE_AFTER>may 19-May 20</DATE_AFTER>
-        <DATE_BEFORE>may 19-May 20</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInHeavySnow.jpg</STILL>
+      <LOOPS>
+        <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>1751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>1950</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>8</ID>
-        <VIDS>
-            <FILENAME>WT_BuildingNest</FILENAME>
-            <FILENAME>WT_FemaleCleansNest</FILENAME>
-        </VIDS>
-        <DATE_AFTER>May 20-may 22</DATE_AFTER>
-        <DATE_BEFORE>May 20-may 22</DATE_BEFORE>
-        <LOOP>1</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Junco Flock Departs/Snow Melts A Little </NAME>
+      <STILL>Still_EmptySceneWithLightSnow.jpg</STILL>
+      <LOOPS></LOOPS>
+      <FIRST_FRAME_1960>1951</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>2125</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>8</ID>
-        <VIDS>
-            <FILENAME>WT_EggsLaid</FILENAME>
-        </VIDS>
-        <DATE_AFTER>may 22-may 23</DATE_AFTER>
-        <DATE_BEFORE>may 22-may 23</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Light Snow On Ground </NAME>
+      <STILL>Still_EmptySceneWithLightSnow.jpg</STILL>
+      <LOOPS></LOOPS>
+      <FIRST_FRAME_1960>2126</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>2175</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>9</ID>
-        <VIDS>
-            <FILENAME>WT_FemaleCleansNest</FILENAME>
-            <FILENAME>WT_MaleFeedsBroodingFemale</FILENAME>
-        </VIDS>
-        <DATE_AFTER>may 23-june 11</DATE_AFTER>
-        <DATE_BEFORE>may 23-june 11</DATE_BEFORE>
-        <LOOP>1</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> All Snow Melts </NAME>
+      <STILL>Still_EmptySceneWithNoLeaves.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>2176</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>2250</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>10</ID>
-        <VIDS>
-            <FILENAME>WT_EggsHatch</FILENAME>
-        </VIDS>
-        <DATE_AFTER>June 11-june 12</DATE_AFTER>
-        <DATE_BEFORE>June 11-june 12</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Raining </NAME>
+      <STILL>Still_EmptySceneWithNoLeaves.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>2251</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>2500</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>11</ID>
-        <VIDS>
-            <FILENAME>WT_FemaleWatchesYoung</FILENAME>
-            <FILENAME>WT_MaleFeedsYoungSingsInFlight</FILENAME>
-            <FILENAME>WT_FemaleFeedsYoung</FILENAME>
-        </VIDS>
-        <DATE_AFTER>June 11-July 25</DATE_AFTER>
-        <DATE_BEFORE>June 11-July 25</DATE_BEFORE>
-        <LOOP>2</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Raining </NAME>
+      <STILL>Still_EmptySceneWithNoLeaves.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>2501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>2750</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>12</ID>
-        <VIDS>
-            <FILENAME>WT_YoungFledge</FILENAME>
-        </VIDS>
-        <DATE_AFTER>July 25-july 26</DATE_AFTER>
-        <DATE_BEFORE>July 25-july 26</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Raining </NAME>
+      <STILL>Still_EmptySceneWithNoLeaves.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>2751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3000</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>13</ID>
-        <VIDS>
-            <FILENAME>WT_FledglingsFlapWings</FILENAME>
-            <FILENAME>WT_FemaleFeedsFledgling</FILENAME>
-            <FILENAME>WT_MaleFeedsFledgling</FILENAME>
-        </VIDS>
-        <DATE_AFTER>July 25-august 1</DATE_AFTER>
-        <DATE_BEFORE>July 25-august 1</DATE_BEFORE>
-        <LOOP>2</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Plants Bloom As Wood Thrush Male Arrives </NAME>
+      <STILL>Still_MaleArrived.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleSings.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3001</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3225</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>14</ID>
-        <VIDS>
-            <FILENAME>WT_YoungMature</FILENAME>
-        </VIDS>
-        <DATE_AFTER>august 1-august 2</DATE_AFTER>
-        <DATE_BEFORE>august 1-august 2</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Male Sings </NAME>
+      <STILL>Still_MaleArrived.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleSings.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3226</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3350</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>15</ID>
-        <VIDS>
-            <FILENAME>WT_MaleEntersSceneLateSummer</FILENAME>
-        </VIDS>
-        <DATE_AFTER>august 2-august 3</DATE_AFTER>
-        <DATE_BEFORE>august 2-august 3</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Wood Thrush Female Arrives </NAME>
+      <STILL>Still_FemaleArrived.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleFemaleCallToEachother.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3351</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3450</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>16</ID>
-        <VIDS>
-            <FILENAME>WT_FlightInDistance1</FILENAME>
-            <FILENAME>WT_FlightInDistance2</FILENAME>
-            <FILENAME>WT_MaleCalls</FILENAME>
-        </VIDS>
-        <DATE_AFTER>august 3-september 17</DATE_AFTER>
-        <DATE_BEFORE>august 3-september 17</DATE_BEFORE>
-        <LOOP>1</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Male and Female Call To Eachother </NAME>
+      <STILL>Still_FemaleArrived.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleFemaleCallToEachother.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3451</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3525</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>17</ID>
-        <VIDS>
-            <FILENAME>WT_WoodThrushDepart</FILENAME>
-        </VIDS>
-        <DATE_AFTER>september 17-september 18</DATE_AFTER>
-        <DATE_BEFORE>september 17-september 18</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.2,0.6</ALPHA>
+      <NAME> Mating Flight </NAME>
+      <STILL>Still_MaleAndFemaleSitTogether.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_AdditionalMatingFlight.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3526</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>3950</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>18</ID>
-        <VIDS>
-            <FILENAME>JUNCO_FlockArrives</FILENAME>
-        </VIDS>
-        <DATE_AFTER>november 1-november 2</DATE_AFTER>
-        <DATE_BEFORE>november 1-november 2</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.15,0.27</ALPHA>
+      <NAME> Additional Mating Flight </NAME>
+      <STILL>Still_MaleAndFemaleSitTogether.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_AdditionalMatingFlight.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>3951</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>4050</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>19</ID>
-        <VIDS>
-            <FILENAME>WEATHER_FirstSnowfall</FILENAME>
-        </VIDS>
-        <DATE_AFTER>november 1-november 2</DATE_AFTER>
-        <DATE_BEFORE>november 1-november 2</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.08,0.75</ALPHA>
+      <NAME> Nesting </NAME>
+      <STILL>Still_FemaleSitsInNest.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_BuildingNest.mp4</FILENAME>
+        <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>4051</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>4425</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>20</ID>
-        <VIDS>
-            <FILENAME>JUNCO1_CatchesBugFromTree</FILENAME>
-            <FILENAME>JUNCO2_GetsWarm</FILENAME>
-            <FILENAME>JUNCO2_FlitsAround</FILENAME>
-            <FILENAME>JUNCO3_ScratchesAtGround</FILENAME>
-            <FILENAME>JUNCO4_EatsSeedsFromGrass</FILENAME>
-            <FILENAME>JUNCO5_HopsOffBranchToEat</FILENAME>
-            <FILENAME>JUNCO5_BathesInSnow</FILENAME>
-            <FILENAME>WEATHER_LightSnowfall</FILENAME>
-        </VIDS>
-        <DATE_AFTER>november 2-january 1</DATE_AFTER>
-        <DATE_BEFORE>november 2-january 1</DATE_BEFORE>
-        <LOOP>3</LOOP>
-        <ALPHA>0.15,0.27</ALPHA>
+      <NAME> Eggs Laid </NAME>
+      <STILL>Still_FemaleSitsInNest.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleFeedsBroodingFemale.mp4</FILENAME>
+        <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>4426</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>4500</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>21</ID>
-        <VIDS>
-            <FILENAME>SCENE_LightSnow</FILENAME>
-        </VIDS>
-        <DATE_AFTER>november 2-january 1</DATE_AFTER>
-        <DATE_BEFORE>november 2-january 1</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.08,0.26</ALPHA>
+      <NAME> Female Shows Male Eggs </NAME>
+      <STILL>Still_FemaleSitsInNest.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleFeedsBroodingFemale.mp4</FILENAME>
+        <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>4501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>4725</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>22</ID>
-        <VIDS>
-            <FILENAME>WEATHER_SecondSnowfall</FILENAME>
-        </VIDS>
-        <DATE_AFTER>january 1-january 2</DATE_AFTER>
-        <DATE_BEFORE>january 1-january 2</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.08,0.26</ALPHA>
+      <NAME> Eggs Hatch and Are Fed </NAME>
+      <STILL>WT_FemaleWatchesYoung.mp4</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleFeedsYoungSingsInFlight.mp4</FILENAME>
+        <FILENAME>WT_FemaleFeedsYoung.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>4726</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>5000</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>23</ID>
-        <VIDS>
-            <FILENAME>WEATHER_HeavySnowfall</FILENAME>
-        </VIDS>
-        <DATE_AFTER>january 2-March 19</DATE_AFTER>
-        <DATE_BEFORE>january 2-March 19</DATE_BEFORE>
-        <LOOP>1</LOOP>
-        <ALPHA>0.08,0.26</ALPHA>
+      <NAME> Young Fledge </NAME>
+      <STILL>Still_FlyingLessonsFromFemale.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>5001</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>5225</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>24</ID>
-        <VIDS>
-            <FILENAME>SCENE_HeavySnow</FILENAME>
-        </VIDS>
-        <DATE_AFTER>january 2-March 19</DATE_AFTER>
-        <DATE_BEFORE>january 2-March 19</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.08,0.26</ALPHA>
+      <NAME> Flying Lessons With Female </NAME>
+      <STILL>Still_FirstFledglingHasFlown.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>5226</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>5400</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>25</ID>
-        <VIDS>
-            <FILENAME>JUNCO1_Shivers</FILENAME>
-            <FILENAME>JUNCO2_Shivers</FILENAME>
-            <FILENAME>JUNCO3_Shivers</FILENAME>
-            <FILENAME>JUNCO4_Shivers</FILENAME>
-            <FILENAME>JUNCO5_Shivers</FILENAME>
-            <FILENAME>WEATHER_HeavySnowfall</FILENAME>
-        </VIDS>
-        <DATE_AFTER>january 2-March 19</DATE_AFTER>
-        <DATE_BEFORE>january 2-March 19</DATE_BEFORE>
-        <LOOP>3</LOOP>
-        <ALPHA>0.15,0.27</ALPHA>
+      <NAME> Flying Lessons With Male </NAME>
+      <STILL>Still_FlyingLessonsFromMale.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>5401</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>5650</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>26</ID>
-        <VIDS>
-            <FILENAME>JUNCO_FlockDeparts</FILENAME>
-        </VIDS>
-        <DATE_AFTER>March 19-March 20</DATE_AFTER>
-        <DATE_BEFORE>March 19-March 20</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.15,0.27</ALPHA>
+      <NAME> Parents Leave Fledglings </NAME>
+      <STILL>Still_FledglingsPracticeFlying.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_FemaleFeedsFledgling.mp4</FILENAME>
+        <FILENAME>WT_MaleFeedsFledgling.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>5651</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6000</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>27</ID>
-        <VIDS>
-            <FILENAME>WEATHER_HeavySnowMelts</FILENAME>
-        </VIDS>
-        <DATE_AFTER>March 25-March 26</DATE_AFTER>
-        <DATE_BEFORE>March 25-March 26</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.08,0.26</ALPHA>
+      <NAME> Fledglings Fly Out Of Scene </NAME>
+      <STILL>Still_EmptySceneWithNest.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_FlightInDistance1.mp4</FILENAME>
+        <FILENAME>WT_FlightInDistance2.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>6001</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6250</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>28</ID>
-        <VIDS>
-            <FILENAME>WEATHER_LightSnowfall</FILENAME>
-        </VIDS>
-        <DATE_AFTER>March 25-March 28</DATE_AFTER>
-        <DATE_BEFORE>March 25-March 28</DATE_BEFORE>
-        <LOOP>1</LOOP>
-        <ALPHA>0.08,0.26</ALPHA>
+      <NAME> Male Enters Scene Late Summer </NAME>
+      <STILL>Still_MaleSitsLateSummer.jpg</STILL>
+      <LOOPS>
+        <FILENAME>WT_MaleCalls.mp4</FILENAME>
+        <FILENAME>WT_FlightInDistance1.mp4</FILENAME>
+        <FILENAME>WT_FlightInDistance2.mp4</FILENAME>
+      </LOOPS>
+      <FIRST_FRAME_1960>6251</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6375</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-        <ID>29</ID>
-        <VIDS>
-            <FILENAME>WEATHER_LightSnowMelts</FILENAME>
-        </VIDS>
-        <DATE_AFTER>March 28-March 30</DATE_AFTER>
-        <DATE_BEFORE>March 28-March 30</DATE_BEFORE>
-        <LOOP>0</LOOP>
-        <ALPHA>0.08,0.26</ALPHA>
+      <NAME> Wood Thrush Departs </NAME>
+      <STILL>Still_EmptySceneLateSummer.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>6376</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6500</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Empty Scene </NAME>
+      <STILL>Still_EmptySceneLateSummer.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>6501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6625</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Leaves Turn Colors Pt. 1 </NAME>
+      <STILL>Still_EmptySceneLateSummer.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>6626</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6750</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Leaves Turn Colors Pt. 2 </NAME>
+      <STILL>Still_EmptySceneLateSummer.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>6751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>6925</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Leaves Brown </NAME>
+      <STILL>Still_EmptySceneLateSummer.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>6926</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>7125</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Leaves Fall Off Of Trees </NAME>
+      <STILL>Still_EmptyScene.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>7126</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>7375</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Empty Scene </NAME>
+      <STILL>Still_EmptyScene.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>7376</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>7500</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Arrives </NAME>
+      <STILL>Still_JuncosStanding.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>7501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>7750</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Light Snowfall On Juncos </NAME>
+      <STILL>Still_JuncosInLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>7751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>8000</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>8001</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>8250</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>8251</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>8500</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>8501</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>8750</LAST_FRAME_1960>
+    </GROUP>
+    <GROUP>
+      <NAME> Junco Flock Behavior </NAME>
+      <STILL>Still_JuncosInLightSnow.jpg</STILL>
+      <LOOPS>
+      </LOOPS>
+      <FIRST_FRAME_1960>8751</FIRST_FRAME_1960>
+      <LAST_FRAME_1960>9000</LAST_FRAME_1960>
     </GROUP>
 </VIDEOS>
