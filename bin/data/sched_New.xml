@@ -17,6 +17,7 @@
       </LOOPS>
       <FIRST_FRAME_1960>251</FIRST_FRAME_1960>
       <LAST_FRAME_1960>500</LAST_FRAME_1960>
+      
     </GROUP>
     <GROUP>
       <NAME> Junco Flock Behavior </NAME>
@@ -101,6 +102,7 @@
       </LOOPS>
       <FIRST_FRAME_1960>2251</FIRST_FRAME_1960>
       <LAST_FRAME_1960>2500</LAST_FRAME_1960>
+      
     </GROUP>
     <GROUP>
       <NAME> Raining </NAME>
@@ -119,7 +121,7 @@
       <LAST_FRAME_1960>3000</LAST_FRAME_1960>
     </GROUP>
     <GROUP>
-      <NAME> Plants Bloom As Wood Thrush Male Arrives </NAME>
+      <NAME flag="WT"> Plants Bloom As Wood Thrush Male Arrives </NAME>
       <STILL>Still_MaleArrived.jpg</STILL>
       <LOOPS>
         <FILENAME>WT_MaleSings.mp4</FILENAME>

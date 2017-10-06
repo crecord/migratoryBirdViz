@@ -22,7 +22,6 @@ public:
   
     void update();
     void draw();
-    int chooseIndex(int lastIndex);
         
     vector <int> currentlyPlayingIndexes;
     vector <ofVideoPlayer> videos;

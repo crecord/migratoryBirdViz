@@ -68,6 +68,7 @@ class ofApp : public ofBaseApp{
     bool bSetupArduino;
     void setupArduino(const int & version);
     void analogPinChanged(const int & pinNum);
+    void digitalPinChanged(const int & pinNum);
     void updateArduino();
     
     string encoderVal;
@@ -88,5 +89,17 @@ class ofApp : public ofBaseApp{
     float averageOfList(deque<int> list);
     
     ofVideoPlayer spinLevelVid;
+    bool buttonOneState;
+    bool buttonTwoState;
+    
+    ofSoundPlayer ambientSound;
+    ofSoundPlayer WTSounds;
+    ofSoundPlayer JuncoSounds;
+    
+    int trigWT_sound_1960;
+    int trigJUNCO_sound_1960;
+    
+    int trigWT_sound_2010;
+    int trigJUNCO_sound_2010;
     
 };

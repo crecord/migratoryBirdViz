@@ -25,9 +25,20 @@ void ofApp::setup(){
         vector <string> loopFiles;
       
         string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
+       
         string still = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/STILL");
         int firstFrame_1960 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME_1960"));
         int lastFrame_1960 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME_1960"));
+        string flag = scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@flag]");
+        
+        if(flag == "WT"){
+            int trigWT_sound_1960 = firstFrame_1960;
+            //int trigWT_sound_2010 = firstFrame_2010;
+        }
+        else if(flag == "JUNCO"){
+            int trigJUNCO_sound_1960 = firstFrame_1960;
+            //int trigJUNCO_sound_2010 = firstFrame_2010;
+        }
       
         scheduleOfVideos.setTo("GROUP[" + ofToString(i) +"]/LOOPS");
           for(int j=0; j < scheduleOfVideos.getNumChildren(); j++){
@@ -39,6 +50,9 @@ void ofApp::setup(){
         temp.setup( name, still, firstFrame_1960, lastFrame_1960, loopFiles);
         allVids.push_back(temp);
     }
+    
+    // hey Sam this should work just as well as long as long as the files are labeled
+    // with the correct number of leading zeros in linux
   
     ofLog() << "loading all images 1 - 9000 ....";
     for (int i = 0; i < 9000; i++){
@@ -63,6 +77,11 @@ void ofApp::setup(){
     ofAddListener(ard.EInitialized, this, &ofApp::setupArduino);
     bSetupArduino	= false;	// flag so we setup arduino when its ready, you don't need to touch this :)
     
+    // to do: set up one to be on for start up.
+    buttonOneState = false;
+    buttonTwoState = false;
+    
+    
     encoderVal = "nothing yet";
     dateOfYear = "no date yet";
   
@@ -81,6 +100,12 @@ void ofApp::setup(){
   
     ofLog() << "FRAMES = " << spinLevelVid.getTotalNumFrames();
     ofLog() << "FRAME = " << spinLevelVid.getCurrentFrame();
+    
+    ambientSound.load("sounds/ambient.mp3");
+    ambientSound.setLoop(true); 
+    WTSounds.load("sounds/WT_chirp.mp3");
+    JuncoSounds.load("sounds/JUNCO_Chirp.mp3");
+    
 }
 
 
@@ -98,8 +123,13 @@ void ofApp::setupArduino(const int & version) {
     
     // set pin A0 to analog input
     ard.sendAnalogPinReporting(0, ARD_ANALOG);
-
+    ard.sendDigitalPinMode(2, ARD_INPUT);
+    ard.sendDigitalPinMode(3, ARD_INPUT);
+    ofAddListener(ard.EDigitalPinChanged, this, &ofApp::digitalPinChanged);
     ofAddListener(ard.EAnalogPinChanged, this, &ofApp::analogPinChanged);
+    
+    ard.sendDigitalPinMode(4, ARD_INPUT);
+    
 }
 
 //--------------------------------------------------------------
@@ -158,6 +188,7 @@ void ofApp::draw(){
     drawAllVid.end();
     bezManager.draw();
     
+    
     ofSetColor(0, 0, 255);
     ofDrawBitmapString(encoderVal, 10, 20);
     ofDrawBitmapString(setFrame, 10, 40);
@@ -165,12 +196,15 @@ void ofApp::draw(){
     ofDrawBitmapString("day = ", 150, 60);
     ofDrawBitmapString("year = 1960", 300, 60);
     ofDrawBitmapString(debugInfo, 10, 80);
+    
 }
 
 
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
+    
     // send key event
     bezManager.keyPressed(key);
     
@@ -205,6 +239,12 @@ void ofApp::keyPressed(int key){
     }
     if (key == 'g'){
         bShowGui = !bShowGui;
+    }
+    if(key == 'h'){
+        ard.sendDigital(4, ARD_HIGH);
+    }
+    if(key == 'j'){
+        ard.sendDigital(4, ARD_LOW);
     }
 }
 
@@ -286,19 +326,43 @@ void ofApp::analogPinChanged(const int & pinNum) {
         // In update, I added 0s to diffList if spin mode = false (not moving)
         // seems to be working well and we can go a little slower
         diffCount++;
+        if(!isSpinMode){
+            ambientSound.play();
+            ambientSound.setPaused(false);
+        }
         isSpinMode = true;
         setPosition = ofMap(result, 0, 735, 0, 1);
         setFrame = int(ofMap(result, 0, 735, 0, 8999, true));
         lastSensorValue = result;
+        // trigger ambient sound to start
+
     }
     else if(averageDiff < 1){
-      isSpinMode = false;
+        if(isSpinMode){
+            isSpinMode = false;
+            ambientSound.setPaused(true);
+        }
+      
+      // trigger ambient sound to stop
     }
 
     
     encoderVal = "analog pin: " + ofToString(pinNum) + " = " + ofToString(result);
 }
 
+
+
+void ofApp::digitalPinChanged(const int & pinNum) {
+    // do something with the digital input. here we're simply going to print the pin number and
+    // value to the screen each time it changes
+    ofLog() << "pin num: " << pinNum<< " value: "<< ofToString(ard.getDigital(pinNum));
+    if(pinNum == 2){
+        buttonOneState = ard.getDigital(pinNum);
+    }
+    else if(pinNum == 3){
+        buttonTwoState = ard.getDigital(pinNum);
+    }
+}
 
 float ofApp::averageOfList(deque<int> list){
     int sum = 0;

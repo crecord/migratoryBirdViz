@@ -129,15 +129,6 @@ void Vid::updateVideoBlock(){
   }
 }
 
-// a touch of recursion to make sure it doesn't repeat.
-int Vid::chooseIndex(int lastIndex){
-    int randIndex = round(ofRandom(0,videos.size()-.52));
-    if (randIndex == lastIndex){
-        chooseIndex(lastIndex);
-    }
-    return randIndex;
-}
-
 
 void Vid::draw(){
   if (currentlyPlayingIndex != -1) { // has loops
