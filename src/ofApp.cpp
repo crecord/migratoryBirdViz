@@ -12,10 +12,10 @@ void ofApp::setup(){
     vidWidth = 1920;
     vidHeight = 1080;
     
-    drawAllVid.allocate(vidWidth, vidHeight);
+    vidBuffer.allocate(vidWidth, vidHeight);
     
     bezManager.setup(10); //WarpResolution
-    bezManager.addFbo(&drawAllVid);
+    bezManager.addFbo(&vidBuffer);
     bezManager.loadSettings();
     
     scheduleOfVideos.load("sched_New.xml");
@@ -27,6 +27,7 @@ void ofApp::setup(){
         string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
        
         string still = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/STILL");
+
         int firstFrame_1960 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME_1960"));
         int lastFrame_1960 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME_1960"));
         string flag = scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@flag]");
@@ -47,15 +48,15 @@ void ofApp::setup(){
         scheduleOfVideos.setTo("../../");
       
         Vid temp;
-        temp.setup( name, still, firstFrame_1960, lastFrame_1960, loopFiles);
+        temp.setup( name, firstFrame_1960, lastFrame_1960, loopFiles);
         allVids.push_back(temp);
     }
     
     // hey Sam this should work just as well as long as long as the files are labeled
     // with the correct number of leading zeros in linux
   
-    ofLog() << "loading all images 1 - 9000 ....";
-    for (int i = 0; i < 9000; i++){
+    // formatting 1960 scrub level image filenames
+    for (int i = 0; i < 3600; i++){
       ofImage temp;
       string leadingZeros = "";
       if (i < 10) {
@@ -65,10 +66,9 @@ void ofApp::setup(){
       } else if (i < 1000) {
         leadingZeros = "0";
       }
-      string imageURL = "./videos/1960_" + leadingZeros + ofToString(i) + ".jpg";
+      string imageURL = "./videos/1960_scrubLevel/1960_" + leadingZeros + ofToString(i+1) + ".jpg";
       fullScene_1960.push_back(imageURL);
     }
-    ofLog() << "...loaded all images 9000";
   
     ard.connect("tty.usbmodem1421", 57600);
     // listen for EInitialized notification. this indicates that
@@ -162,20 +162,16 @@ void ofApp::draw(){
     }
 
   
-    drawAllVid.begin();
+    vidBuffer.begin();
     ofClear(0, 0, 0, 0);
   
     string debugInfo = "";
     if(!isSpinMode){
-      // draw the currently active loops or still
+      // draw the currently active loop
       for(int i =0; i < allVids.size(); i++){
         if((allVids.at(i).isCurrentlyPlaying)){
-          if(allVids.at(i).isStill){
-              allVids.at(i).still.draw(0,0);
-          } else {
-              allVids.at(i).draw();
-          }
-          debugInfo = allVids.at(i).debugInfo;
+            allVids.at(i).draw();
+            debugInfo = allVids.at(i).debugInfo;
         }
       }
     }
@@ -185,14 +181,14 @@ void ofApp::draw(){
       temp.draw(0, 0);
     }
   
-    drawAllVid.end();
+    vidBuffer.end();
     bezManager.draw();
     
     
     ofSetColor(0, 0, 255);
     ofDrawBitmapString(encoderVal, 10, 20);
     ofDrawBitmapString(setFrame, 10, 40);
-    ofDrawBitmapString("month = " + ofToString(Vid::mons[(int)trunc((setFrame / 9000.0) * 12)]), 10, 60);
+    ofDrawBitmapString("month = " + ofToString(Vid::mons[(int)trunc((setFrame / 3600.0) * 12)]), 10, 60);
     ofDrawBitmapString("day = ", 150, 60);
     ofDrawBitmapString("year = 1960", 300, 60);
     ofDrawBitmapString(debugInfo, 10, 80);
@@ -224,13 +220,13 @@ void ofApp::keyPressed(int key){
         isSpinMode = true;
         setFrame -= 5;
         if(setFrame < 0){
-            setFrame = 8999;
+            setFrame = 3599;
         }
     }
    if(key == 'w'){
         isSpinMode = true;
         setFrame += 5;
-        if(setFrame >= 9000){
+        if(setFrame >= 3600){
          setFrame = 0;
         }
     }
@@ -267,17 +263,7 @@ void ofApp::drawDebugMasks() {
   
     int previewW = camW/2, previewH = camH/2, labelOffset = 10;
     
-    chromakey->drawBaseMask(camW + previewW, 0, previewW, previewH);
-    ofDrawBitmapStringHighlight("Base mask", camW + previewW, labelOffset, ofColor(0, 125), ofColor::yellowGreen);
-    
-    chromakey->drawDetailMask(camW + previewW, previewH, previewW, previewH);
-    ofDrawBitmapStringHighlight("Detailed mask", camW + previewW, previewH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
-    
-    chromakey->drawChromaMask(previewW, camH, previewW, previewH);
-    ofDrawBitmapStringHighlight("Chroma mask", previewW, camH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
-				
     drawCheckerboard(camW, camH, previewW, previewH, 5);
-    chromakey->drawFinalMask(camW, camH, previewW, previewH);
     ofDrawBitmapStringHighlight("Final mask", camW, camH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
     
     webcam.draw(camW + previewW, camH, previewW, previewH);
@@ -332,7 +318,7 @@ void ofApp::analogPinChanged(const int & pinNum) {
         }
         isSpinMode = true;
         setPosition = ofMap(result, 0, 735, 0, 1);
-        setFrame = int(ofMap(result, 0, 735, 0, 8999, true));
+        setFrame = int(ofMap(result, 0, 735, 0, 3599, true));
         lastSensorValue = result;
         // trigger ambient sound to start
 

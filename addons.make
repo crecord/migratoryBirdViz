@@ -1,5 +1,4 @@
 ofxBezierWarpManager
-ofxChromaKeyShader
 ofxCv
 ofxGui
 ofxOpenCv
