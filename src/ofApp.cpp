@@ -30,15 +30,18 @@ void ofApp::setup(){
 
         int firstFrame_1960 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME_1960"));
         int lastFrame_1960 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME_1960"));
+        int firstFrame_2010 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME_2010"));
+        int lastFrame_2010 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME_2010"));
+        
         string flag = scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@flag]");
         
         if(flag == "WT"){
             int trigWT_sound_1960 = firstFrame_1960;
-            //int trigWT_sound_2010 = firstFrame_2010;
+            int trigWT_sound_2010 = firstFrame_2010;
         }
         else if(flag == "JUNCO"){
             int trigJUNCO_sound_1960 = firstFrame_1960;
-            //int trigJUNCO_sound_2010 = firstFrame_2010;
+            int trigJUNCO_sound_2010 = firstFrame_2010;
         }
       
         scheduleOfVideos.setTo("GROUP[" + ofToString(i) +"]/LOOPS");

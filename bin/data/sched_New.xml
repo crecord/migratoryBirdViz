@@ -4,6 +4,8 @@
         <NAME> Heavy Snowfall Deposits Snow on Juncos </NAME>
         <FIRST_FRAME_1960>1</FIRST_FRAME_1960>
         <LAST_FRAME_1960>100</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>1</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>100</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
         </LOOPS>
@@ -12,6 +14,8 @@
         <NAME> Junco Flock Behavior </NAME>
         <FIRST_FRAME_1960>101</FIRST_FRAME_1960>
         <LAST_FRAME_1960>200</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>101</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>200</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
         </LOOPS>
@@ -20,6 +24,8 @@
         <NAME> Junco Flock Behavior </NAME>
         <FIRST_FRAME_1960>201</FIRST_FRAME_1960>
         <LAST_FRAME_1960>300</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>201</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>300</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
         </LOOPS>
@@ -28,6 +34,8 @@
         <NAME> Junco Flock Behavior/Light Snow In Background </NAME>
         <FIRST_FRAME_1960>301</FIRST_FRAME_1960>
         <LAST_FRAME_1960>400</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>301</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>400</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
         </LOOPS>
@@ -36,6 +44,8 @@
         <NAME> Junco Flock Behavior </NAME>
         <FIRST_FRAME_1960>401</FIRST_FRAME_1960>
         <LAST_FRAME_1960>500</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>401</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>500</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
         </LOOPS>
@@ -44,6 +54,8 @@
         <NAME> Junco Flock Behavior/Light Snow In Background </NAME>
         <FIRST_FRAME_1960>501</FIRST_FRAME_1960>
         <LAST_FRAME_1960>600</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>501</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>600</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
         </LOOPS>
@@ -52,6 +64,8 @@
         <NAME> Junco Flock Behavior </NAME>
         <FIRST_FRAME_1960>601</FIRST_FRAME_1960>
         <LAST_FRAME_1960>700</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>601</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>700</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
         </LOOPS>
@@ -60,6 +74,8 @@
         <NAME> Junco Flock Behavior </NAME>
         <FIRST_FRAME_1960>701</FIRST_FRAME_1960>
         <LAST_FRAME_1960>780</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>701</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>780</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
         </LOOPS>
@@ -68,18 +84,24 @@
         <NAME> Junco Flock Departs/Snow Melts </NAME>
         <FIRST_FRAME_1960>781</FIRST_FRAME_1960>
         <LAST_FRAME_1960>900</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>781</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>900</LAST_FRAME_2010>
         <LOOPS></LOOPS>
     </GROUP>
     <GROUP>
         <NAME> Raining </NAME>
         <FIRST_FRAME_1960>901</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1000</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>901</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>1000</LAST_FRAME_2010>
         <LOOPS></LOOPS>
     </GROUP>
     <GROUP>
         <NAME> Harder Raining / Grasses Grow / Raining Stops </NAME>
         <FIRST_FRAME_1960>1001</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1090</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>1001</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>1090</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -87,13 +109,17 @@
         <NAME> Plants Flower </NAME>
         <FIRST_FRAME_1960>1091</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1200</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>1091</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>1200</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
     <GROUP>
-        <NAME> Plants Bloom As Wood Thrush Male Arrives On The 5th </NAME>
+        <NAME flag="WT"> Plants Bloom As Wood Thrush Male Arrives On The 5th </NAME>
         <FIRST_FRAME_1960>1201</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1340</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>1201</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>1340</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>WT_MaleSings.mp4</FILENAME>
         </LOOPS>
@@ -102,6 +128,8 @@
         <NAME> Wood Thrush Female Arrives </NAME>
         <FIRST_FRAME_1960>1341</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1410</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>1341</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>1410</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>WT_MaleFemaleCallToEachother.mp4</FILENAME>
         </LOOPS>
@@ -110,6 +138,8 @@
         <NAME> Mating Flight </NAME>
         <FIRST_FRAME_1960>1411</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1620</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>1411</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>1620</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>WT_AdditionalMatingFlight.mp4</FILENAME>
         </LOOPS>
@@ -118,6 +148,8 @@
         <NAME> Nesting </NAME>
         <FIRST_FRAME_1960>1621</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1770</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>1621</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>1770</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>WT_BuildingNest.mp4</FILENAME>
             <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
@@ -127,6 +159,8 @@
         <NAME> Eggs Laid </NAME>
         <FIRST_FRAME_1960>1771</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1800</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>1771</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>1800</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>WT_MaleFeedsBroodingFemale.mp4</FILENAME>
             <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
@@ -136,6 +170,8 @@
         <NAME> Female Shows Male Eggs </NAME>
         <FIRST_FRAME_1960>1801</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1890</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>1801</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>1890</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>WT_MaleFeedsBroodingFemale.mp4</FILENAME>
             <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
@@ -145,6 +181,8 @@
         <NAME> Eggs Hatch and Are Fed </NAME>
         <FIRST_FRAME_1960>1891</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2020</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>1891</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2020</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>WT_MaleFeedsYoungSingsInFlight.mp4</FILENAME>
             <FILENAME>WT_FemaleFeedsYoung.mp4</FILENAME>
@@ -154,6 +192,8 @@
         <NAME> Young Fledge </NAME>
         <FIRST_FRAME_1960>2021</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2090</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2021</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2090</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -161,6 +201,8 @@
         <NAME> Flying Lessons With Female </NAME>
         <FIRST_FRAME_1960>2191</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2160</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2191</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2160</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -168,6 +210,8 @@
         <NAME> Flying Lessons With Male </NAME>
         <FIRST_FRAME_1960>2161</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2270</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2161</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2270</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -175,6 +219,8 @@
         <NAME> Parents Leave Fledglings </NAME>
         <FIRST_FRAME_1960>2271</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2400</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2271</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2400</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>WT_FemaleFeedsFledgling.mp4</FILENAME>
             <FILENAME>WT_MaleFeedsFledgling.mp4</FILENAME>
@@ -184,6 +230,8 @@
         <NAME> Fledglings Fly Out Of Scene </NAME>
         <FIRST_FRAME_1960>2401</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2500</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2401</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2500</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>WT_FlightInDistance1.mp4</FILENAME>
             <FILENAME>WT_FlightInDistance2.mp4</FILENAME>
@@ -193,6 +241,8 @@
         <NAME> Male Enters Scene Late Summer </NAME>
         <FIRST_FRAME_1960>2501</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2550</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2501</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2550</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME>WT_MaleCalls.mp4</FILENAME>
             <FILENAME>WT_FlightInDistance1.mp4</FILENAME>
@@ -203,6 +253,8 @@
         <NAME> Wood Thrush Departs </NAME>
         <FIRST_FRAME_1960>2551</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2600</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2551</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2600</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -210,6 +262,8 @@
         <NAME> Empty Scene </NAME>
         <FIRST_FRAME_1960>2601</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2650</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2601</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2650</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -217,6 +271,8 @@
         <NAME> Leaves Turn Colors Pt. 1 </NAME>
         <FIRST_FRAME_1960>2651</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2700</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2651</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2700</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -224,6 +280,8 @@
         <NAME> Leaves Turn Colors Pt. 2 </NAME>
         <FIRST_FRAME_1960>2701</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2770</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2701</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2770</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -231,6 +289,8 @@
         <NAME> Leaves Brown </NAME>
         <FIRST_FRAME_1960>2771</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2850</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2771</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2850</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -238,6 +298,8 @@
         <NAME> Leaves Fall Off Of Trees </NAME>
         <FIRST_FRAME_1960>2851</FIRST_FRAME_1960>
         <LAST_FRAME_1960>2960</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2851</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>2960</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -245,13 +307,17 @@
         <NAME> Empty Scene </NAME>
         <FIRST_FRAME_1960>2691</FIRST_FRAME_1960>
         <LAST_FRAME_1960>3000</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>2691</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>3000</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
     <GROUP>
-        <NAME> Junco Flock Arrives </NAME>
+        <NAME flag="JUNCO"> Junco Flock Arrives </NAME>
         <FIRST_FRAME_1960>3001</FIRST_FRAME_1960>
         <LAST_FRAME_1960>3100</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>3001</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>3100</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -259,6 +325,8 @@
         <NAME> Light Snowfall On Juncos </NAME>
         <FIRST_FRAME_1960>3101</FIRST_FRAME_1960>
         <LAST_FRAME_1960>3200</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>3101</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>3200</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -266,6 +334,8 @@
         <NAME> Junco Flock Behavior </NAME>
         <FIRST_FRAME_1960>3201</FIRST_FRAME_1960>
         <LAST_FRAME_1960>3300</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>3201</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>3300</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -273,6 +343,8 @@
         <NAME> Junco Flock Behavior </NAME>
         <FIRST_FRAME_1960>3301</FIRST_FRAME_1960>
         <LAST_FRAME_1960>3400</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>3301</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>3400</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -280,6 +352,8 @@
         <NAME> Junco Flock Behavior </NAME>
         <FIRST_FRAME_1960>3401</FIRST_FRAME_1960>
         <LAST_FRAME_1960>3500</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>3401</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>3500</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
@@ -287,6 +361,8 @@
         <NAME> Junco Flock Behavior </NAME>
         <FIRST_FRAME_1960>3501</FIRST_FRAME_1960>
         <LAST_FRAME_1960>3600</LAST_FRAME_1960>
+        <FIRST_FRAME_2010>3501</FIRST_FRAME_2010>
+        <LAST_FRAME_2010>3600</LAST_FRAME_2010>
         <LOOPS>
         </LOOPS>
     </GROUP>
