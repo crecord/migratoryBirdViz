@@ -46,6 +46,8 @@ private:
     void drawVideoBlock();
     void stopVideoBlock();
     
+    string frameToFilename(int frameNumber, bool isAfter);
+    
     int loopIndex;
     
     int delay;

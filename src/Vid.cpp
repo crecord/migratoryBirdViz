@@ -18,16 +18,8 @@ void Vid::setup(string name, int firstFrame_1960, int lastFrame_1960, vector <st
   
     name = name;
     
-    // Grab still from last frame
-    string leadingZeros = "";
-    if (lastFrame_1960 < 10) {
-        leadingZeros = "000";
-    } else if (lastFrame_1960 < 100) {
-        leadingZeros = "00";
-    } else if (lastFrame_1960 < 1000) {
-        leadingZeros = "0";
-    }
-    string stillURL = "./videos/1960_scrubLevel/1960_" + leadingZeros + ofToString(lastFrame_1960) + ".jpg";
+    string stillURL = frameToFilename(lastFrame_1960 - 1, false);
+    ofLog() << stillURL;
     still.load(stillURL);
 
     startFrame_1960 = firstFrame_1960;
@@ -95,16 +87,7 @@ void Vid::setupVideoBlock(){
     
   // also pop any remaining action frames onto frameQ
     for (int i = frame; i < endFrame_1960; i++) {
-        ofImage remainingFrame;
-        string leadingZeros = "";
-        if (i < 10) {
-            leadingZeros = "000";
-        } else if (i < 100) {
-            leadingZeros = "00";
-        } else if (i < 1000) {
-            leadingZeros = "0";
-        }
-        frameQ.push_back("./videos/1960_scrubLevel/1960_" + leadingZeros + ofToString(i + 1) + ".jpg");
+        frameQ.push_back(frameToFilename(i, false));
     }
 }
 
@@ -161,4 +144,20 @@ void Vid::stopVideoBlock(){
 
 void Vid::drawVideoBlock(){
   
+}
+
+string Vid::frameToFilename(int frameNumber, bool isAfter) {
+    string leadingZeros = "";
+    if ((frameNumber + 1) < 10) {
+        leadingZeros = "000";
+    } else if ((frameNumber + 1) < 100) {
+        leadingZeros = "00";
+    } else if ((frameNumber + 1) < 1000) {
+        leadingZeros = "0";
+    }
+    if (isAfter) {
+        return "";
+    } else {
+        return "./videos/1960_scrubLevel/1960_" + leadingZeros + ofToString(frameNumber + 1) + ".jpg";
+    }
 }
