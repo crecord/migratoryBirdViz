@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxChromaKeyShader.h"
 #include "ofxGui.h"
 #include "ofxBezierWarpManager.h"
 #include "Vid.h"
@@ -35,8 +34,6 @@ class ofApp : public ofBaseApp{
     // === Variables =============================
     ofImage bg_image;
   
-    ofxChromaKeyShader *chromakey;
-    ofxChromaKeyShader *chromakey1;
     ofVideoGrabber webcam;
     int camW, camH;
     

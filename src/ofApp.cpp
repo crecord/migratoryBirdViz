@@ -227,17 +227,7 @@ void ofApp::drawDebugMasks() {
   
     int previewW = camW/2, previewH = camH/2, labelOffset = 10;
     
-    chromakey->drawBaseMask(camW + previewW, 0, previewW, previewH);
-    ofDrawBitmapStringHighlight("Base mask", camW + previewW, labelOffset, ofColor(0, 125), ofColor::yellowGreen);
-    
-    chromakey->drawDetailMask(camW + previewW, previewH, previewW, previewH);
-    ofDrawBitmapStringHighlight("Detailed mask", camW + previewW, previewH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
-    
-    chromakey->drawChromaMask(previewW, camH, previewW, previewH);
-    ofDrawBitmapStringHighlight("Chroma mask", previewW, camH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
-				
     drawCheckerboard(camW, camH, previewW, previewH, 5);
-    chromakey->drawFinalMask(camW, camH, previewW, previewH);
     ofDrawBitmapStringHighlight("Final mask", camW, camH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
     
     webcam.draw(camW + previewW, camH, previewW, previewH);
