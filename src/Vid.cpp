@@ -27,18 +27,29 @@ float Vid::percent = 0;
 int Vid::frame = 0;
 bool Vid::isAfter = false;
 
-void Vid::setup(string name, string stillName, int firstFrame_1960, int lastFrame_1960, vector <string> loopFiles){
+void Vid::setup(string name, int firstFrame_1960, int lastFrame_1960, vector <string> loopFiles){
 
-    debugInfo = "group ID: " + ofToString(name) + "\n 1960 frame range: " + ofToString(firstFrame_1960) + "-" + ofToString(lastFrame_1960);
+    debugInfo = "group: " + ofToString(name) + "\n 1960 frame range: " + ofToString(firstFrame_1960) + "-" + ofToString(lastFrame_1960);
   
     name = name;
-    still.load("stills/" + stillName);
+    
+    // Grab still from last frame
+    string leadingZeros = "";
+    if (lastFrame_1960 < 10) {
+        leadingZeros = "000";
+    } else if (lastFrame_1960 < 100) {
+        leadingZeros = "00";
+    } else if (lastFrame_1960 < 1000) {
+        leadingZeros = "0";
+    }
+    string stillURL = "./videos/1960_scrubLevel/1960_" + leadingZeros + ofToString(lastFrame_1960) + ".jpg";
+    still.load(stillURL);
+
     startFrame_1960 = firstFrame_1960;
     endFrame_1960 = lastFrame_1960;
+    
     loopFiles = loopFiles;
   
-    ofLog() << name;
-  ofLog() << loopFiles.size();
     for (int i =0; i< loopFiles.size(); i++){
       ofVideoPlayer temp;
       string filen = "videos/"+ loopFiles.at(i);
@@ -49,7 +60,6 @@ void Vid::setup(string name, string stillName, int firstFrame_1960, int lastFram
     isCurrentlyPlaying = false;
     
     currentlyPlayingIndex = 0;
-    ofLog() << debugInfo;
 }
 
 void Vid::update(){
@@ -86,12 +96,6 @@ void Vid::update(){
     }
 }
 
-/*
- 0 - static, non looping use the position to dictate where in the video we are
- 1 - Looping a video none at once and doing it evenly - can work for multiple or one
- 2 - looping with a default video but other ones playing occasionally
- 3 - looping but only occasionally- not too many at once.
-*/
 
 void Vid::setupVideoBlock(){
   currentlyPlayingIndex = 0;
@@ -129,22 +133,15 @@ void Vid::updateVideoBlock(){
   }
 }
 
-// a touch of recursion to make sure it doesn't repeat.
-int Vid::chooseIndex(int lastIndex){
-    int randIndex = round(ofRandom(0,videos.size()-.52));
-    if (randIndex == lastIndex){
-        chooseIndex(lastIndex);
-    }
-    return randIndex;
-}
-
 
 void Vid::draw(){
+  if (isStill) {
+    still.draw(0, 0);
+  }
   if (currentlyPlayingIndex != -1) { // has loops
     videos.at(currentlyPlayingIndex).draw(0, 0);
   }
 }
-
 
 void Vid::stopVideoBlock(){
     currentlyPlayingIndex = 0;

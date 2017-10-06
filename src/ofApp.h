@@ -43,7 +43,7 @@ class ofApp : public ofBaseApp{
     bool bShowGui;
     bool bUpdateBgColor;
   
-    ofFbo drawAllVid;
+    ofFbo vidBuffer;
     
     //ofFbo allThelayers;
     ofFbo first_fbo;

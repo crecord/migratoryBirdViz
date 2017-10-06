@@ -18,7 +18,7 @@ public:
     static bool isAfter;
     static string mons[12];
   
-    void setup(string name, string still, int firstFrame_1960, int lastFrame_1960, vector <string> loopFiles);
+    void setup(string name, int firstFrame_1960, int lastFrame_1960, vector <string> loopFiles);
   
     void update();
     void draw();
