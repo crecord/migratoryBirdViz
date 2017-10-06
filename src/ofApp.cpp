@@ -2,23 +2,17 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-  
-    setPosition = 0;
-    setFrame = 0;
+    frameShown = 0;
   
     ofSetFullscreen(false);
-    
-    // could be dymamic, but whatever
-    vidWidth = 1920;
-    vidHeight = 1080;
-    
+
     vidBuffer.allocate(vidWidth, vidHeight);
     
     bezManager.setup(10); //WarpResolution
     bezManager.addFbo(&vidBuffer);
     bezManager.loadSettings();
     
-    scheduleOfVideos.load("sched_New.xml");
+    scheduleOfVideos.load("sched.xml");
     scheduleOfVideos.setTo("videos");
   
     for(int i =0; i <scheduleOfVideos.getNumChildren(); i++ ){
@@ -62,23 +56,15 @@ void ofApp::setup(){
     bSetupArduino	= false;	// flag so we setup arduino when its ready, you don't need to touch this :)
     
     encoderVal = "nothing yet";
-    dateOfYear = "no date yet";
   
     lastSensorValue = -20;
+    
+    decorativeFrame.load("./Frame.png");
     
     isSpinMode = false;
     lastValue = 0;
     diffCount = 0;
     diffList.assign(5, 0);
-    
-    spinLevelVid.load("1960.mp4");
-    spinLevelVid.setLoopState(OF_LOOP_NORMAL);
-    spinLevelVid.setFrame(setFrame);
-    spinLevelVid.stop();
-    spinLevelVid.update();
-  
-    ofLog() << "FRAMES = " << spinLevelVid.getTotalNumFrames();
-    ofLog() << "FRAME = " << spinLevelVid.getCurrentFrame();
 }
 
 
@@ -105,7 +91,7 @@ void ofApp::update(){
     if(!isSpinMode){
       diffList.push_front(0);
       diffList.pop_back();
-      allVids.at(0).frame = setFrame;
+      allVids.at(0).frame = frameShown;
       for(int i =0; i < allVids.size(); i++){
           allVids.at(i).update();
       }
@@ -123,11 +109,11 @@ void ofApp::draw(){
     ofSetColor(255, 255, 255);
   
   
-    if(!isSpinMode) {
-      ofClear(255, 0, 0);
-    } else {
-      ofClear(0, 255, 0);
-    }
+    //if(!isSpinMode) {
+    //  ofClear(255, 0, 0);
+    //} else {
+    //  ofClear(0, 255, 0);
+    //}
 
   
     vidBuffer.begin();
@@ -145,22 +131,26 @@ void ofApp::draw(){
     }
     else {
       ofImage temp;
-      temp.load(fullScene_1960.at(setFrame));
+      temp.load(fullScene_1960.at(frameShown));
       temp.draw(0, 0);
+    }
+    
+    if (showDecorativeFrame) {
+        decorativeFrame.draw(0, 0);
     }
   
     vidBuffer.end();
     bezManager.draw();
     
+    
     ofSetColor(0, 0, 255);
     ofDrawBitmapString(encoderVal, 10, 20);
-    ofDrawBitmapString(setFrame, 10, 40);
-    ofDrawBitmapString("month = " + ofToString(Vid::mons[(int)trunc((setFrame / 3600.0) * 12)]), 10, 60);
-    ofDrawBitmapString("day = ", 150, 60);
+    ofDrawBitmapString(frameShown, 10, 40);
+    ofDrawBitmapString("month = " + ofToString(mons[(int)trunc((frameShown / 3600.0) * 12)]), 10, 60);
+    ofDrawBitmapString("day = FIGURE OUT MATH " + ofToString(frameShown % 30), 150, 60);
     ofDrawBitmapString("year = 1960", 300, 60);
     ofDrawBitmapString(debugInfo, 10, 80);
 }
-
 
 
 //--------------------------------------------------------------
@@ -182,20 +172,17 @@ void ofApp::keyPressed(int key){
     }
     if(key == 'q'){
         isSpinMode = true;
-        setFrame -= 5;
-        if(setFrame < 0){
-            setFrame = 3599;
+        frameShown -= 5;
+        if(frameShown < 0){
+            frameShown = 3599;
         }
     }
    if(key == 'w'){
         isSpinMode = true;
-        setFrame += 5;
-        if(setFrame >= 3600){
-         setFrame = 0;
+        frameShown += 5;
+        if(frameShown >= 3600){
+         frameShown = 0;
         }
-    }
-    if (key == 'a'){
-        bUpdateBgColor = !bUpdateBgColor;
     }
     if (key == 'g'){
         bShowGui = !bShowGui;
@@ -214,18 +201,11 @@ void ofApp::keyReleased(int key){
 }
 
 void ofApp::drawDebugMasks() {
-
     ofSetColor(255);
     int camW = vidHeight/3;
     int camH = vidWidth/3;
-  
     int previewW = camW/2, previewH = camH/2, labelOffset = 10;
-    
-    drawCheckerboard(camW, camH, previewW, previewH, 5);
-    ofDrawBitmapStringHighlight("Final mask", camW, camH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
-    
-    webcam.draw(camW + previewW, camH, previewW, previewH);
-    ofDrawBitmapStringHighlight("RGB image", camW + previewW, camH + labelOffset, ofColor(0, 125), ofColor::yellowGreen);
+    drawCheckerboard(camW, camH, previewW, previewH, 5);    
 }
 
 //--------------------------------------------------------------
@@ -271,8 +251,7 @@ void ofApp::analogPinChanged(const int & pinNum) {
         // seems to be working well and we can go a little slower
         diffCount++;
         isSpinMode = true;
-        setPosition = ofMap(result, 0, 735, 0, 1);
-        setFrame = int(ofMap(result, 0, 735, 0, 3599, true));
+        frameShown = int(ofMap(result, 0, 735, 0, 3599, true));
         lastSensorValue = result;
     }
     else if(averageDiff < 1){

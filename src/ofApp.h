@@ -25,65 +25,69 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
-    void drawDebugMasks();
-    void drawCheckerboard(float x, float y, int width, int height, int size);
-    float setPosition;
-    int setFrame;
-  
-    // === Variables =============================
-    ofImage bg_image;
-  
-    ofVideoGrabber webcam;
-    int camW, camH;
     
-    ofFbo checkerboardTex;
+        int camW, camH;
+        int vidWidth = 1920;
+        int vidHeight = 1080;
     
-    ofxPanel chromaGui;
-    bool bShowGui;
-    bool bUpdateBgColor;
-  
-    ofFbo vidBuffer;
+        string mons[12] = {
+            "january",
+            "february",
+            "march",
+            "april",
+            "may",
+            "june",
+            "july",
+            "august",
+            "september",
+            "october",
+            "november",
+            "december"
+        };
     
-    //ofFbo allThelayers;
-    ofFbo first_fbo;
-    ofFbo second_fbo;
-    ofFbo third_fbo;
-    ofFbo fourth_fbo;
+        // load in the schedule
+        ofXml scheduleOfVideos;
     
-    bool showGuide;
-    ofxBezierWarpManager bezManager;
-  
-    // load in the schedule
-    ofXml scheduleOfVideos;
+        int spinnerFrame; // The frame # that the spinner is pointing to
+        int vidFrame; // The frame # that the vid class is showing (it can be ahead or behind the spinner frame
+        int frameShown; // The frame we are gonna show
     
-    vector<Vid> allVids;
-    vector<string> fullScene_1960;
+        bool showDecorativeFrame = false;
+        ofImage decorativeFrame; // The branches graphic
     
-    // arduino variables
-    ofArduino ard;
-    bool bSetupArduino;
-    void setupArduino(const int & version);
-    void analogPinChanged(const int & pinNum);
-    void updateArduino();
+        ofFbo vidBuffer;
     
-    string encoderVal;
-    string dateOfYear; 
+        vector<Vid> allVids;
+        vector<string> fullScene_1960;
     
+        // === Is Spinning?  =============================
     
-    int vidWidth;
-    int vidHeight;
-    int lastSensorValue;
+        bool isSpinMode;
+
+        string encoderVal;
+        int lastSensorValue;
     
-    // determine whether in spin mode
-    bool isSpinMode;
-    float lastValue;
-    int diffCount;
+        // determine whether in spin mode
+        float lastValue;
+        int diffCount;
+        deque<int> diffList;
+        float averageOfList(deque<int> list);
+
+        // === Debugging =============================
     
-    deque<int> diffList;
+        ofFbo checkerboardTex;
+        bool bShowGui;
+        bool showGuide;
+        ofxBezierWarpManager bezManager;
     
-    float averageOfList(deque<int> list);
+        void drawDebugMasks();
+        void drawCheckerboard(float x, float y, int width, int height, int size);
+
     
-    ofVideoPlayer spinLevelVid;
-    
+        // === Arduino =============================
+        ofArduino ard;
+        bool bSetupArduino;
+        void setupArduino(const int & version);
+        void analogPinChanged(const int & pinNum);
+        void updateArduino();
 };
