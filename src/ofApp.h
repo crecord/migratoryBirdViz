@@ -48,6 +48,9 @@ class ofApp : public ofBaseApp{
         // load in the schedule
         ofXml scheduleOfVideos;
     
+        vector<Vid> allVids;
+        vector<string> fullScene_1960;
+    
         int spinnerFrame; // The frame # that the spinner is pointing to
         int vidFrame; // The frame # that the vid class is showing (it can be ahead or behind the spinner frame
         int frameShown; // The frame we are gonna show
@@ -57,8 +60,32 @@ class ofApp : public ofBaseApp{
     
         ofFbo vidBuffer;
     
-        vector<Vid> allVids;
-        vector<string> fullScene_1960;
+    
+        // === Arduino =============================
+    
+        ofArduino ard;
+        bool bSetupArduino;
+        void setupArduino(const int & version);
+        void analogPinChanged(const int & pinNum);
+        void digitalPinChanged(const int & pinNum);
+        void updateArduino();
+    
+        bool buttonOneState;
+        bool buttonTwoState;
+    
+    
+        // === Sounds  =============================
+    
+        ofSoundPlayer ambientSound;
+        ofSoundPlayer WTSounds;
+        ofSoundPlayer JuncoSounds;
+    
+        int trigWT_sound_1960;
+        int trigJUNCO_sound_1960;
+    
+        int trigWT_sound_2010;
+        int trigJUNCO_sound_2010;
+    
     
         // === Is Spinning?  =============================
     
@@ -67,7 +94,6 @@ class ofApp : public ofBaseApp{
         string encoderVal;
         int lastSensorValue;
     
-        // determine whether in spin mode
         float lastValue;
         int diffCount;
         deque<int> diffList;
@@ -83,11 +109,4 @@ class ofApp : public ofBaseApp{
         void drawDebugMasks();
         void drawCheckerboard(float x, float y, int width, int height, int size);
 
-    
-        // === Arduino =============================
-        ofArduino ard;
-        bool bSetupArduino;
-        void setupArduino(const int & version);
-        void analogPinChanged(const int & pinNum);
-        void updateArduino();
 };
