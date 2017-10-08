@@ -30,6 +30,8 @@ class ofApp : public ofBaseApp{
         int vidWidth = 1920;
         int vidHeight = 1080;
     
+        string debugInfo;
+    
         string mons[12] = {
             "january",
             "february",
@@ -45,21 +47,30 @@ class ofApp : public ofBaseApp{
             "december"
         };
     
+        int fakeSpinnerNumber;
+        int posMod(int x, int y);
+    
+        void spinnerChanged(const int newSpinnerNumber);
+        int spinDistance;
+        int lastSpinnerNumber;
+        int spinnerNumber;
+        int frameNumberShown;
+        int frameNumberToShow;
+        void calculateFrameToShow();
+        int getSpinDistance(int prev, int next, int max);
+        ofImage frameToShow;
+    
         // load in the schedule
         ofXml scheduleOfVideos;
     
         vector<Vid> allVids;
         vector<string> fullScene_1960;
     
-        int spinnerFrame; // The frame # that the spinner is pointing to
-        int vidFrame; // The frame # that the vid class is showing (it can be ahead or behind the spinner frame
-        int frameShown; // The frame we are gonna show
-    
-        bool showDecorativeFrame = false;
+        bool showDecorativeFrame = true;
         ofImage decorativeFrame; // The branches graphic
     
         ofFbo vidBuffer;
-    
+        
     
         // === Arduino =============================
     
@@ -94,10 +105,11 @@ class ofApp : public ofBaseApp{
         string encoderVal;
         int lastSensorValue;
     
-        float lastValue;
         int diffCount;
         deque<int> diffList;
+        float averageDiff;
         float averageOfList(deque<int> list);
+        void updateDiffQueue(int value);
 
         // === Debugging =============================
     

@@ -14,13 +14,22 @@ public:
     static int frame;
     static bool isAfter;
   
-    void setup(string name, int firstFrame_1960, int lastFrame_1960, vector <string> loopFiles);
+    void setup(
+      string name,
+      int firstFrame_1960,
+      int endFrame_1960,
+      int firstFrame_2010,
+      int endFrame_2010,
+      vector <string> loopFiles
+    );
   
     void update();
     void draw();
         
     vector <int> currentlyPlayingIndexes;
     vector <ofVideoPlayer> videos;
+    
+    int calculateFrameToShow();
   
     bool isCurrentlyPlaying;
     bool isStill = true;

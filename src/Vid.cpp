@@ -12,18 +12,18 @@ float Vid::percent = 0;
 int Vid::frame = 0;
 bool Vid::isAfter = false;
 
-void Vid::setup(string name, int firstFrame_1960, int lastFrame_1960, vector <string> loopFiles){
+void Vid::setup(string name, int firstFrame_1960, int endFrame_1960, int firstFrame_2010, int endFrame_2010, vector <string> loopFiles){
 
-    debugInfo = "group: " + ofToString(name) + "\n 1960 frame range: " + ofToString(firstFrame_1960) + "-" + ofToString(lastFrame_1960);
+    debugInfo = "group: " + ofToString(name) + "\n 1960 frame range: " + ofToString(firstFrame_1960) + "-" + ofToString(endFrame_1960);
   
     name = name;
     
-    string stillURL = frameToFilename(lastFrame_1960 - 1, false);
+    string stillURL = frameToFilename(endFrame_1960 - 1, false);
     ofLog() << stillURL;
     still.load(stillURL);
 
     startFrame_1960 = firstFrame_1960;
-    endFrame_1960 = lastFrame_1960;
+    endFrame_1960 = endFrame_1960;
     
     loopFiles = loopFiles;
   
@@ -40,39 +40,15 @@ void Vid::setup(string name, int firstFrame_1960, int lastFrame_1960, vector <st
 }
 
 void Vid::update(){
-    // currently looking at the 2010s
-    if (isAfter){
-      if ((frame >= startFrame_1960)&(frame <= endFrame_1960)){
-        if (!isCurrentlyPlaying){
-          setupVideoBlock();
-        }
+    if (frame > startFrame_1960 & frame <= endFrame_1960 ||
+        frame == 0 & startFrame_1960 == 0) {
         isCurrentlyPlaying = true;
-        updateVideoBlock();
-      } else{
-        if (isCurrentlyPlaying) {
-          stopVideoBlock();
-        }
+    } else {
         isCurrentlyPlaying = false;
-      }
     }
-    
-    // looking at the 1960s
-    else{
-      if (frame > startFrame_1960 & frame <= endFrame_1960 ||
-          frame == 0 & startFrame_1960 == 0) {
-        if (!isCurrentlyPlaying){
-          setupVideoBlock();
-          isCurrentlyPlaying = true;
-        } else if (frameQ.empty()) {
-          updateVideoBlock();
-        }
-      } else{
-        if (isCurrentlyPlaying) {
-          stopVideoBlock();
-          isCurrentlyPlaying = false;
-        }
-      }
-    }
+}
+
+int Vid::calculateFrameToShow() {
 }
 
 
