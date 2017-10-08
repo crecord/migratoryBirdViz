@@ -29,6 +29,8 @@ public:
   
     bool isCurrentlyPlaying= false;
     string debugInfo_;
+    deque<int> frameQ_;
+
     
 private:
 
@@ -39,7 +41,6 @@ private:
     float stillFrame_2010_;
     
     ofImage still_;
-    deque<int> frameQ_;
 
     string name_;
 

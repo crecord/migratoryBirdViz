@@ -64,7 +64,7 @@ void ofApp::setup() {
     isSpinMode = true;
     encoderVal = "nothing yet";
     lastSensorValue = 0;
-    diffList.assign(4, 0);
+    diffList.assign(9, 0);
     
     // LOAD IN SOUNDS //
     ambientSound.load("sounds/ambient.mp3");
@@ -135,13 +135,19 @@ void ofApp::calculateFrameToShow() {
     if(isSpinMode){
         // Spinning
         int adjustedSpinnerNumber = spinnerNumber;
+        int frameAdjustment = averageDiff;
+        if (averageDiff < 50 && averageDiff >= 0) {
+            frameAdjustment = 1;
+        } if (averageDiff > -50 && averageDiff < 0) {
+            frameAdjustment = -1;
+        }
         if (spinDistance >= 0) {
             // go forwards
             if (adjustedSpinnerNumber < frameNumberShown){
                 adjustedSpinnerNumber += 3600;
             }
-            if (frameNumberShown + averageDiff < adjustedSpinnerNumber) {
-                frameNumberToShow = posMod(int(frameNumberShown + averageDiff),3600);
+            if (frameNumberShown + frameAdjustment < adjustedSpinnerNumber) {
+                frameNumberToShow = posMod(int(frameNumberShown + frameAdjustment),3600);
             } else {
                 frameNumberToShow = posMod(spinnerNumber, 3600);
             }
@@ -158,8 +164,8 @@ void ofApp::calculateFrameToShow() {
             if (adjustedSpinnerNumber > frameNumberShown){
                 adjustedSpinnerNumber -= 3600;
             }
-            if (frameNumberShown - averageDiff > adjustedSpinnerNumber ) {
-                frameNumberToShow = posMod(int(frameNumberShown - averageDiff), 3600);
+            if (frameNumberShown - frameAdjustment > adjustedSpinnerNumber ) {
+                frameNumberToShow = posMod(int(frameNumberShown - frameAdjustment), 3600);
             } else {
                 frameNumberToShow = posMod(spinnerNumber, 3600);
             }
@@ -167,7 +173,7 @@ void ofApp::calculateFrameToShow() {
             // turn loop off
             if (loopFrameNumber != -1) {
                 loopFrameNumber = -1;
-             frameNumberShown = loopFrameNumber;
+                frameNumberShown = loopFrameNumber;
             }
         }
         
@@ -334,15 +340,15 @@ int ofApp::getSpinDistance(int prev, int next, int max){
 void ofApp::analogPinChanged(const int & pinNum) {
     // do something with the analog input. here we're simply going to print the pin number and
     // value to the screen each time it changes
-    int analogValue = ard.getAnalog(pinNum);
-    int newSpinnerNumber = int(ofMap(analogValue, 0, 735, 0, 3599, true));
+    float analogValue = ard.getAnalog(pinNum);
+    int newSpinnerNumber = int(ofMap(analogValue, 0.0, 735.0, 0.0, 3599.0, true));
     spinnerChanged(newSpinnerNumber);
     encoderVal = "analog pin: " + ofToString(pinNum) + " = " + ofToString(newSpinnerNumber);
 
 }
 
 void ofApp::spinnerChanged(const int newSpinnerNumber){
-    int threshold = 25;
+    int threshold = 20;
     if (abs(newSpinnerNumber - spinnerNumber) > threshold) {
         spinnerNumber = newSpinnerNumber;
         encoderVal = ", spin dist = " + ofToString(spinDistance);

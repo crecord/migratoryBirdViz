@@ -52,11 +52,10 @@ void Vid::update(int frame){
 int Vid::calculateFrameToShow() {
     if (frameQ_.empty()) {
         updateVideoBlock();
-        //if (movieIsPlaying) { return -1; }
         return stillFrame_1960_ - 1;
     } else {
         int QFrame = frameQ_.front();
-        int framesToPop = 2;
+        int framesToPop = 1;
         int framesPopped = 0;
         while (!frameQ_.empty() && framesPopped < framesToPop) {
             frameQ_.pop_front();
@@ -72,7 +71,7 @@ void Vid::setupVideoBlock(int frame){
   delay_ = ofRandom(3000, 6000);
   startTime_ = ofGetElapsedTimeMillis();
 
-  for (int i = frame; i < stillFrame_1960_; i++) {
+  for (int i = frame + 1; i < stillFrame_1960_; i++) {
     frameQ_.push_back(i);
    }
     
@@ -113,8 +112,10 @@ void Vid::drawVid() {
 }
 
 void Vid::stopVideoBlock(){
+    ofLog() << "stopping video";
     loopIndex_ = 0;
     delay_ = 0;
+    startTime_ = 0;
     for(int i =0; i< videos.size(); i++){
         videos.at(i).stop();
     }
