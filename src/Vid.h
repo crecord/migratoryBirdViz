@@ -10,11 +10,7 @@
 
 class Vid{
 public:
-    static float percent;
-    static int frame;
-    static bool isAfter;
-  
-    void setup(
+    Vid(
       string name,
       int firstFrame_1960,
       int endFrame_1960,
@@ -23,41 +19,39 @@ public:
       vector <string> loopFiles
     );
   
-    void update();
-    void draw();
+    void update(int frame);
         
-    vector <int> currentlyPlayingIndexes;
-    vector <ofVideoPlayer> videos;
+   // vector <int> currentlyPlayingIndexes;
+   // vector <ofVideoPlayer> videos;
     
     int calculateFrameToShow();
   
-    bool isCurrentlyPlaying;
-    bool isStill = true;
-    ofImage still;
-    deque<string> frameQ;
-  
-    float startFrame_1960;
-    float endFrame_1960;
-    float startFrame_2010;
-    float endFrame_2010;
-      
-    string debugInfo;
+    bool isCurrentlyPlaying= false;
+    string debugInfo_;
     
 private:
-    string name;
 
-    vector <string> loopFiles;
+    vector <string> loopFiles_;
+    float startFrame_1960_;
+    float stillFrame_1960_;
+    float startFrame_2010_;
+    float stillFrame_2010_;
+    
+    ofImage still_;
+    deque<int> frameQ_;
+
+    string name_;
 
     // manage the block of videos
-    void setupVideoBlock();
+    void setupVideoBlock(int frame);
     void updateVideoBlock();
     void drawVideoBlock();
     void stopVideoBlock();
     
     string frameToFilename(int frameNumber, bool isAfter);
     
-    int loopIndex;
+    //int loopIndex;
     
-    int delay;
-    int startTime;
+    //int delay;
+    //int startTime;
 };

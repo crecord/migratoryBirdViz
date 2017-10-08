@@ -7,6 +7,7 @@ void ofApp::setup() {
     frameNumberToShow = 0;
     frameNumberShown = 0;
     fakeSpinnerNumber = 0;
+    loopFrameNumber = -1;
   
     ofSetFullscreen(false);
     
@@ -39,8 +40,7 @@ void ofApp::setup() {
             loopFiles.push_back(scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]"));
         }
         scheduleOfVideos.setTo("../../");
-        Vid temp;
-        temp.setup( name, firstFrame_1960, endFrame_1960, firstFrame_2010, endFrame_2010, loopFiles);
+        Vid temp(name, firstFrame_1960, endFrame_1960, firstFrame_2010, endFrame_2010, loopFiles);
         allVids.push_back(temp);
     }
     
@@ -51,9 +51,9 @@ void ofApp::setup() {
     for (int i = 0; i < 3600; i++){
       ofImage temp;
       string leadingZeros = "";
-      if (i < 10) { leadingZeros = "000"; }
-      else if (i < 100) { leadingZeros = "00"; }
-      else if (i < 1000) { leadingZeros = "0"; }
+      if (i+1 < 10) { leadingZeros = "000"; }
+      else if (i+1 < 100) { leadingZeros = "00"; }
+      else if (i+1 < 1000) { leadingZeros = "0"; }
       string imageURL = "./videos/1960_scrubLevel/1960_" + leadingZeros + ofToString(i+1) + ".jpg";
       fullScene_1960.push_back(imageURL);
     }
@@ -63,8 +63,8 @@ void ofApp::setup() {
     // VARIABLES FOR SENSING SPINNING //
     isSpinMode = true;
     encoderVal = "nothing yet";
-    lastSensorValue = -20;
-    diffList.assign(5, 0);
+    lastSensorValue = 0;
+    diffList.assign(6, 0);
     
     // LOAD IN SOUNDS //
     ambientSound.load("sounds/ambient.mp3");
@@ -105,7 +105,7 @@ void ofApp::setupArduino(const int & version) {
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    spinDistance = getSpinDistance(frameNumberShown, spinnerNumber, 3600) / 2;
+    spinDistance = getSpinDistance(frameNumberShown, spinnerNumber, 3600);
     updateDiffQueue(spinDistance);
     
     if (averageDiff == 0.0 && isSpinMode){
@@ -118,14 +118,7 @@ void ofApp::update(){
         ambientSound.play();
         ambientSound.setPaused(false);
         isSpinMode = true;
-    }
-    
-    // Tell vids what frame is currently shown
-    // And see which is active
-    allVids.at(0).frame = frameNumberShown;
-    for(int i =0; i < allVids.size(); i++) {
-        allVids.at(i).update();
-        debugInfo = allVids.at(i).debugInfo;
+        // frameNumberShown = loopFrameNumber;
     }
     
     // Figure out which frame to show
@@ -152,22 +145,42 @@ void ofApp::calculateFrameToShow() {
             } else {
                 frameNumberToShow = posMod(spinnerNumber, 3600);
             }
+            
+            // see if you should let the spin catch the loop frame still
+            if (frameNumberToShow < loopFrameNumber) {
+                frameNumberToShow = loopFrameNumber;
+            } else if (loopFrameNumber != -1) {
+                loopFrameNumber = -1;
+            }
         } else {
             // go backwards
+            
             if (adjustedSpinnerNumber > frameNumberShown){
                 adjustedSpinnerNumber -= 3600;
             }
-            if (frameNumberShown + averageDiff > adjustedSpinnerNumber ) {
-                frameNumberToShow = posMod(int(frameNumberShown + averageDiff), 3600);
+            if (frameNumberShown - averageDiff > adjustedSpinnerNumber ) {
+                frameNumberToShow = posMod(int(frameNumberShown - averageDiff), 3600);
             } else {
                 frameNumberToShow = posMod(spinnerNumber, 3600);
             }
+            
+            // turn loop off
+            if (loopFrameNumber != -1) {
+                loopFrameNumber = -1;
+             frameNumberShown = loopFrameNumber;
+            }
         }
+        
+        // loopFrameNumber = -1;
     } else {
-        //
-        for(int i =0; i < allVids.size(); i++){
+        // If In Loop Mode
+        // Tell vids what frame is currently shown
+        // And see which is active
+        for(int i = 0; i < allVids.size(); i++) {
+            allVids.at(i).update(frameNumberShown);
             if (allVids.at(i).isCurrentlyPlaying) {
-                frameNumberToShow = allVids.at(i).calculateFrameToShow();
+                debugInfo = allVids.at(i).debugInfo_;
+                loopFrameNumber = allVids.at(i).calculateFrameToShow();
             }
         }
     }
@@ -181,11 +194,14 @@ void ofApp::draw(){
     vidBuffer.begin();
       ofClear(0, 0, 0, 0);
     
-    if (frameNumberToShow != -1) {
-        ofLog() << "Frame number to show:: draw " + ofToString(frameNumberToShow);
-      frameToShow.load(fullScene_1960.at(frameNumberToShow));
-      frameToShow.draw(0, 0);
-      frameNumberShown = frameNumberToShow;
+    if (loopFrameNumber >= 0 && loopFrameNumber < 3600) {
+        ofImage loopFrameToShow;
+        loopFrameToShow.load(fullScene_1960.at(loopFrameNumber));
+        loopFrameToShow.draw(0, 0);
+    } else {
+        frameToShow.load(fullScene_1960.at(frameNumberToShow));
+        frameToShow.draw(0, 0);
+        frameNumberShown = frameNumberToShow;
     }
 
     if (showDecorativeFrame) {
@@ -198,13 +214,12 @@ void ofApp::draw(){
     
     ofSetColor(255, 255, 255);
     ofDrawBitmapString(encoderVal, 10, 20);
-    ofDrawBitmapString(isSpinMode ? "SPIN MODE" : "LOOP MODE", 100, 20);
+    ofDrawBitmapString(isSpinMode ? "SPIN MODE" : "LOOP MODE", 200, 20);
     ofDrawBitmapString("Frame # shown: " + ofToString(frameNumberShown), 10, 40);
     ofDrawBitmapString("Spinner #: " + ofToString(spinnerNumber), 200, 40);
     ofDrawBitmapString("Average Diff" + ofToString(averageDiff), 400, 40);
 
     ofDrawBitmapString("month = " + ofToString(mons[(int)trunc((frameNumberShown / 3600.0) * 12)]), 10, 60);
-    ofDrawBitmapString("day = FIGURE OUT MATH " + ofToString(frameNumberShown % 30), 150, 60);
     ofDrawBitmapString("year = 1960", 300, 60);
     ofDrawBitmapString(debugInfo, 10, 80);
 }
@@ -212,7 +227,6 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    
     
     // send key event
     bezManager.keyPressed(key);
@@ -230,11 +244,11 @@ void ofApp::keyPressed(int key){
         bezManager.loadSettings();
     }
     if(key == 'q'){
-        fakeSpinnerNumber = posMod((fakeSpinnerNumber - 5), 3600);
+        fakeSpinnerNumber = posMod((fakeSpinnerNumber - 25), 3600);
         spinnerChanged(fakeSpinnerNumber);
     }
     if(key == 'w'){
-        fakeSpinnerNumber = posMod((fakeSpinnerNumber + 5), 3600);
+        fakeSpinnerNumber = posMod((fakeSpinnerNumber + 25), 3600);
         spinnerChanged(fakeSpinnerNumber);
     }
     if (key == 'g'){
@@ -288,8 +302,9 @@ void ofApp::drawCheckerboard(float x, float y, int width, int height, int size) 
 int ofApp::posMod(int x, int y){
     return ((x % y) + y) % y;
 }
+
 void ofApp::updateDiffQueue(int value) {
-    diffList.push_front(value);
+    diffList.push_front(abs(value));
     averageDiff = averageOfList(diffList);
     diffList.pop_back();
 }

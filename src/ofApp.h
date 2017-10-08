@@ -52,8 +52,10 @@ class ofApp : public ofBaseApp{
     
         void spinnerChanged(const int newSpinnerNumber);
         int spinDistance;
-        int lastSpinnerNumber;
+    int frameDistance;
         int spinnerNumber;
+    int prevSpinnerNumber;
+        int loopFrameNumber;
         int frameNumberShown;
         int frameNumberToShow;
         void calculateFrameToShow();
@@ -71,7 +73,6 @@ class ofApp : public ofBaseApp{
     
         ofFbo vidBuffer;
         
-    
         // === Arduino =============================
     
         ofArduino ard;
@@ -105,11 +106,18 @@ class ofApp : public ofBaseApp{
         string encoderVal;
         int lastSensorValue;
     
-        int diffCount;
         deque<int> diffList;
+        deque<int> spinDiffList;
+    
         float averageDiff;
-        float averageOfList(deque<int> list);
+        float averageSpinDiff;
+    
         void updateDiffQueue(int value);
+        void updateSpinDiffQueue(int value);
+    
+        //helper
+        float averageOfList(deque<int> list);
+
 
         // === Debugging =============================
     

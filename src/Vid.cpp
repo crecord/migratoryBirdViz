@@ -8,67 +8,82 @@
 
 #include "Vid.h"
 
-float Vid::percent = 0;
-int Vid::frame = 0;
-bool Vid::isAfter = false;
+Vid::Vid(string name, int firstFrame_1960, int endFrame_1960, int firstFrame_2010, int endFrame_2010, vector <string> loopFiles) {
 
-void Vid::setup(string name, int firstFrame_1960, int endFrame_1960, int firstFrame_2010, int endFrame_2010, vector <string> loopFiles){
-
-    debugInfo = "group: " + ofToString(name) + "\n 1960 frame range: " + ofToString(firstFrame_1960) + "-" + ofToString(endFrame_1960);
+    name_ = name;
+    debugInfo_ = "group: " + ofToString(name) + "\n 1960 frame range: " + ofToString(firstFrame_1960) + "-" + ofToString(endFrame_1960);
   
-    name = name;
+    startFrame_1960_ = firstFrame_1960;
+    stillFrame_1960_ = endFrame_1960;
+    startFrame_2010_ = firstFrame_1960;
+    stillFrame_2010_ = endFrame_1960;
     
-    string stillURL = frameToFilename(endFrame_1960 - 1, false);
-    ofLog() << stillURL;
-    still.load(stillURL);
-
-    startFrame_1960 = firstFrame_1960;
-    endFrame_1960 = endFrame_1960;
+    still_.load(frameToFilename(stillFrame_1960_ - 1, false));
     
-    loopFiles = loopFiles;
+   //loopFiles_ = loopFiles;
   
-    for (int i =0; i< loopFiles.size(); i++){
-      ofVideoPlayer temp;
-      string filen = "videos/"+ loopFiles.at(i);
-      temp.load(filen);
-      videos.push_back(temp);
-    }
+   //   for (int i =0; i< loopFiles.size(); i++){
+   //   ofVideoPlayer temp;
+    //  string filen = "videos/"+ loopFiles.at(i);
+     // temp.load(filen);
+     // videos.push_back(temp);
+   // }
   
     isCurrentlyPlaying = false;
     
-    loopIndex = 0;
+    // loopIndex = 0;
+    frameQ_ = deque<int>();
 }
 
-void Vid::update(){
-    if (frame > startFrame_1960 & frame <= endFrame_1960 ||
-        frame == 0 & startFrame_1960 == 0) {
+void Vid::update(int frame){
+    bool inRange = (frame > startFrame_1960_) && (frame <= stillFrame_1960_);
+    if (!isCurrentlyPlaying && inRange) {
+        // Set to currently playing
         isCurrentlyPlaying = true;
-    } else {
+        setupVideoBlock(frame);
+    } else if (isCurrentlyPlaying && !inRange) {
+        // set to not currently playing
         isCurrentlyPlaying = false;
+        // clearFrameQ
+        frameQ_ = {};
     }
 }
 
 int Vid::calculateFrameToShow() {
-}
-
-
-void Vid::setupVideoBlock(){
-  loopIndex = 0;
-  if (videos.size() == 0) {
-    loopIndex = -1; // has no loops
-  }
-  isStill = true;
-  delay = ofRandom(5000, 10000);
-  startTime = ofGetElapsedTimeMillis();
-    
-  // also pop any remaining action frames onto frameQ
-    for (int i = frame; i < endFrame_1960; i++) {
-        frameQ.push_back(frameToFilename(i, false));
+    if (frameQ_.empty()) {
+        return stillFrame_1960_ - 1;
+    } else {
+        int QFrame = frameQ_.front();
+        int framesToPop = 2;
+        int framesPopped = 0;
+        while (!frameQ_.empty() && framesPopped < framesToPop) {
+            frameQ_.pop_front();
+            framesPopped++;
+        }
+        return QFrame;
     }
 }
 
+
+void Vid::setupVideoBlock(int frame){
+  // loopIndex = 0;
+  // if (videos.size() == 0) {
+  //   loopIndex = -1; // has no loops
+  // }
+  // isStill = true;
+  // delay = ofRandom(5000, 10000);
+  // startTime = ofGetElapsedTimeMillis();
+    
+
+
+  for (int i = frame; i < stillFrame_1960_; i++) {
+    frameQ_.push_back(i);
+   }
+    
+}
+
 void Vid::updateVideoBlock(){
-  if (loopIndex != -1) { // has loops
+  /*if (loopIndex != -1) { // has loops
     videos.at(loopIndex).update();
     if(videos.at(loopIndex).getIsMovieDone()) {
       // Once a loop is complete, stop it, set a delay time before playing the next one
@@ -91,31 +106,18 @@ void Vid::updateVideoBlock(){
       delay = 0;
     }
   }
-}
-
-
-void Vid::draw(){
-  if (!frameQ.empty()) {
-    ofImage frameToDraw;
-    frameToDraw.load(frameQ.front());
-    frameToDraw.draw(0, 0);
-    frameQ.pop_front();
-  }
-  else if (isStill) {
-    still.draw(0, 0);
-  }
-  else if (loopIndex != -1) { // has loops
-    videos.at(loopIndex).draw(0, 0);
-  }
+   */
 }
 
 void Vid::stopVideoBlock(){
+    /*
     loopIndex = 0;
     isStill = false;
     delay = 0;
     for(int i =0; i< videos.size(); i++){
         videos.at(i).stop();
     }
+     */
 }
 
 void Vid::drawVideoBlock(){
