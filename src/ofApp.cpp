@@ -64,7 +64,7 @@ void ofApp::setup() {
     isSpinMode = true;
     encoderVal = "nothing yet";
     lastSensorValue = 0;
-    diffList.assign(6, 0);
+    diffList.assign(4, 0);
     
     // LOAD IN SOUNDS //
     ambientSound.load("sounds/ambient.mp3");
@@ -198,6 +198,11 @@ void ofApp::draw(){
         ofImage loopFrameToShow;
         loopFrameToShow.load(fullScene_1960.at(loopFrameNumber));
         loopFrameToShow.draw(0, 0);
+        for(int i = 0; i < allVids.size(); i++) {
+            if (allVids.at(i).isCurrentlyPlaying) {
+                allVids.at(i).drawVid();
+            }
+        }
     } else {
         frameToShow.load(fullScene_1960.at(frameNumberToShow));
         frameToShow.draw(0, 0);

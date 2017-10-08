@@ -20,19 +20,17 @@ Vid::Vid(string name, int firstFrame_1960, int endFrame_1960, int firstFrame_201
     
     still_.load(frameToFilename(stillFrame_1960_ - 1, false));
     
-   //loopFiles_ = loopFiles;
-  
-   //   for (int i =0; i< loopFiles.size(); i++){
-   //   ofVideoPlayer temp;
-    //  string filen = "videos/"+ loopFiles.at(i);
-     // temp.load(filen);
-     // videos.push_back(temp);
-   // }
+    loopFiles_ = loopFiles;
+    for (int i =0; i< loopFiles.size(); i++){
+        ofVideoPlayer temp;
+        string filen = "videos/"+ loopFiles.at(i);
+        temp.load(filen);
+        videos.push_back(temp);
+        loopIndex_ = 0;
+   }
   
     isCurrentlyPlaying = false;
-    
-    // loopIndex = 0;
-    frameQ_ = deque<int>();
+    frameQ_ = {};
 }
 
 void Vid::update(int frame){
@@ -46,11 +44,15 @@ void Vid::update(int frame){
         isCurrentlyPlaying = false;
         // clearFrameQ
         frameQ_ = {};
+        stopVideoBlock();
     }
 }
 
+
 int Vid::calculateFrameToShow() {
     if (frameQ_.empty()) {
+        updateVideoBlock();
+        //if (movieIsPlaying) { return -1; }
         return stillFrame_1960_ - 1;
     } else {
         int QFrame = frameQ_.front();
@@ -66,15 +68,9 @@ int Vid::calculateFrameToShow() {
 
 
 void Vid::setupVideoBlock(int frame){
-  // loopIndex = 0;
-  // if (videos.size() == 0) {
-  //   loopIndex = -1; // has no loops
-  // }
-  // isStill = true;
-  // delay = ofRandom(5000, 10000);
-  // startTime = ofGetElapsedTimeMillis();
-    
-
+  // isStill_ = true;
+  delay_ = ofRandom(3000, 6000);
+  startTime_ = ofGetElapsedTimeMillis();
 
   for (int i = frame; i < stillFrame_1960_; i++) {
     frameQ_.push_back(i);
@@ -83,45 +79,45 @@ void Vid::setupVideoBlock(int frame){
 }
 
 void Vid::updateVideoBlock(){
-  /*if (loopIndex != -1) { // has loops
-    videos.at(loopIndex).update();
-    if(videos.at(loopIndex).getIsMovieDone()) {
-      // Once a loop is complete, stop it, set a delay time before playing the next one
-      videos.at(loopIndex).stop();
-      if (loopIndex < videos.size()-1){
-        loopIndex ++;
-      } else {
-        loopIndex= 0;
-      }
-      isStill = true;
-      delay = ofRandom(5000);
-      startTime = ofGetElapsedTimeMillis();
+  ofLog() << "update video block";
+  if (videos.size() > 0 && videos.at(loopIndex_).isPlaying()) { // is playing a loop
+      videos.at(loopIndex_).update();
+      if (videos.at(loopIndex_).getPosition() > .99) {
+          ofLog() << " A LOOP IS OVER";
+        // Once a loop is complete, stop it, set a delay time before playing the next one
+        videos.at(loopIndex_).stop();
+        videos.at(loopIndex_).setPosition(0);
+        if ((loopIndex_+ 1) < videos.size()){
+          loopIndex_ ++;
+        } else {
+         loopIndex_ = 0;
+        }
+        delay_ = ofRandom(3000, 6000);
+        startTime_ = ofGetElapsedTimeMillis();
     }
-       
-    if (delay != 0 & (ofGetElapsedTimeMillis() - startTime) >= delay) {
-      isStill = false;
-      // Once a delay is complete, playing the next loop
-      videos.at(loopIndex).setLoopState(OF_LOOP_NONE);
-      videos.at(loopIndex).play();
-      delay = 0;
+  } else if (videos.size() > 0) {
+    if ((delay_ != 0) && (ofGetElapsedTimeMillis() - startTime_) >= delay_) {
+        videos.at(loopIndex_).setLoopState(OF_LOOP_NONE);
+        videos.at(loopIndex_).play();
+        delay_ = 0;
     }
   }
-   */
+}
+
+void Vid::drawVid() {
+    ofLog() << loopIndex_;
+    
+    if (videos.size() > 0 && videos.at(loopIndex_).isPlaying()) {
+        videos.at(loopIndex_).draw(0, 0);
+    }
 }
 
 void Vid::stopVideoBlock(){
-    /*
-    loopIndex = 0;
-    isStill = false;
-    delay = 0;
+    loopIndex_ = 0;
+    delay_ = 0;
     for(int i =0; i< videos.size(); i++){
         videos.at(i).stop();
     }
-     */
-}
-
-void Vid::drawVideoBlock(){
-  
 }
 
 string Vid::frameToFilename(int frameNumber, bool isAfter) {

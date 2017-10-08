@@ -22,9 +22,10 @@ public:
     void update(int frame);
         
    // vector <int> currentlyPlayingIndexes;
-   // vector <ofVideoPlayer> videos;
+   vector <ofVideoPlayer> videos;
     
     int calculateFrameToShow();
+    void drawVid();
   
     bool isCurrentlyPlaying= false;
     string debugInfo_;
@@ -44,14 +45,14 @@ private:
 
     // manage the block of videos
     void setupVideoBlock(int frame);
-    void updateVideoBlock();
+    void updateVideoBlock(); // returns if movie is playing
     void drawVideoBlock();
     void stopVideoBlock();
     
     string frameToFilename(int frameNumber, bool isAfter);
     
-    //int loopIndex;
+    int loopIndex_;
     
-    //int delay;
-    //int startTime;
+    int delay_;
+    int startTime_;
 };
