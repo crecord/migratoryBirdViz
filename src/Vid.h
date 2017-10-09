@@ -16,13 +16,15 @@ public:
       int endFrame_1960,
       int firstFrame_2010,
       int endFrame_2010,
-      vector <string> loopFiles
+      vector <string> loopFiles,
+      string stillLoop
     );
   
-    void update(int frame);
+    void update(int frame, bool isSpinMode);
         
    // vector <int> currentlyPlayingIndexes;
    vector <ofVideoPlayer> videos;
+    ofVideoPlayer stillLoop_;
     
     int calculateFrameToShow();
     void drawVid();

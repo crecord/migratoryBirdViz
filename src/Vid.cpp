@@ -8,7 +8,7 @@
 
 #include "Vid.h"
 
-Vid::Vid(string name, int firstFrame_1960, int endFrame_1960, int firstFrame_2010, int endFrame_2010, vector <string> loopFiles) {
+Vid::Vid(string name, int firstFrame_1960, int endFrame_1960, int firstFrame_2010, int endFrame_2010, vector <string> loopFiles, string stillLoop) {
 
     name_ = name;
     debugInfo_ = "group: " + ofToString(name) + "\n 1960 frame range: " + ofToString(firstFrame_1960) + "-" + ofToString(endFrame_1960);
@@ -28,18 +28,25 @@ Vid::Vid(string name, int firstFrame_1960, int endFrame_1960, int firstFrame_201
         videos.push_back(temp);
         loopIndex_ = 0;
    }
+
+    if (stillLoop != "") {
+        stillLoop_.load("videos/"+stillLoop);
+        stillLoop_.setLoopState(OF_LOOP_NORMAL);
+
+        ofLog() << "STILL LOOP IS LOADED " << stillLoop << stillLoop_.isLoaded();
+    }
   
     isCurrentlyPlaying = false;
     frameQ_ = {};
 }
 
-void Vid::update(int frame){
+void Vid::update(int frame, bool isSpinMode){
     bool inRange = (frame > startFrame_1960_) && (frame <= stillFrame_1960_);
-    if (!isCurrentlyPlaying && inRange) {
+    if (!isCurrentlyPlaying && inRange && !isSpinMode) {
         // Set to currently playing
         isCurrentlyPlaying = true;
         setupVideoBlock(frame);
-    } else if (isCurrentlyPlaying && !inRange) {
+    } else if ((isCurrentlyPlaying && !inRange) || (isCurrentlyPlaying && isSpinMode)) {
         // set to not currently playing
         isCurrentlyPlaying = false;
         // clearFrameQ
@@ -52,6 +59,9 @@ void Vid::update(int frame){
 int Vid::calculateFrameToShow() {
     if (frameQ_.empty()) {
         updateVideoBlock();
+        if (stillLoop_.isLoaded() && !stillLoop_.isPlaying()){
+            stillLoop_.play();
+        }
         return stillFrame_1960_ - 1;
     } else {
         int QFrame = frameQ_.front();
@@ -104,8 +114,10 @@ void Vid::updateVideoBlock(){
 }
 
 void Vid::drawVid() {
-    ofLog() << loopIndex_;
-    
+    if (stillLoop_.isPlaying()) {
+        stillLoop_.update();
+        stillLoop_.draw(0, 0);
+    }
     if (videos.size() > 0 && videos.at(loopIndex_).isPlaying()) {
         videos.at(loopIndex_).draw(0, 0);
     }
@@ -116,6 +128,9 @@ void Vid::stopVideoBlock(){
     loopIndex_ = 0;
     delay_ = 0;
     startTime_ = 0;
+    if (stillLoop_.isLoaded()){
+        stillLoop_.stop();
+    }
     for(int i =0; i< videos.size(); i++){
         videos.at(i).stop();
     }

@@ -21,6 +21,7 @@ void ofApp::setup() {
     scheduleOfVideos.setTo("videos");
     for (int i =0; i <scheduleOfVideos.getNumChildren(); i++ ) {
         vector <string> loopFiles;
+        string stillLoop = "";
         string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
         int firstFrame_1960 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME_1960"));
         int endFrame_1960 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME_1960"));
@@ -37,10 +38,15 @@ void ofApp::setup() {
         }
         scheduleOfVideos.setTo("GROUP[" + ofToString(i) +"]/LOOPS");
           for(int j=0; j < scheduleOfVideos.getNumChildren(); j++){
-            loopFiles.push_back(scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]"));
+            string loopFlag = scheduleOfVideos.getAttribute("FILENAME[" + ofToString(j) +"][@flag]");
+            if (loopFlag == "STILL") {
+                stillLoop = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
+            } else {
+                loopFiles.push_back(scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]"));
+            }
         }
         scheduleOfVideos.setTo("../../");
-        Vid temp(name, firstFrame_1960, endFrame_1960, firstFrame_2010, endFrame_2010, loopFiles);
+        Vid temp(name, firstFrame_1960, endFrame_1960, firstFrame_2010, endFrame_2010, loopFiles, stillLoop);
         allVids.push_back(temp);
     }
     
@@ -64,7 +70,7 @@ void ofApp::setup() {
     isSpinMode = true;
     encoderVal = "nothing yet";
     lastSensorValue = 0;
-    diffList.assign(9, 0);
+    diffList.assign(5, 0);
     
     // LOAD IN SOUNDS //
     ambientSound.load("sounds/ambient.mp3");
@@ -108,17 +114,20 @@ void ofApp::update(){
     spinDistance = getSpinDistance(frameNumberShown, spinnerNumber, 3600);
     updateDiffQueue(spinDistance);
     
-    if (averageDiff == 0.0 && isSpinMode){
+    if (averageDiff == 0.0){
+        if (isSpinMode) {
+            // trigger ambient sound to stop
+            ambientSound.setPaused(true);
+        }
         // stop the spin mode
-        // trigger ambient sound to stop
-        ambientSound.setPaused(true);
         isSpinMode = false;
     }
-    else if (abs(averageDiff) > 0.0 && !isSpinMode){
-        ambientSound.play();
-        ambientSound.setPaused(false);
+    else if (abs(averageDiff) > 0.0){
+        if (!isSpinMode) {
+            ambientSound.play();
+            ambientSound.setPaused(false);
+        }
         isSpinMode = true;
-        // frameNumberShown = loopFrameNumber;
     }
     
     // Figure out which frame to show
@@ -132,6 +141,18 @@ void ofApp::update(){
 }
 
 void ofApp::calculateFrameToShow() {
+    for(int i = 0; i < allVids.size(); i++) {
+        allVids.at(i).update(frameNumberShown, isSpinMode);
+        
+        if (!isSpinMode) {
+            if (allVids.at(i).isCurrentlyPlaying) {
+                debugInfo = allVids.at(i).debugInfo_;
+                loopFrameNumber = allVids.at(i).calculateFrameToShow();
+            }
+        }
+    }
+
+
     if(isSpinMode){
         // Spinning
         int adjustedSpinnerNumber = spinnerNumber;
@@ -164,8 +185,8 @@ void ofApp::calculateFrameToShow() {
             if (adjustedSpinnerNumber > frameNumberShown){
                 adjustedSpinnerNumber -= 3600;
             }
-            if (frameNumberShown - frameAdjustment > adjustedSpinnerNumber ) {
-                frameNumberToShow = posMod(int(frameNumberShown - frameAdjustment), 3600);
+            if (frameNumberShown + frameAdjustment > adjustedSpinnerNumber ) {
+                frameNumberToShow = posMod(int(frameNumberShown + frameAdjustment), 3600);
             } else {
                 frameNumberToShow = posMod(spinnerNumber, 3600);
             }
@@ -174,19 +195,6 @@ void ofApp::calculateFrameToShow() {
             if (loopFrameNumber != -1) {
                 loopFrameNumber = -1;
                 frameNumberShown = loopFrameNumber;
-            }
-        }
-        
-        // loopFrameNumber = -1;
-    } else {
-        // If In Loop Mode
-        // Tell vids what frame is currently shown
-        // And see which is active
-        for(int i = 0; i < allVids.size(); i++) {
-            allVids.at(i).update(frameNumberShown);
-            if (allVids.at(i).isCurrentlyPlaying) {
-                debugInfo = allVids.at(i).debugInfo_;
-                loopFrameNumber = allVids.at(i).calculateFrameToShow();
             }
         }
     }
@@ -228,6 +236,7 @@ void ofApp::draw(){
     ofDrawBitmapString(isSpinMode ? "SPIN MODE" : "LOOP MODE", 200, 20);
     ofDrawBitmapString("Frame # shown: " + ofToString(frameNumberShown), 10, 40);
     ofDrawBitmapString("Spinner #: " + ofToString(spinnerNumber), 200, 40);
+    ofDrawBitmapString("Spinner Dist: " + ofToString(spinDistance), 600, 40);
     ofDrawBitmapString("Average Diff" + ofToString(averageDiff), 400, 40);
 
     ofDrawBitmapString("month = " + ofToString(mons[(int)trunc((frameNumberShown / 3600.0) * 12)]), 10, 60);
@@ -315,9 +324,14 @@ int ofApp::posMod(int x, int y){
 }
 
 void ofApp::updateDiffQueue(int value) {
-    diffList.push_front(abs(value));
-    averageDiff = averageOfList(diffList);
+    int lastDiff = diffList.back();
+    if ((lastDiff < 0 && value > 0) || (lastDiff > 0 && value < 0)) {
+        diffList.clear();
+        diffList.assign(5, 0);
+    }
     diffList.pop_back();
+    diffList.push_front(value);
+    averageDiff = averageOfList(diffList);
 }
 
 
@@ -351,9 +365,7 @@ void ofApp::spinnerChanged(const int newSpinnerNumber){
     int threshold = 20;
     if (abs(newSpinnerNumber - spinnerNumber) > threshold) {
         spinnerNumber = newSpinnerNumber;
-        encoderVal = ", spin dist = " + ofToString(spinDistance);
     }
-   
 }
 
 

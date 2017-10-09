@@ -94,7 +94,9 @@
         <LAST_FRAME_1960>1000</LAST_FRAME_1960>
         <FIRST_FRAME_2010>901</FIRST_FRAME_2010>
         <LAST_FRAME_2010>1000</LAST_FRAME_2010>
-        <LOOPS></LOOPS>
+        <LOOPS>
+            <FILENAME flag="STILL" >RainLoop_Sound.mp4</FILENAME>
+        </LOOPS>
     </GROUP>
     <GROUP>
         <NAME> Harder Raining / Grasses Grow / Raining Stops </NAME>
@@ -184,6 +186,7 @@
         <FIRST_FRAME_2010>1891</FIRST_FRAME_2010>
         <LAST_FRAME_2010>2020</LAST_FRAME_2010>
         <LOOPS>
+            <FILENAME flag="STILL" >FemaleWatchingNest_Sound.mp4</FILENAME>
             <FILENAME>WT_MaleFeedsYoungSingsInFlight.mp4</FILENAME>
             <FILENAME>WT_FemaleFeedsYoung.mp4</FILENAME>
         </LOOPS>
