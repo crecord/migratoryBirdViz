@@ -17,34 +17,46 @@ public:
       int firstFrame_2010,
       int endFrame_2010,
       vector <string> loopFiles,
+      vector <int> loopDelays,
       string stillLoop
     );
-  
-    void update(int frame, bool isSpinMode);
-        
-   // vector <int> currentlyPlayingIndexes;
-   vector <ofVideoPlayer> videos;
-    ofVideoPlayer stillLoop_;
     
+    string name_;
+    string debugInfo_;
+  
+    bool isInRange(int frame);
     int calculateFrameToShow();
     void drawVid();
   
-    bool isCurrentlyPlaying= false;
-    string debugInfo_;
-    deque<int> frameQ_;
-
+    bool isInRange_ = false;
+    bool isPlayingTransition_ = false;
+    bool isPlayingStill_ = false;
+    bool isPlayingLoop_ = false;
     
 private:
-
-    vector <string> loopFiles_;
+    
+    deque<int> frameQ_;
+    
+    vector <string> loopFiles_;    // Names of videos
+    vector <int> loopDelays_;      // The delay for each video
+    vector <ofVideoPlayer> videos; // The video player object
+    int loopIndex_ = 0;            // Which loop should be played next
+    bool hasLoops = false;
+    
+    void setupTransition(int frame);
+    void setupStill();
+    void setupLooping();
+    void updateLooping();
+    
     float startFrame_1960_;
     float stillFrame_1960_;
     float startFrame_2010_;
     float stillFrame_2010_;
+    float startFrame_;
+    float stillFrame_;
     
     ofImage still_;
-
-    string name_;
+    ofVideoPlayer stillLoop_;
 
     // manage the block of videos
     void setupVideoBlock(int frame);
@@ -54,7 +66,7 @@ private:
     
     string frameToFilename(int frameNumber, bool isAfter);
     
-    int loopIndex_;
+    
     
     int delay_;
     int startTime_;

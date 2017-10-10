@@ -21,6 +21,7 @@ void ofApp::setup() {
     scheduleOfVideos.setTo("videos");
     for (int i =0; i <scheduleOfVideos.getNumChildren(); i++ ) {
         vector <string> loopFiles;
+        vector <int> loopDelays;
         string stillLoop = "";
         string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
         int firstFrame_1960 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME_1960"));
@@ -42,11 +43,14 @@ void ofApp::setup() {
             if (loopFlag == "STILL") {
                 stillLoop = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
             } else {
+                string delayFlag = scheduleOfVideos.getAttribute("FILENAME[" + ofToString(j) +"][@delay]");
+                if (delayFlag == "") delayFlag = 1000;
+                loopDelays.push_back(ofToInt(delayFlag));
                 loopFiles.push_back(scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]"));
             }
         }
         scheduleOfVideos.setTo("../../");
-        Vid temp(name, firstFrame_1960, endFrame_1960, firstFrame_2010, endFrame_2010, loopFiles, stillLoop);
+        Vid temp(name, firstFrame_1960, endFrame_1960, firstFrame_2010, endFrame_2010, loopFiles, loopDelays, stillLoop);
         allVids.push_back(temp);
     }
     
@@ -130,6 +134,14 @@ void ofApp::update(){
         isSpinMode = true;
     }
     
+    // Recalculate which loop section in range
+    // If a loop is currently playing, finsh it before updating this...
+    for(int i = 0; i < allVids.size(); i++) {
+        if (allVids.at(i).isInRange(frameNumberShown)) {
+            activeVidIndex = i;
+        }
+    }
+    
     // Figure out which frame to show
     calculateFrameToShow();
 
@@ -141,25 +153,20 @@ void ofApp::update(){
 }
 
 void ofApp::calculateFrameToShow() {
-    for(int i = 0; i < allVids.size(); i++) {
-        allVids.at(i).update(frameNumberShown, isSpinMode);
-        
-        if (!isSpinMode) {
-            if (allVids.at(i).isCurrentlyPlaying) {
-                debugInfo = allVids.at(i).debugInfo_;
-                loopFrameNumber = allVids.at(i).calculateFrameToShow();
-            }
+
+    if (!isSpinMode) {
+        if (activeVidIndex != -1) {
+            loopFrameNumber = allVids.at(activeVidIndex).calculateFrameToShow();
         }
     }
-
 
     if(isSpinMode){
         // Spinning
         int adjustedSpinnerNumber = spinnerNumber;
         int frameAdjustment = averageDiff;
-        if (averageDiff < 50 && averageDiff >= 0) {
+        if (averageDiff < 20 && averageDiff >= 0) {
             frameAdjustment = 1;
-        } if (averageDiff > -50 && averageDiff < 0) {
+        } if (averageDiff > -20 && averageDiff < 0) {
             frameAdjustment = -1;
         }
         if (spinDistance >= 0) {
@@ -208,15 +215,11 @@ void ofApp::draw(){
     vidBuffer.begin();
       ofClear(0, 0, 0, 0);
     
-    if (loopFrameNumber >= 0 && loopFrameNumber < 3600) {
+    if (!isSpinMode && activeVidIndex != -1) {
         ofImage loopFrameToShow;
         loopFrameToShow.load(fullScene_1960.at(loopFrameNumber));
         loopFrameToShow.draw(0, 0);
-        for(int i = 0; i < allVids.size(); i++) {
-            if (allVids.at(i).isCurrentlyPlaying) {
-                allVids.at(i).drawVid();
-            }
-        }
+        allVids.at(activeVidIndex).drawVid();
     } else {
         frameToShow.load(fullScene_1960.at(frameNumberToShow));
         frameToShow.draw(0, 0);
@@ -264,11 +267,11 @@ void ofApp::keyPressed(int key){
         bezManager.loadSettings();
     }
     if(key == 'q'){
-        fakeSpinnerNumber = posMod((fakeSpinnerNumber - 25), 3600);
+        fakeSpinnerNumber = posMod((fakeSpinnerNumber - 15), 3600);
         spinnerChanged(fakeSpinnerNumber);
     }
     if(key == 'w'){
-        fakeSpinnerNumber = posMod((fakeSpinnerNumber + 25), 3600);
+        fakeSpinnerNumber = posMod((fakeSpinnerNumber + 15), 3600);
         spinnerChanged(fakeSpinnerNumber);
     }
     if (key == 'g'){
@@ -362,7 +365,7 @@ void ofApp::analogPinChanged(const int & pinNum) {
 }
 
 void ofApp::spinnerChanged(const int newSpinnerNumber){
-    int threshold = 20;
+    int threshold = 10;
     if (abs(newSpinnerNumber - spinnerNumber) > threshold) {
         spinnerNumber = newSpinnerNumber;
     }

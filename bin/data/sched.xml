@@ -2,12 +2,18 @@
 <VIDEOS>
     <GROUP>
         <NAME> Heavy Snowfall Deposits Snow on Juncos </NAME>
-        <FIRST_FRAME_1960>0</FIRST_FRAME_1960>
+        <FIRST_FRAME_1960>1</FIRST_FRAME_1960>
         <LAST_FRAME_1960>100</LAST_FRAME_1960>
-        <FIRST_FRAME_2010>0</FIRST_FRAME_2010>
+        <FIRST_FRAME_2010>1</FIRST_FRAME_2010>
         <LAST_FRAME_2010>100</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -17,7 +23,13 @@
         <FIRST_FRAME_2010>101</FIRST_FRAME_2010>
         <LAST_FRAME_2010>200</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -27,7 +39,13 @@
         <FIRST_FRAME_2010>201</FIRST_FRAME_2010>
         <LAST_FRAME_2010>300</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -37,7 +55,13 @@
         <FIRST_FRAME_2010>301</FIRST_FRAME_2010>
         <LAST_FRAME_2010>400</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -47,7 +71,13 @@
         <FIRST_FRAME_2010>401</FIRST_FRAME_2010>
         <LAST_FRAME_2010>500</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -57,7 +87,13 @@
         <FIRST_FRAME_2010>501</FIRST_FRAME_2010>
         <LAST_FRAME_2010>600</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -67,7 +103,13 @@
         <FIRST_FRAME_2010>601</FIRST_FRAME_2010>
         <LAST_FRAME_2010>700</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -77,7 +119,13 @@
         <FIRST_FRAME_2010>701</FIRST_FRAME_2010>
         <LAST_FRAME_2010>780</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>Loop_JuncoBehaviors8.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_HeavySnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -95,16 +143,17 @@
         <FIRST_FRAME_2010>901</FIRST_FRAME_2010>
         <LAST_FRAME_2010>1000</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME flag="STILL" >RainLoop_Sound.mp4</FILENAME>
+            <FILENAME flag="STILL">RainingLooping.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
-        <NAME> Harder Raining / Grasses Grow / Raining Stops </NAME>
+        <NAME> Raining Stops </NAME>
         <FIRST_FRAME_1960>1001</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1090</LAST_FRAME_1960>
         <FIRST_FRAME_2010>1001</FIRST_FRAME_2010>
         <LAST_FRAME_2010>1090</LAST_FRAME_2010>
         <LOOPS>
+            <FILENAME delay="7000">RainingOnEmptyScene.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -114,6 +163,7 @@
         <FIRST_FRAME_2010>1091</FIRST_FRAME_2010>
         <LAST_FRAME_2010>1200</LAST_FRAME_2010>
         <LOOPS>
+            <FILENAME delay="7000">RainingOnFlowers.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -123,7 +173,7 @@
         <FIRST_FRAME_2010>1201</FIRST_FRAME_2010>
         <LAST_FRAME_2010>1340</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>WT_MaleSings.mp4</FILENAME>
+            <FILENAME delay="3000">WT_MaleSings.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -133,50 +183,39 @@
         <FIRST_FRAME_2010>1341</FIRST_FRAME_2010>
         <LAST_FRAME_2010>1410</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>WT_MaleFemaleCallToEachother.mp4</FILENAME>
+            <FILENAME delay="3000">WT_MaleFemaleCallToEachother.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
         <NAME> Mating Flight </NAME>
         <FIRST_FRAME_1960>1411</FIRST_FRAME_1960>
-        <LAST_FRAME_1960>1620</LAST_FRAME_1960>
+        <LAST_FRAME_1960>1600</LAST_FRAME_1960>
         <FIRST_FRAME_2010>1411</FIRST_FRAME_2010>
-        <LAST_FRAME_2010>1620</LAST_FRAME_2010>
+        <LAST_FRAME_2010>1600</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>WT_AdditionalMatingFlight.mp4</FILENAME>
+            <FILENAME delay="10000">WT_AdditionalMatingFlight.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
         <NAME> Nesting </NAME>
-        <FIRST_FRAME_1960>1621</FIRST_FRAME_1960>
+        <FIRST_FRAME_1960>1601</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1770</LAST_FRAME_1960>
-        <FIRST_FRAME_2010>1621</FIRST_FRAME_2010>
+        <FIRST_FRAME_2010>1601</FIRST_FRAME_2010>
         <LAST_FRAME_2010>1770</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>WT_BuildingNest.mp4</FILENAME>
-            <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
+            <FILENAME delay="1000">WT_FemaleCleansNest.mp4</FILENAME>
+            <FILENAME delay="5000">WT_BuildingNest.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
         <NAME> Eggs Laid </NAME>
         <FIRST_FRAME_1960>1771</FIRST_FRAME_1960>
-        <LAST_FRAME_1960>1800</LAST_FRAME_1960>
-        <FIRST_FRAME_2010>1771</FIRST_FRAME_2010>
-        <LAST_FRAME_2010>1800</LAST_FRAME_2010>
-        <LOOPS>
-            <FILENAME>WT_MaleFeedsBroodingFemale.mp4</FILENAME>
-            <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
-        </LOOPS>
-    </GROUP>
-    <GROUP>
-        <NAME> Female Shows Male Eggs </NAME>
-        <FIRST_FRAME_1960>1801</FIRST_FRAME_1960>
         <LAST_FRAME_1960>1890</LAST_FRAME_1960>
-        <FIRST_FRAME_2010>1801</FIRST_FRAME_2010>
+        <FIRST_FRAME_2010>1771</FIRST_FRAME_2010>
         <LAST_FRAME_2010>1890</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>WT_MaleFeedsBroodingFemale.mp4</FILENAME>
-            <FILENAME>WT_FemaleCleansNest.mp4</FILENAME>
+            <FILENAME delay="1000">WT_FemaleCleansNest.mp4</FILENAME>
+            <FILENAME delay="8000">WT_MaleFeedsBroodingFemale.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -187,8 +226,8 @@
         <LAST_FRAME_2010>2020</LAST_FRAME_2010>
         <LOOPS>
             <FILENAME flag="STILL" >FemaleWatchingNest_Sound.mp4</FILENAME>
-            <FILENAME>WT_MaleFeedsYoungSingsInFlight.mp4</FILENAME>
-            <FILENAME>WT_FemaleFeedsYoung.mp4</FILENAME>
+            <FILENAME delay="1000">WT_MaleFeedsYoungSingsInFlight.mp4</FILENAME>
+            <FILENAME delay="1000">WT_FemaleFeedsYoung.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -225,8 +264,8 @@
         <FIRST_FRAME_2010>2271</FIRST_FRAME_2010>
         <LAST_FRAME_2010>2400</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>WT_FemaleFeedsFledgling.mp4</FILENAME>
-            <FILENAME>WT_MaleFeedsFledgling.mp4</FILENAME>
+            <FILENAME delay="10000">WT_FemaleFeedsFledgling.mp4</FILENAME>
+            <FILENAME delay="10000">WT_MaleFeedsFledgling.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -236,8 +275,8 @@
         <FIRST_FRAME_2010>2401</FIRST_FRAME_2010>
         <LAST_FRAME_2010>2500</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>WT_FlightInDistance1.mp4</FILENAME>
-            <FILENAME>WT_FlightInDistance2.mp4</FILENAME>
+            <FILENAME delay="5000">WT_FlightInDistance1.mp4</FILENAME>
+            <FILENAME delay="5000">WT_FlightInDistance2.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -247,9 +286,9 @@
         <FIRST_FRAME_2010>2501</FIRST_FRAME_2010>
         <LAST_FRAME_2010>2550</LAST_FRAME_2010>
         <LOOPS>
-            <FILENAME>WT_MaleCalls.mp4</FILENAME>
-            <FILENAME>WT_FlightInDistance1.mp4</FILENAME>
-            <FILENAME>WT_FlightInDistance2.mp4</FILENAME>
+            <FILENAME delay="1000">WT_MaleCalls.mp4</FILENAME>
+            <FILENAME delay="1000">WT_FlightInDistance1.mp4</FILENAME>
+            <FILENAME delay="1000">WT_FlightInDistance2.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>

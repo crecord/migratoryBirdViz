@@ -66,6 +66,7 @@ class ofApp : public ofBaseApp{
         ofXml scheduleOfVideos;
     
         vector<Vid> allVids;
+        int activeVidIndex = -1;
         vector<string> fullScene_1960;
     
         bool showDecorativeFrame = true;
