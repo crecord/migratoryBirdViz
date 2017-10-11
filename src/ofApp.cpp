@@ -43,7 +43,7 @@ void ofApp::setup() {
     decorativeFrame.load("./Frame.png");
     
     
-    // Load In Sched To Custom Vid Class //
+    // Load In 1960s Vids To Custom Vid Class //
     scheduleOfVideos.load("1960_sched.xml");
     scheduleOfVideos.setTo("VIDEOS");
     for (int i =0; i <scheduleOfVideos.getNumChildren(); i++ ) {
