@@ -10,24 +10,16 @@
 
 Vid::Vid(
     string name,
-    int firstFrame_1960,
-    int endFrame_1960,
-    int firstFrame_2010,
-    int endFrame_2010,
+    int firstFrame,
+    int endFrame,
     vector <string> loopFiles,
     vector <int> loopDelays,
     string stillLoop) {
 
     name_ = name;
   
-    startFrame_1960_ = firstFrame_1960 - 1; // Minus one to convert to 0 index
-    stillFrame_1960_ = endFrame_1960 - 1;
-    startFrame_2010_ = firstFrame_1960 - 1;
-    stillFrame_2010_ = endFrame_1960 - 1;
-    
-    // We are in 1960 to start
-    startFrame_ = startFrame_1960_;
-    stillFrame_ = stillFrame_1960_;
+    startFrame_ = firstFrame - 1; // Minus one to convert to 0 index
+    stillFrame_ = endFrame - 1;
     
     still_.load(frameToFilename(stillFrame_, false));
     
@@ -51,7 +43,7 @@ Vid::Vid(
 
 
 bool Vid::isInRange(int frame) {
-    bool nowInRange = (startFrame_1960_ <= frame) && (frame <= stillFrame_1960_);
+    bool nowInRange = (startFrame_ <= frame) && (frame <= stillFrame_);
     if (nowInRange && !isInRange_) {
         // If it just became in range, start the transition
         setupTransition(frame);
@@ -94,7 +86,7 @@ int Vid::calculateFrameToShow() {
 
 void Vid::setupTransition(int frame) {
     frameQ_ = {};
-    for (int i = frame + 1; i <= stillFrame_1960_; i++) {
+    for (int i = frame + 1; i <= stillFrame_; i++) {
         frameQ_.push_back(i);
     }
     isPlayingTransition_ = true;

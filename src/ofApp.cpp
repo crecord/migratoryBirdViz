@@ -18,7 +18,7 @@ void ofApp::setup() {
     prevSpinnerNumber = 0;
     spinnerNumber = 0;
     fakeSpinnerNumber = 0;
-    isSpinMode = false;
+    isSpinMode = true;
     encoderVal = "nothing yet";
     spinDistanceList.assign(5, 0);
 
@@ -44,25 +44,21 @@ void ofApp::setup() {
     
     
     // Load In Sched To Custom Vid Class //
-    scheduleOfVideos.load("sched.xml");
+    scheduleOfVideos.load("1960_sched.xml");
     scheduleOfVideos.setTo("VIDEOS");
     for (int i =0; i <scheduleOfVideos.getNumChildren(); i++ ) {
         vector <string> loopFiles;
         vector <int> loopDelays;
         string stillLoop = "";
         string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
-        int firstFrame_1960 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME_1960"));
-        int endFrame_1960 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME_1960"));
-        int firstFrame_2010 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME_2010"));
-        int endFrame_2010 = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME_2010"));
+        int firstFrame = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME"));
+        int endFrame = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME"));
         string flag = scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@flag]");
         if(flag == "WT"){
-            int trigWT_sound_1960 = firstFrame_1960;
-            int trigWT_sound_2010 = firstFrame_2010;
+            int trigWT_sound_1960 = firstFrame;
         }
         else if(flag == "JUNCO"){
-            int trigJUNCO_sound_1960 = firstFrame_1960;
-            int trigJUNCO_sound_2010 = firstFrame_2010;
+            int trigJUNCO_sound_1960 = firstFrame;
         }
         scheduleOfVideos.setTo("GROUP[" + ofToString(i) +"]/LOOPS");
           for(int j=0; j < scheduleOfVideos.getNumChildren(); j++){
@@ -77,7 +73,7 @@ void ofApp::setup() {
             }
         }
         scheduleOfVideos.setTo("../../");
-        Vid temp(name, firstFrame_1960, endFrame_1960, firstFrame_2010, endFrame_2010, loopFiles, loopDelays, stillLoop);
+        Vid temp(name, firstFrame, endFrame, loopFiles, loopDelays, stillLoop);
         allVids.push_back(temp);
     }
 
@@ -176,6 +172,7 @@ void ofApp::update(){
 void ofApp::calculateFrameToShow() {
 
     if (!isSpinMode) {
+        ofLog() << activeVidIndex;
         loopLevelFrame = allVids.at(activeVidIndex).calculateFrameToShow();
     }
 

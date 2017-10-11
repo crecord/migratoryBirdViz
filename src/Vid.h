@@ -12,10 +12,8 @@ class Vid{
 public:
     Vid(
       string name,
-      int firstFrame_1960,
-      int endFrame_1960,
-      int firstFrame_2010,
-      int endFrame_2010,
+      int firstFrame,
+      int endFrame,
       vector <string> loopFiles,
       vector <int> loopDelays,
       string stillLoop
@@ -50,10 +48,6 @@ private:
     void setupLooping();
     void updateLooping();
     
-    float startFrame_1960_;
-    float stillFrame_1960_;
-    float startFrame_2010_;
-    float stillFrame_2010_;
     float startFrame_;
     float stillFrame_;
     
