@@ -46,16 +46,14 @@ Vid::Vid(
 
 bool Vid::isInRange(int frame) {
     bool nowInRange = (startFrame_ <= frame) && (frame <= stillFrame_);
-    if (nowInRange && !isInRange_) {
-        // If it just became in range, start the transition
-        setupTransition(frame);
-    } else if (isInRange_ && !nowInRange) {
-        // If it just exited range
+    if (isInRange_ && !nowInRange) {
+        // If it just exited range, stop video block
         stopVideoBlock();
     }
     isInRange_ = nowInRange;
     return isInRange_;
 }
+
 
 int Vid::calculateFrameToShow() {
     if (isPlayingTransition_) {
@@ -88,7 +86,7 @@ int Vid::calculateFrameToShow() {
 
 void Vid::setupTransition(int frame) {
     frameQ_ = {};
-    for (int i = frame + 1; i <= stillFrame_; i++) {
+    for (int i = frame + 1; i <= stillFrame_; i+=2) {
         frameQ_.push_back(i);
     }
     isPlayingTransition_ = true;
@@ -127,25 +125,16 @@ void Vid::updateLooping() {
     }
 }
 
-bool Vid::isLoopFinished() {
-    if (!isPlayingLoop_) {
-        return true;
-    }
-    if (isPlayingLoop_ && videos.at(loopIndex_).getCurrentFrame() < 0) { // Loop Finish
-        videos.at(loopIndex_).stop();
-        videos.at(loopIndex_).setSpeed(1);
-        isPlayingLoop_ = false;
-        return true;
-    }
-    return false;
-}
 
 void Vid::stopVideoBlock(){
     delay_ = MAX_DELAY;
     if (stillLoop_.isPlaying()){ stillLoop_.stop(); }
-    if (isPlayingLoop_) {
-        videos.at(loopIndex_).setSpeed(2);
+    if (isPlayingLoop_ && videos.at(loopIndex_).isPlaying()) {
+        videos.at(loopIndex_).stop();
     }
+    isPlayingLoop_ = false;
+    isPlayingStill_ = false;
+    isPlayingTransition_ = false;
 }
 
 

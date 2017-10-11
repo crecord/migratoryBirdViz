@@ -33,6 +33,8 @@ public:
     bool isPlayingStill_ = false;
     bool isPlayingLoop_ = false;
     void setupTransition(int frame);
+    
+    void stopVideoBlock();
 
     
 private:
@@ -59,7 +61,7 @@ private:
     void setupVideoBlock(int frame);
     void updateVideoBlock(); // returns if movie is playing
     void drawVideoBlock();
-    void stopVideoBlock();
+    
     
     string frameToFilename(int frameNumber, string year);
     

@@ -5,6 +5,7 @@
 
 
 void ofApp::setup() {
+    // ofSetFrameRate(1);
     ofSetFullscreen(false);
     
     
@@ -20,7 +21,7 @@ void ofApp::setup() {
     fakeSpinnerNumber = 0;
     isSpinMode = true;
     encoderVal = "nothing yet";
-    spinDistanceList.assign(5, 0);
+    spinDistanceList.assign(10, 0);
 
     
     // Setup Arduino //
@@ -125,13 +126,11 @@ void ofApp::setup() {
       images_2010.push_back(imageURL_2010);
     }
   
-    
     // Load Sounds //
     ambientSound.load("sounds/ambient.mp3");
     ambientSound.setLoop(true); 
     WTSounds.load("sounds/WT_chirp.mp3");
     JuncoSounds.load("sounds/JUNCO_Chirp.mp3");
-    
     
     setTo1960s();
 }
@@ -176,18 +175,11 @@ void ofApp::setupArduino(const int & version) {
 
 
 void ofApp::update(){
-    bool rejectSpinMode = false;
     
-    // Recalculate which loop section in range
-    // If a loop is currently playing, let it finish first...
+    // Se which vid is in range
     for(int i = 0; i < activeVids->size(); i++) {
         if (activeVids->at(i).isInRange(frameShown)) {
-            activeVidIndex = i;
-            //if (allVids.at(activeVidIndex).isLoopFinished()) {
-            //    activeVidIndex = i;
-            //} else {
-            //    rejectSpinMode = true;
-            // }
+             activeVidIndex = i;
         }
     }
     
@@ -197,21 +189,31 @@ void ofApp::update(){
     spinDistanceList.push_front(spinDistance);
     averageSpinDistance = averageOfList(spinDistanceList);
     
+    bool nowSpinMode;
     if (averageSpinDistance == 0.0){
-        if (isSpinMode) {
-            // trigger ambient sound to stop
+        nowSpinMode = false;
+    }
+    else if (abs(averageSpinDistance) > 0.0){
+        if (averageSpinDistance > 0 && (getSpinDistance(spinnerNumber, loopLevelFrame, 3600) > 0)) {
+            // we are spinning forward and the loop is ahead of the scrub vid
+            nowSpinMode = false;
+        } else {
+            nowSpinMode = true;
+        }
+    }
+    
+    // Trigger sounds to stop or start, if spin mode changes
+    if (nowSpinMode != isSpinMode) {
+        if (nowSpinMode) {
+            ambientSound.play();
+            ambientSound.setPaused(false);
+            scrubLevelFrame = loopLevelFrame;
+            activeVids->at(activeVidIndex).stopVideoBlock();
+        } else {
             ambientSound.setPaused(true);
             activeVids->at(activeVidIndex).setupTransition(scrubLevelFrame);
         }
-        // stop the spin mode
-        isSpinMode = false;
-    }
-    else if (abs(averageSpinDistance) > 0.0 && !rejectSpinMode){
-        if (!isSpinMode) {
-            ambientSound.play();
-            ambientSound.setPaused(false);
-        }
-        isSpinMode = true;
+        isSpinMode = nowSpinMode;
     }
     
     // Figure out which frame to show
@@ -225,15 +227,10 @@ void ofApp::update(){
 }
 
 void ofApp::calculateFrameToShow() {
-
-    if (!isSpinMode) {
-        loopLevelFrame = activeVids->at(activeVidIndex).calculateFrameToShow();
-    }
-
     if(isSpinMode){
         // Spinning
         int adjustedSpinnerNumber = spinnerNumber;
-        int frameAdjustment = averageSpinDistance;
+        int frameAdjustment = abs(averageSpinDistance) > abs(spinDistance) ? spinDistance : averageSpinDistance;
         
         if (spinDistance >= 0) {
             // go forwards
@@ -247,7 +244,7 @@ void ofApp::calculateFrameToShow() {
             }
         } else {
             // go backwards
-            if (adjustedSpinnerNumber > frameShown){
+            if (adjustedSpinnerNumber > scrubLevelFrame){
                 adjustedSpinnerNumber -= 3600;
             }
             if (frameShown + frameAdjustment > adjustedSpinnerNumber ) {
@@ -256,6 +253,8 @@ void ofApp::calculateFrameToShow() {
                 scrubLevelFrame = posMod(spinnerNumber, 3600);
             }
         }
+    } else if (!isSpinMode) {
+        loopLevelFrame = activeVids->at(activeVidIndex).calculateFrameToShow();
     }
 }
 
@@ -320,13 +319,15 @@ void ofApp::draw(){
     ofDrawBitmapString(isSpinMode ? "SPIN MODE" : "LOOP MODE", 200, 20);
     ofDrawBitmapString("Frame # shown: " + ofToString(frameShown), 10, 40);
     ofDrawBitmapString("Spinner #: " + ofToString(spinnerNumber), 200, 40);
-    ofDrawBitmapString("Spinner Dist: " + ofToString(spinDistance), 600, 40);
-    ofDrawBitmapString("Average Diff" + ofToString(averageSpinDistance), 400, 40);
+    ofDrawBitmapString("Scrub Level Frame #: " + ofToString(scrubLevelFrame), 600, 40);
+    ofDrawBitmapString("Loop #: " + ofToString(loopLevelFrame), 800, 40);
+    ofDrawBitmapString("Spinner Dist: " + ofToString(spinDistance), 600, 60);
+    ofDrawBitmapString("Average Spin Dist" + ofToString(averageSpinDistance), 400, 60);
 
-    ofDrawBitmapString("month = " + ofToString(mons[(int)trunc((frameShown / 3600.0) * 12)]), 10, 60);
-    ofDrawBitmapString("day = " + ofToString(((frameShown / 10) % 30) + 1), 150, 60);
-    ofDrawBitmapString("years = " + years, 300, 60);
-    ofDrawBitmapString(debugInfo, 10, 80);
+    ofDrawBitmapString("month = " + ofToString(mons[(int)trunc((frameShown / 3600.0) * 12)]), 10, 80);
+    ofDrawBitmapString("day = " + ofToString(((frameShown / 10) % 30) + 1), 150, 80);
+    ofDrawBitmapString("years = " + years, 300, 80);
+    ofDrawBitmapString(debugInfo, 10, 100);
 }
 
 
