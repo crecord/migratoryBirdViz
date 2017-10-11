@@ -32,6 +32,9 @@ class ofApp : public ofBaseApp{
     
         string debugInfo;
     
+        // load in the schedule
+        ofXml scheduleOfVideos;
+    
         string mons[12] = {
             "january",
             "february",
@@ -47,24 +50,27 @@ class ofApp : public ofBaseApp{
             "december"
         };
     
-        int fakeSpinnerNumber;
         int posMod(int x, int y);
     
         void spinnerChanged(const int newSpinnerNumber);
-        int spinDistance;
-    int frameDistance;
+        int spinnerChangedThreshold = 0; // 0 if testing with arrow keys, otherwise test with spinner to fins correct value
+    
         int spinnerNumber;
-    int prevSpinnerNumber;
-        int loopFrameNumber;
-        int frameNumberShown;
-        int frameNumberToShow;
-        void calculateFrameToShow();
+        int prevSpinnerNumber;
+        int fakeSpinnerNumber;
+
         int getSpinDistance(int prev, int next, int max);
-        ofImage frameToShow;
+        int spinDistance;
+        deque<int> spinDistanceList;
+        float averageSpinDistance;
+
+        int scrubLevelFrame;
+        int loopLevelFrame;
+        int frameShown;
     
-        // load in the schedule
-        ofXml scheduleOfVideos;
+        void calculateFrameToShow();
     
+
         vector<Vid> allVids;
         int activeVidIndex = -1;
         vector<string> fullScene_1960;
@@ -105,16 +111,9 @@ class ofApp : public ofBaseApp{
         bool isSpinMode;
 
         string encoderVal;
-        int lastSensorValue;
     
         deque<int> diffList;
-        deque<int> spinDiffList;
-    
-        float averageDiff;
-        float averageSpinDiff;
-    
-        void updateDiffQueue(int value);
-        void updateSpinDiffQueue(int value);
+
     
         //helper
         float averageOfList(deque<int> list);

@@ -26,12 +26,15 @@ public:
   
     bool isInRange(int frame);
     int calculateFrameToShow();
+    bool isLoopFinished(); // returns true if loop has finished
     void drawVid();
   
     bool isInRange_ = false;
     bool isPlayingTransition_ = false;
     bool isPlayingStill_ = false;
     bool isPlayingLoop_ = false;
+    void setupTransition(int frame);
+
     
 private:
     
@@ -43,7 +46,6 @@ private:
     int loopIndex_ = 0;            // Which loop should be played next
     bool hasLoops = false;
     
-    void setupTransition(int frame);
     void setupStill();
     void setupLooping();
     void updateLooping();
@@ -67,7 +69,7 @@ private:
     string frameToFilename(int frameNumber, bool isAfter);
     
     
-    
+    int MAX_DELAY = 15000;
     int delay_;
     int startTime_;
 };
