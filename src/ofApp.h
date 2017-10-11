@@ -71,11 +71,21 @@ class ofApp : public ofBaseApp{
         void calculateFrameToShow();
     
 
-        vector<Vid> allVids;
-        int activeVidIndex = -1;
-        vector<string> fullScene_1960;
+        vector<Vid> vids_1960;
+        vector<string> images_1960;
     
-        bool showDecorativeFrame = true;
+        vector<Vid> vids_2010;
+        vector<string> images_2010;
+    
+        vector<Vid>* activeVids;
+        vector<string>* activeImages;
+        int activeVidIndex = -1;
+    
+        void setTo1960s();
+        void setTo2010s();
+        string years;
+
+        bool showDecorativeFrame = false;
         ofImage decorativeFrame; // The branches graphic
     
         ofFbo vidBuffer;
@@ -105,6 +115,9 @@ class ofApp : public ofBaseApp{
         int trigWT_sound_2010;
         int trigJUNCO_sound_2010;
     
+        int trigWT_sound;
+        int trigJUNCO_sound;
+
     
         // === Is Spinning?  =============================
     

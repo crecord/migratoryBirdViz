@@ -67,27 +67,62 @@ void ofApp::setup() {
                 stillLoop = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
             } else {
                 string delayFlag = scheduleOfVideos.getAttribute("FILENAME[" + ofToString(j) +"][@delay]");
-                if (delayFlag == "") delayFlag = 1000;
+                if (delayFlag == "") delayFlag = 15000;
                 loopDelays.push_back(ofToInt(delayFlag));
                 loopFiles.push_back(scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]"));
             }
         }
         scheduleOfVideos.setTo("../../");
-        Vid temp(name, firstFrame, endFrame, loopFiles, loopDelays, stillLoop);
-        allVids.push_back(temp);
+        Vid temp(name, firstFrame, endFrame, loopFiles, loopDelays, stillLoop, "1960");
+        vids_1960.push_back(temp);
+    }
+    
+    // Load In 2010s Vids To Custom Vid Class //
+    scheduleOfVideos.load("2010_sched.xml");
+    scheduleOfVideos.setTo("VIDEOS");
+    for (int i =0; i <scheduleOfVideos.getNumChildren(); i++ ) {
+        vector <string> loopFiles;
+        vector <int> loopDelays;
+        string stillLoop = "";
+        string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
+        int firstFrame = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME"));
+        int endFrame = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME"));
+        string flag = scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@flag]");
+        if(flag == "WT"){
+            int trigWT_sound_2010 = firstFrame;
+        }
+        else if(flag == "JUNCO"){
+            int trigJUNCO_sound_2010 = firstFrame;
+        }
+        scheduleOfVideos.setTo("GROUP[" + ofToString(i) +"]/LOOPS");
+        for(int j=0; j < scheduleOfVideos.getNumChildren(); j++){
+            string loopFlag = scheduleOfVideos.getAttribute("FILENAME[" + ofToString(j) +"][@flag]");
+            if (loopFlag == "STILL") {
+                stillLoop = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
+            } else {
+                string delayFlag = scheduleOfVideos.getAttribute("FILENAME[" + ofToString(j) +"][@delay]");
+                if (delayFlag == "") delayFlag = 15000;
+                loopDelays.push_back(ofToInt(delayFlag));
+                loopFiles.push_back(scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]"));
+            }
+        }
+        scheduleOfVideos.setTo("../../");
+        Vid temp(name, firstFrame, endFrame, loopFiles, loopDelays, stillLoop, "2010");
+        vids_2010.push_back(temp);
     }
 
     
     // Formatting Scrub Level Image Filenames //
-    // TODO: Add 2010s
     for (int i = 0; i < 3600; i++){
       ofImage temp;
       string leadingZeros = "";
       if (i+1 < 10) { leadingZeros = "000"; }
       else if (i+1 < 100) { leadingZeros = "00"; }
       else if (i+1 < 1000) { leadingZeros = "0"; }
-      string imageURL = "./videos/1960_scrubLevel/1960_" + leadingZeros + ofToString(i+1) + ".jpg";
-      fullScene_1960.push_back(imageURL);
+      string imageURL_1960 = "./videos/1960_scrubLevel/1960_" + leadingZeros + ofToString(i+1) + ".jpg";
+      string imageURL_2010 = "./videos/2010_scrubLevel/2010_" + leadingZeros + ofToString(i+1) + ".jpg";
+      images_1960.push_back(imageURL_1960);
+      images_2010.push_back(imageURL_2010);
     }
   
     
@@ -96,6 +131,26 @@ void ofApp::setup() {
     ambientSound.setLoop(true); 
     WTSounds.load("sounds/WT_chirp.mp3");
     JuncoSounds.load("sounds/JUNCO_Chirp.mp3");
+    
+    
+    setTo1960s();
+}
+
+void ofApp::setTo1960s() {
+    activeVids = &vids_1960;
+    activeImages = &images_1960;
+    trigWT_sound = trigWT_sound_1960;
+    trigJUNCO_sound= trigJUNCO_sound_1960;
+    years = "1960s";
+}
+
+void ofApp::setTo2010s() {
+    // TODO may have to reset what is being spun...
+    activeVids = &vids_2010;
+    activeImages = &images_2010;
+    trigWT_sound = trigWT_sound_2010;
+    trigJUNCO_sound= trigJUNCO_sound_2010;
+    years = "2010s";
 }
 
 
@@ -125,8 +180,8 @@ void ofApp::update(){
     
     // Recalculate which loop section in range
     // If a loop is currently playing, let it finish first...
-    for(int i = 0; i < allVids.size(); i++) {
-        if (allVids.at(i).isInRange(frameShown)) {
+    for(int i = 0; i < activeVids->size(); i++) {
+        if (activeVids->at(i).isInRange(frameShown)) {
             activeVidIndex = i;
             //if (allVids.at(activeVidIndex).isLoopFinished()) {
             //    activeVidIndex = i;
@@ -146,7 +201,7 @@ void ofApp::update(){
         if (isSpinMode) {
             // trigger ambient sound to stop
             ambientSound.setPaused(true);
-            allVids.at(activeVidIndex).setupTransition(scrubLevelFrame);
+            activeVids->at(activeVidIndex).setupTransition(scrubLevelFrame);
         }
         // stop the spin mode
         isSpinMode = false;
@@ -172,8 +227,7 @@ void ofApp::update(){
 void ofApp::calculateFrameToShow() {
 
     if (!isSpinMode) {
-        ofLog() << activeVidIndex;
-        loopLevelFrame = allVids.at(activeVidIndex).calculateFrameToShow();
+        loopLevelFrame = activeVids->at(activeVidIndex).calculateFrameToShow();
     }
 
     if(isSpinMode){
@@ -243,12 +297,12 @@ void ofApp::draw(){
     
     ofImage frameImage;
     if (!isSpinMode) {
-        frameImage.load(fullScene_1960.at(loopLevelFrame));
+        frameImage.load(activeImages->at(loopLevelFrame));
         frameImage.draw(0, 0);
-        allVids.at(activeVidIndex).drawVid();
+        activeVids->at(activeVidIndex).drawVid();
         frameShown = loopLevelFrame;
     } else {
-        frameImage.load(fullScene_1960.at(scrubLevelFrame));
+        frameImage.load(activeImages->at(scrubLevelFrame));
         frameImage.draw(0, 0);
         frameShown = scrubLevelFrame;
     }
@@ -270,7 +324,8 @@ void ofApp::draw(){
     ofDrawBitmapString("Average Diff" + ofToString(averageSpinDistance), 400, 40);
 
     ofDrawBitmapString("month = " + ofToString(mons[(int)trunc((frameShown / 3600.0) * 12)]), 10, 60);
-    ofDrawBitmapString("year = 1960", 300, 60);
+    ofDrawBitmapString("day = " + ofToString(((frameShown / 10) % 30) + 1), 150, 60);
+    ofDrawBitmapString("years = " + years, 300, 60);
     ofDrawBitmapString(debugInfo, 10, 80);
 }
 
@@ -327,6 +382,11 @@ void ofApp::keyPressed(int key){
     // load settings
     if (key == 'l') {
         bezManager.loadSettings();
+    }
+    if (key == 'v') {
+        setTo1960s();
+    } else if (key == 'b') {
+        setTo2010s();
     }
     if(key == 'q'){
         fakeSpinnerNumber = posMod((fakeSpinnerNumber - 15), 3600);

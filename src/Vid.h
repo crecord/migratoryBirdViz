@@ -16,7 +16,8 @@ public:
       int endFrame,
       vector <string> loopFiles,
       vector <int> loopDelays,
-      string stillLoop
+      string stillLoop,
+      string years
     );
     
     string name_;
@@ -60,7 +61,7 @@ private:
     void drawVideoBlock();
     void stopVideoBlock();
     
-    string frameToFilename(int frameNumber, bool isAfter);
+    string frameToFilename(int frameNumber, string year);
     
     
     int MAX_DELAY = 15000;

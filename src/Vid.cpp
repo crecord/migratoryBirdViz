@@ -14,14 +14,16 @@ Vid::Vid(
     int endFrame,
     vector <string> loopFiles,
     vector <int> loopDelays,
-    string stillLoop) {
+    string stillLoop,
+    string year
+) {
 
     name_ = name;
   
     startFrame_ = firstFrame - 1; // Minus one to convert to 0 index
     stillFrame_ = endFrame - 1;
     
-    still_.load(frameToFilename(stillFrame_, false));
+    still_.load(frameToFilename(stillFrame_, year));
     
     loopFiles_ = loopFiles;
     loopDelays_ = loopDelays;
@@ -157,7 +159,7 @@ void Vid::drawVid() {
 }
 
 
-string Vid::frameToFilename(int frameNumber, bool isAfter) {
+string Vid::frameToFilename(int frameNumber, string year) {
     string leadingZeros = "";
     if ((frameNumber + 1) < 10) {
         leadingZeros = "000";
@@ -166,9 +168,5 @@ string Vid::frameToFilename(int frameNumber, bool isAfter) {
     } else if ((frameNumber + 1) < 1000) {
         leadingZeros = "0";
     }
-    if (isAfter) {
-        return "";
-    } else {
-        return "./videos/1960_scrubLevel/1960_" + leadingZeros + ofToString(frameNumber + 1) + ".jpg";
-    }
+    return "./videos/"+year+"_scrubLevel/"+year+"_" + leadingZeros + ofToString(frameNumber + 1) + ".jpg";
 }
