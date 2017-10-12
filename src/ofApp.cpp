@@ -6,7 +6,7 @@
 
 void ofApp::setup() {
     // ofSetFrameRate(1);
-    ofSetFullscreen(false);
+    ofSetFullscreen(true);
     
     
     // Initialize Frames //
@@ -25,7 +25,7 @@ void ofApp::setup() {
 
     
     // Setup Arduino //
-    ard.connect("tty.usbmodem1411", 57600);
+    ard.connect("tty.usbmodem1421", 57600);
     // listen for EInitialized notification. this indicates that
     // the arduino is ready to receive commands and it is safe to
     // call setupArduino()
@@ -112,27 +112,34 @@ void ofApp::setup() {
         vids_2010.push_back(temp);
     }
 
-    
-    // Formatting Scrub Level Image Filenames //
-    for (int i = 0; i < 3600; i++){
-      ofImage temp;
-      string leadingZeros = "";
-      if (i+1 < 10) { leadingZeros = "000"; }
-      else if (i+1 < 100) { leadingZeros = "00"; }
-      else if (i+1 < 1000) { leadingZeros = "0"; }
-      string imageURL_1960 = "./videos/1960_scrubLevel/1960_" + leadingZeros + ofToString(i+1) + ".jpg";
-      string imageURL_2010 = "./videos/2010_scrubLevel/2010_" + leadingZeros + ofToString(i+1) + ".jpg";
-      images_1960.push_back(imageURL_1960);
-      images_2010.push_back(imageURL_2010);
+    ofDirectory dir;
+    dir.listDir("./videos/1960_scrubLevel/");
+    //  this will put it in order as long as it has the leading zeros in linux
+    dir.sort();
+    for(int i =0; i < dir.size(); i++){
+        images_1960.push_back(dir.getPath(i));
     }
-  
+    //ofLog()<<"numOfFiles"<< dir.size();
+    
+    ofDirectory dir2;
+    dir2.listDir("./videos/2010_scrubLevel/");
+    //  this will put it in order as long as it has the leading zeros in linux
+    dir2.sort();
+    for(int i =0; i < dir2.size(); i++){
+        images_2010.push_back(dir.getPath(i));
+    }
+    //ofLog()<<"numOfFiles"<< dir.size();
+    
+
     // Load Sounds //
     ambientSound.load("sounds/ambient.mp3");
     ambientSound.setLoop(true); 
     WTSounds.load("sounds/WT_chirp.mp3");
     JuncoSounds.load("sounds/JUNCO_Chirp.mp3");
+    transSound.load("sounds/swooshes/swishSound.wav");
     
     setTo1960s();
+    
 }
 
 void ofApp::setTo1960s() {
@@ -141,6 +148,7 @@ void ofApp::setTo1960s() {
     trigWT_sound = trigWT_sound_1960;
     trigJUNCO_sound= trigJUNCO_sound_1960;
     years = "1960s";
+    isCurrently1960 = true;
 }
 
 void ofApp::setTo2010s() {
@@ -150,6 +158,7 @@ void ofApp::setTo2010s() {
     trigWT_sound = trigWT_sound_2010;
     trigJUNCO_sound= trigJUNCO_sound_2010;
     years = "2010s";
+    isCurrently1960 = false;
 }
 
 
@@ -161,13 +170,18 @@ void ofApp::setupArduino(const int & version) {
     // print firmware name and version to the console
     ofLogNotice() << ard.getFirmwareName();
     ofLogNotice() << "firmata v" << ard.getMajorFirmwareVersion() << "." << ard.getMinorFirmwareVersion();
-    // set pin A0 to analog input
+    
+    // set pin A0 to analog input for the encoder
     ard.sendAnalogPinReporting(0, ARD_ANALOG);
-    ard.sendDigitalPinMode(2, ARD_INPUT);
+    
+    // the buttons state
     ard.sendDigitalPinMode(3, ARD_INPUT);
+    ard.sendDigitalPinMode(4, ARD_INPUT);
     ofAddListener(ard.EDigitalPinChanged, this, &ofApp::digitalPinChanged);
     ofAddListener(ard.EAnalogPinChanged, this, &ofApp::analogPinChanged);
-    ard.sendDigitalPinMode(4, ARD_INPUT);
+    
+    // the relay
+    ard.sendDigitalPinMode(2, ARD_OUTPUT);
 }
 
 
@@ -176,7 +190,7 @@ void ofApp::setupArduino(const int & version) {
 
 void ofApp::update(){
     
-    // Se which vid is in range
+    // See which vid is in range
     for(int i = 0; i < activeVids->size(); i++) {
         if (activeVids->at(i).isInRange(frameShown)) {
              activeVidIndex = i;
@@ -288,6 +302,9 @@ int ofApp::getSpinDistance(int prev, int next, int max){
 
 
 void ofApp::draw(){
+    
+    
+
     ofBackground(0);
     ofSetColor(255, 255, 255);
 
@@ -328,40 +345,48 @@ void ofApp::draw(){
     ofDrawBitmapString("day = " + ofToString(((frameShown / 10) % 30) + 1), 150, 80);
     ofDrawBitmapString("years = " + years, 300, 80);
     ofDrawBitmapString(debugInfo, 10, 100);
-}
-
-
-void ofApp::drawDebugMasks() {
-    ofSetColor(255);
-    int camW = vidHeight/3;
-    int camH = vidWidth/3;
-    int previewW = camW/2, previewH = camH/2, labelOffset = 10;
-    drawCheckerboard(camW, camH, previewW, previewH, 5);
-}
-
-
-void ofApp::drawCheckerboard(float x, float y, int width, int height, int size) {
-    if (!checkerboardTex.isAllocated()) {
-        checkerboardTex.allocate(width, height);
-        ofPushStyle();
-        checkerboardTex.begin();
-        ofClear(255, 255, 255, 255);
-        int numWidth = width/size;
-        int numHeight = height/size;
-        for(int h=0; h<numHeight; h++) {
-            for(int w=0; w<numWidth; w++) {
-                if ((h+w)%2 == 0) {
-                    ofSetColor(ofColor::black);
-                    ofDrawRectangle(w*size, h*size, size, size);
-                }
+    
+    if(isTransitioning){
+        int timeDiff = ofGetElapsedTimeMillis() - startTime;
+        int transDur = 1000;
+        if(timeDiff < transDur){
+            int scaledValue;
+            
+            if(timeDiff<= transDur/2){
+                isMidTrans = true;
+                scaledValue = ofMap(timeDiff, 0, transDur/2, 0, 255);
             }
+            else{
+                if(isMidTrans){
+                    // switch in over 
+                    isMidTrans = false;
+                    if(isCurrently1960){
+                        setTo1960s();
+                    }
+                    else{
+                        setTo2010s();
+                    }
+                }
+                scaledValue = ofMap(timeDiff, transDur/2,transDur , 255, 0);
+            }
+            ofSetColor(255, 255, 255, scaledValue);
+            ofDrawRectangle(0, 0, ofGetWidth(),ofGetHeight());
+            ofSetColor(255, 255, 255);
         }
-        checkerboardTex.end();
-        ofPopStyle();
+        else{
+            isTransitioning = false;
+        }
+        int scaledValue = ofMap(mouseX, 0, ofGetWidth(), 0, 255);
+        ofSetColor(255, 255, 255, 20);
+        ofDrawRectangle(0, 0, ofGetWidth(),ofGetHeight());
+        ofSetColor(255, 255, 255);
     }
-    ofSetColor(255, 255);
-    checkerboardTex.draw(x, y);
+    
+    
 }
+
+
+
 
 
 //----------------------   KEY PRESS   --------------------------//
@@ -437,8 +462,10 @@ void ofApp::analogPinChanged(const int & pinNum) {
     // value to the screen each time it changes
     float analogValue = ard.getAnalog(pinNum);
     int newSpinnerNumber = int(ofMap(analogValue, 0.0, 735.0, 0.0, 3599.0, true));
-    spinnerChanged(newSpinnerNumber);
-    encoderVal = "analog pin: " + ofToString(pinNum) + " = " + ofToString(newSpinnerNumber);
+    
+    // till the encoder is hooked up
+    //spinnerChanged(newSpinnerNumber);
+    //encoderVal = "analog pin: " + ofToString(pinNum) + " = " + ofToString(newSpinnerNumber);
 
 }
 
@@ -447,11 +474,26 @@ void ofApp::digitalPinChanged(const int & pinNum) {
     // do something with the digital input. here we're simply going to print the pin number and
     // value to the screen each time it changes
     ofLog() << "pin num: " << pinNum << " value: "<< ofToString(ard.getDigital(pinNum));
-    if(pinNum == 2){
+    if(pinNum == 3){
         buttonOneState = ard.getDigital(pinNum);
+        if(!isCurrently1960){
+            ard.sendDigital(2, ARD_HIGH);
+            isCurrently1960 = true;
+            startTime = ofGetElapsedTimeMillis();
+            isTransitioning = true;
+            transSound.play();
+        }
+        
     }
-    else if(pinNum == 3){
+    else if(pinNum == 4){
         buttonTwoState = ard.getDigital(pinNum);
+        if(isCurrently1960){
+            ard.sendDigital(2, ARD_LOW);
+            isCurrently1960 = false;
+            startTime = ofGetElapsedTimeMillis();
+            isTransitioning = true;
+            transSound.play();
+        }
     }
 }
 
@@ -468,12 +510,13 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::mouseDragged(int x, int y, int button){
     // send drag event
     bezManager.mouseDragged(x, y, button);
+    
 }
 
-//--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     // send press event
     bezManager.mousePressed(x, y, button);
+    
 }
 
 //--------------------------------------------------------------

@@ -70,7 +70,8 @@ class ofApp : public ofBaseApp{
     
         void calculateFrameToShow();
     
-
+    
+    
         vector<Vid> vids_1960;
         vector<string> images_1960;
     
@@ -83,8 +84,16 @@ class ofApp : public ofBaseApp{
     
         void setTo1960s();
         void setTo2010s();
+    
         string years;
-
+    
+        // transistion bw years overlay
+        int startTime;
+        bool isTransitioning;
+        bool isMidTrans;
+        ofSoundPlayer transSound;
+        bool isCurrently1960;
+    
         bool showDecorativeFrame = false;
         ofImage decorativeFrame; // The branches graphic
     
@@ -138,8 +147,6 @@ class ofApp : public ofBaseApp{
         bool bShowGui;
         bool showGuide;
         ofxBezierWarpManager bezManager;
-    
-        void drawDebugMasks();
-        void drawCheckerboard(float x, float y, int width, int height, int size);
+
 
 };
