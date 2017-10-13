@@ -56,10 +56,10 @@ void ofApp::setup() {
         int endFrame = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME"));
         string flag = scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@flag]");
         if(flag == "WT"){
-            int trigWT_sound_1960 = firstFrame;
+            trigWT_sound_1960 = firstFrame;
         }
         else if(flag == "JUNCO"){
-            int trigJUNCO_sound_1960 = firstFrame;
+            trigJUNCO_sound_1960 = firstFrame;
         }
         scheduleOfVideos.setTo("GROUP[" + ofToString(i) +"]/LOOPS");
           for(int j=0; j < scheduleOfVideos.getNumChildren(); j++){
@@ -90,10 +90,10 @@ void ofApp::setup() {
         int endFrame = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME"));
         string flag = scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@flag]");
         if(flag == "WT"){
-            int trigWT_sound_2010 = firstFrame;
+            trigWT_sound_2010 = firstFrame;
         }
         else if(flag == "JUNCO"){
-            int trigJUNCO_sound_2010 = firstFrame;
+            trigJUNCO_sound_2010 = firstFrame;
         }
         scheduleOfVideos.setTo("GROUP[" + ofToString(i) +"]/LOOPS");
         for(int j=0; j < scheduleOfVideos.getNumChildren(); j++){
@@ -138,12 +138,19 @@ void ofApp::setup() {
     JuncoSounds.load("sounds/JUNCO_Chirp.mp3");
     transSound.load("sounds/swooshes/swishSound.wav");
     
+    
     setTo1960s();
+    
+    // this is the time in millis that the white flash happens over
+    fadeTime = 1000;
+    
     
 }
 
 void ofApp::setTo1960s() {
+    //activeVids->at(activeVidIndex).stopVideoBlock();
     activeVids = &vids_1960;
+    //activeVids->at(activeVidIndex).setupTransition(scrubLevelFrame);
     activeImages = &images_1960;
     trigWT_sound = trigWT_sound_1960;
     trigJUNCO_sound= trigJUNCO_sound_1960;
@@ -153,7 +160,9 @@ void ofApp::setTo1960s() {
 
 void ofApp::setTo2010s() {
     // TODO may have to reset what is being spun...
+   // activeVids->at(activeVidIndex).stopVideoBlock();
     activeVids = &vids_2010;
+    //activeVids->at(activeVidIndex).setupTransition(scrubLevelFrame);
     activeImages = &images_2010;
     trigWT_sound = trigWT_sound_2010;
     trigJUNCO_sound= trigJUNCO_sound_2010;
@@ -216,15 +225,23 @@ void ofApp::update(){
         }
     }
     
+    
+    
     // Trigger sounds to stop or start, if spin mode changes
     if (nowSpinMode != isSpinMode) {
         if (nowSpinMode) {
+            isScrubSoundFadeUp = true;
+            isScrubSoundFadeDown = false;
+            startSoundFade = ofGetElapsedTimeMillis();
             ambientSound.play();
+            ambientSound.setVolume(0);
             ambientSound.setPaused(false);
             scrubLevelFrame = loopLevelFrame;
             activeVids->at(activeVidIndex).stopVideoBlock();
         } else {
-            ambientSound.setPaused(true);
+            isScrubSoundFadeDown = true;
+            isScrubSoundFadeUp = false;
+            startSoundFade = ofGetElapsedTimeMillis();
             activeVids->at(activeVidIndex).setupTransition(scrubLevelFrame);
         }
         isSpinMode = nowSpinMode;
@@ -267,6 +284,14 @@ void ofApp::calculateFrameToShow() {
                 scrubLevelFrame = posMod(spinnerNumber, 3600);
             }
         }
+        // trigger the tweet sounds at the correct moments
+        if( checkInRange(adjustedSpinnerNumber, trigWT_sound)  & (WTSounds.isPlaying() == false)){
+            WTSounds.play();
+        }
+        if( checkInRange(adjustedSpinnerNumber, trigJUNCO_sound)  & (JuncoSounds.isPlaying() == false)){
+            JuncoSounds.play();
+        }
+        
     } else if (!isSpinMode) {
         loopLevelFrame = activeVids->at(activeVidIndex).calculateFrameToShow();
     }
@@ -321,6 +346,23 @@ void ofApp::draw(){
         frameImage.load(activeImages->at(scrubLevelFrame));
         frameImage.draw(0, 0);
         frameShown = scrubLevelFrame;
+        if(isScrubSoundFadeUp){
+            int timeChange = ofGetElapsedTimeMillis() - startSoundFade;
+            float volume = ofMap(timeChange, 0, fadeTime, 0, 1);
+            ambientSound.setVolume(volume);
+            if(volume >= 1){
+                isScrubSoundFadeUp = false;
+            }
+        }
+    }
+    if(isScrubSoundFadeDown){
+        int timeChange = ofGetElapsedTimeMillis() - startSoundFade;
+        float volume = ofMap(timeChange, 0, fadeTime, 1, 0);
+        ambientSound.setVolume(volume);
+        if(volume <= 0){
+            ambientSound.setPaused(true);
+            isScrubSoundFadeDown = false;
+        }
     }
 
     if (showDecorativeFrame) {
@@ -454,6 +496,17 @@ float ofApp::averageOfList(deque<int> list){
 }
 
 
+bool ofApp::checkInRange(int value, int centerOfRange){
+    int rgSz = 5;
+    if((value < centerOfRange + rgSz) & (value > centerOfRange - rgSz)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
 //----------------------   ARDUINO   --------------------------//
 
 
@@ -499,6 +552,10 @@ void ofApp::digitalPinChanged(const int & pinNum) {
 
 
 //----------------------   OTHER   --------------------------//
+
+
+
+
 
 
 //--------------------------------------------------------------

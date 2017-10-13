@@ -118,6 +118,11 @@ class ofApp : public ofBaseApp{
         ofSoundPlayer WTSounds;
         ofSoundPlayer JuncoSounds;
     
+        bool isScrubSoundFadeUp;
+        bool isScrubSoundFadeDown;
+        int startSoundFade;
+        int fadeTime;
+    
         int trigWT_sound_1960;
         int trigJUNCO_sound_1960;
     
@@ -139,7 +144,7 @@ class ofApp : public ofBaseApp{
     
         //helper
         float averageOfList(deque<int> list);
-
+        bool checkInRange(int value, int centerOfRange);
 
         // === Debugging =============================
     
