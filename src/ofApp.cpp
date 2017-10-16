@@ -126,7 +126,7 @@ void ofApp::setup() {
     //  this will put it in order as long as it has the leading zeros in linux
     dir2.sort();
     for(int i =0; i < dir2.size(); i++){
-        images_2010.push_back(dir.getPath(i));
+        images_2010.push_back(dir2.getPath(i));
     }
     //ofLog()<<"numOfFiles"<< dir.size();
     
@@ -138,36 +138,46 @@ void ofApp::setup() {
     JuncoSounds.load("sounds/JUNCO_Chirp.mp3");
     transSound.load("sounds/swooshes/swishSound.wav");
     
-    
     setTo1960s();
     
     // this is the time in millis that the white flash happens over
     fadeTime = 1000;
-    
-    
 }
 
 void ofApp::setTo1960s() {
-    //activeVids->at(activeVidIndex).stopVideoBlock();
-    activeVids = &vids_1960;
-    //activeVids->at(activeVidIndex).setupTransition(scrubLevelFrame);
-    activeImages = &images_1960;
-    trigWT_sound = trigWT_sound_1960;
-    trigJUNCO_sound= trigJUNCO_sound_1960;
-    years = "1960s";
-    isCurrently1960 = true;
+    if (years != "1960s") {
+        // stop what is currently playing and clear spinner stuff
+        if (activeVids != nullptr) {
+            activeVids->at(activeVidIndex).stopVideoBlock();
+        }
+        spinDistanceList.assign(10, 0);
+        isSpinMode = true;
+    
+        activeVids = &vids_1960;
+        activeImages = &images_1960;
+        trigWT_sound = trigWT_sound_1960;
+        trigJUNCO_sound= trigJUNCO_sound_1960;
+        years = "1960s";
+        isCurrently1960 = true;
+    }
 }
 
 void ofApp::setTo2010s() {
-    // TODO may have to reset what is being spun...
-   // activeVids->at(activeVidIndex).stopVideoBlock();
-    activeVids = &vids_2010;
-    //activeVids->at(activeVidIndex).setupTransition(scrubLevelFrame);
-    activeImages = &images_2010;
-    trigWT_sound = trigWT_sound_2010;
-    trigJUNCO_sound= trigJUNCO_sound_2010;
-    years = "2010s";
-    isCurrently1960 = false;
+    if (years != "2010s") {
+        // stop what is currently playing and clear spinner stuff
+        if (activeVids != nullptr) {
+            activeVids->at(activeVidIndex).stopVideoBlock();
+        }
+        spinDistanceList.assign(10, 0);
+        isSpinMode = true;
+
+        activeVids = &vids_2010;
+        activeImages = &images_2010;
+        trigWT_sound = trigWT_sound_2010;
+        trigJUNCO_sound= trigJUNCO_sound_2010;
+        years = "2010s";
+        isCurrently1960 = false;
+    }
 }
 
 
@@ -452,9 +462,19 @@ void ofApp::keyPressed(int key){
         bezManager.loadSettings();
     }
     if (key == 'v') {
-        setTo1960s();
+        if(!isCurrently1960){
+            isCurrently1960 = true;
+            startTime = ofGetElapsedTimeMillis();
+            isTransitioning = true;
+            transSound.play();
+        }
     } else if (key == 'b') {
-        setTo2010s();
+        if (isCurrently1960){
+            isCurrently1960 = false;
+            startTime = ofGetElapsedTimeMillis();
+            isTransitioning = true;
+            transSound.play();
+        }
     }
     if(key == 'q'){
         fakeSpinnerNumber = posMod((fakeSpinnerNumber - 15), 3600);
