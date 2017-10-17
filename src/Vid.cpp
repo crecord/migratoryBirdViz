@@ -111,6 +111,7 @@ void Vid::updateLooping() {
         videos.at(loopIndex_).update();
         if (videos.at(loopIndex_).getCurrentFrame() < 0) { // Check if video done
             // Once a loop is done playing: rewind it, stop it, set the delay time before playing the next one
+            videos.at(loopIndex_).setFrame(0);
             videos.at(loopIndex_).stop();
             if ((loopIndex_+ 1) < videos.size()){
                 loopIndex_ += 1;

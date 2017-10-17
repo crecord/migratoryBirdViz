@@ -116,14 +116,17 @@
         <NAME> Junco Flock Departs/Snow Melts </NAME>
         <FIRST_FRAME>781</FIRST_FRAME>
         <LAST_FRAME>900</LAST_FRAME>
-        <LOOPS></LOOPS>
+        <LOOPS>
+            <FILENAME delay = "5000">SnowingOnEmptyScene.mp4</FILENAME>
+            <FILENAME delay = "5000">RainingOnEmptyScene.mp4</FILENAME>
+        </LOOPS>
     </GROUP>
     <GROUP>
         <NAME> Raining </NAME>
         <FIRST_FRAME>901</FIRST_FRAME>
         <LAST_FRAME>1000</LAST_FRAME>
         <LOOPS>
-            <FILENAME flag="STILL">RainingLooping.mp4</FILENAME>
+            <FILENAME flag="STILL">RainingLoop.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -131,7 +134,7 @@
         <FIRST_FRAME>1001</FIRST_FRAME>
         <LAST_FRAME>1090</LAST_FRAME>
         <LOOPS>
-            <FILENAME delay="7000">RainingOnEmptyScene.mp4</FILENAME>
+            <FILENAME delay="3000">RainingOnEmptyScene.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -139,7 +142,7 @@
         <FIRST_FRAME>1091</FIRST_FRAME>
         <LAST_FRAME>1200</LAST_FRAME>
         <LOOPS>
-            <FILENAME delay="7000">RainingOnFlowers.mp4</FILENAME>
+            <FILENAME delay="5000">RainingOnFlowers.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -147,7 +150,7 @@
         <FIRST_FRAME>1201</FIRST_FRAME>
         <LAST_FRAME>1340</LAST_FRAME>
         <LOOPS>
-            <FILENAME delay="3000">WT_MaleSings.mp4</FILENAME>
+            <FILENAME delay="3000">MaleSingsOnLeaves.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -155,7 +158,7 @@
         <FIRST_FRAME>1341</FIRST_FRAME>
         <LAST_FRAME>1410</LAST_FRAME>
         <LOOPS>
-            <FILENAME delay="3000">WT_MaleFemaleCallToEachother.mp4</FILENAME>
+            <FILENAME delay="3000">MaleAndFemaleCallToEachother.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -163,7 +166,8 @@
         <FIRST_FRAME>1411</FIRST_FRAME>
         <LAST_FRAME>1600</LAST_FRAME>
         <LOOPS>
-            <FILENAME delay="10000">WT_AdditionalMatingFlight.mp4</FILENAME>
+            <FILENAME delay="5000">AdditionalMatingFlight.mp4</FILENAME>
+            <FILENAME delay="2000">MaleAndFemaleSitTogether.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -171,8 +175,9 @@
         <FIRST_FRAME>1601</FIRST_FRAME>
         <LAST_FRAME>1770</LAST_FRAME>
         <LOOPS>
-            <FILENAME delay="1000">WT_FemaleCleansNest.mp4</FILENAME>
-            <FILENAME delay="5000">WT_BuildingNest.mp4</FILENAME>
+            <FILENAME delay="1000">FemaleCleansNest.mp4</FILENAME>
+            <FILENAME delay="3000">BuildingNest.mp4</FILENAME>
+            <FILENAME delay="3000">FemaleChecksForEggs.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -180,8 +185,9 @@
         <FIRST_FRAME>1771</FIRST_FRAME>
         <LAST_FRAME>1890</LAST_FRAME>
         <LOOPS>
-            <FILENAME delay="1000">WT_FemaleCleansNest.mp4</FILENAME>
-            <FILENAME delay="8000">WT_MaleFeedsBroodingFemale.mp4</FILENAME>
+            <FILENAME delay="1000">FemaleCleansNest.mp4</FILENAME>
+            <FILENAME delay="3000">FemaleChecksOnEggs.mp4</FILENAME>
+            <FILENAME delay="4000">MaleFeedsBroodingFemale.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -189,9 +195,10 @@
         <FIRST_FRAME>1891</FIRST_FRAME>
         <LAST_FRAME>2020</LAST_FRAME>
         <LOOPS>
-            <FILENAME flag="STILL" >FemaleWatchingNest_Sound.mp4</FILENAME>
-            <FILENAME delay="1000">WT_MaleFeedsYoungSingsInFlight.mp4</FILENAME>
-            <FILENAME delay="1000">WT_FemaleFeedsYoung.mp4</FILENAME>
+            <FILENAME flag="STILL" >FemaleWatchingNest.mp4</FILENAME>
+            <FILENAME delay="3000">MaleSingsInFlight.mp4</FILENAME>
+            <FILENAME delay="3000">MaleFeedsYoung.mp4</FILENAME>
+            <FILENAME delay="3000">FemaleFeedsYoung.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -199,6 +206,9 @@
         <FIRST_FRAME>2021</FIRST_FRAME>
         <LAST_FRAME>2090</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay="1000">FemaleDemonstratesFlapping1.mp4</FILENAME>
+            <FILENAME delay="1000">FemaleDemonstratesFlapping2.mp4</FILENAME>
+            <FILENAME delay="1000">FledglingsDemonstrateFlapping.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -206,6 +216,7 @@
         <FIRST_FRAME>2091</FIRST_FRAME>
         <LAST_FRAME>2160</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay="1000">FledglingNervousToFly.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -213,6 +224,9 @@
         <FIRST_FRAME>2161</FIRST_FRAME>
         <LAST_FRAME>2270</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay="2000">FamilyEncouragesFledglingToFly.mp4</FILENAME>
+            <FILENAME delay="2000">FledglingEncouragesFledglingToFly.mp4</FILENAME>
+            <FILENAME delay="2000">MaleEncouragesFledglingToFly.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -220,8 +234,9 @@
         <FIRST_FRAME>2271</FIRST_FRAME>
         <LAST_FRAME>2400</LAST_FRAME>
         <LOOPS>
-            <FILENAME delay="10000">WT_FemaleFeedsFledgling.mp4</FILENAME>
-            <FILENAME delay="10000">WT_MaleFeedsFledgling.mp4</FILENAME>
+            <FILENAME delay="1000">FledglingsPracticeFlying.mp4</FILENAME>
+            <FILENAME delay="5000">FemaleFeedsFledglingOnGround.mp4</FILENAME>
+            <FILENAME delay="5000">MaleFeedsFledglingOnBranch.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -229,8 +244,10 @@
         <FIRST_FRAME>2401</FIRST_FRAME>
         <LAST_FRAME>2500</LAST_FRAME>
         <LOOPS>
-            <FILENAME delay="5000">WT_FlightInDistance1.mp4</FILENAME>
-            <FILENAME delay="5000">WT_FlightInDistance2.mp4</FILENAME>
+            <FILENAME delay="3000">FlightInDistance1.mp4</FILENAME>
+            <FILENAME delay="2000">FlightInDistance2.mp4</FILENAME>
+            <FILENAME delay="3000">FlightInDistance3.mp4</FILENAME>
+            <FILENAME delay="2000">FlightInDistance4.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -238,9 +255,11 @@
         <FIRST_FRAME>2501</FIRST_FRAME>
         <LAST_FRAME>2550</LAST_FRAME>
         <LOOPS>
-            <FILENAME delay="1000">WT_MaleCalls.mp4</FILENAME>
-            <FILENAME delay="1000">WT_FlightInDistance1.mp4</FILENAME>
-            <FILENAME delay="1000">WT_FlightInDistance2.mp4</FILENAME>
+            <FILENAME delay="1000">MaleCallsLateSummer.mp4</FILENAME>
+            <FILENAME delay="3000">FlightInDistance1_MaleSits.mp4</FILENAME>
+            <FILENAME delay="2000">FlightInDistance2_MaleSits.mp4</FILENAME>
+            <FILENAME delay="3000">FlightInDistance3_MaleSits.mp4</FILENAME>
+            <FILENAME delay="2000">FlightInDistance4_MaleSits.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -262,6 +281,10 @@
         <FIRST_FRAME>2651</FIRST_FRAME>
         <LAST_FRAME>2780</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay="3000">LeafFalling1.mp4</FILENAME>
+            <FILENAME delay="40000">RainingOnFallLeaves.mp4</FILENAME>
+            <FILENAME delay="2000">LeafFalling2.mp4</FILENAME>
+            <FILENAME delay="2000">LeafFalling3.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -269,6 +292,7 @@
         <FIRST_FRAME>2781</FIRST_FRAME>
         <LAST_FRAME>2920</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay="5000">RainingOnEmptyScene.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -276,6 +300,7 @@
         <FIRST_FRAME>2921</FIRST_FRAME>
         <LAST_FRAME>3000</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay="5000">RainingOnEmptyScene.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -283,6 +308,10 @@
         <FIRST_FRAME>3001</FIRST_FRAME>
         <LAST_FRAME>3100</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay = "0">JuncoBehaviors_NoSnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_NoSnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_NoSnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_NoSnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -290,6 +319,13 @@
         <FIRST_FRAME>3101</FIRST_FRAME>
         <LAST_FRAME>3200</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -297,6 +333,13 @@
         <FIRST_FRAME>3201</FIRST_FRAME>
         <LAST_FRAME>3300</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -304,6 +347,13 @@
         <FIRST_FRAME>3301</FIRST_FRAME>
         <LAST_FRAME>3400</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -311,6 +361,13 @@
         <FIRST_FRAME>3401</FIRST_FRAME>
         <LAST_FRAME>3500</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
     <GROUP>
@@ -318,6 +375,13 @@
         <FIRST_FRAME>3501</FIRST_FRAME>
         <LAST_FRAME>3600</LAST_FRAME>
         <LOOPS>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_1.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_2.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_3.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_4.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_5.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_6.mp4</FILENAME>
+            <FILENAME delay = "0">JuncoBehaviors_LightSnow_7.mp4</FILENAME>
         </LOOPS>
     </GROUP>
 </VIDEOS>

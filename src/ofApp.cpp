@@ -132,7 +132,7 @@ void ofApp::setup() {
     
 
     // Load Sounds //
-    ambientSound.load("sounds/ambient.mp3");
+    ambientSound.load("sounds/ambientForest.mp3");
     ambientSound.setLoop(true); 
     WTSounds.load("sounds/WT_chirp.mp3");
     JuncoSounds.load("sounds/JUNCO_Chirp.mp3");
