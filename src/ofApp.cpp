@@ -8,7 +8,6 @@ void ofApp::setup() {
     // ofSetFrameRate(1);
     ofSetFullscreen(true);
     
-    
     // Initialize Frames //
     scrubLevelFrame = 0;
     loopLevelFrame = 0;
@@ -22,7 +21,12 @@ void ofApp::setup() {
     isSpinMode = true;
     encoderVal = "nothing yet";
     spinDistanceList.assign(10, 0);
-
+    
+    // Setup GUI //
+    gui.setup(); // most of the time you don't need a name
+    gui.setPosition(1500, 10);
+    gui.add(minimumEncoderMovement.setup("minimumEncoderMovement", 0, 0, 40));
+    gui.add(spinModeThreshold.setup("spinModeThreshold", 0.0, 0.0, 40.0));
     
     // Setup Arduino //
     ard.connect("tty.usbmodem1421", 57600);
@@ -154,7 +158,7 @@ void ofApp::setup() {
     JuncoSounds.load("sounds/JUNCO_Chirp.mp3");
     transSound.load("sounds/swooshes/swishSound.wav");
     
-    setTo1960s();
+    setTo2010s();
     
     // this is the time in millis that the white flash happens over
     fadeTime = 1000;
@@ -239,10 +243,10 @@ void ofApp::update(){
     averageSpinDistance = averageOfList(spinDistanceList);
     
     bool nowSpinMode;
-    if (averageSpinDistance == 0.0){
+    if (averageSpinDistance <= spinModeThreshold){
         nowSpinMode = false;
     }
-    else if (abs(averageSpinDistance) > 0.0){
+    else if (abs(averageSpinDistance) > spinModeThreshold){
         if (averageSpinDistance > 0 && (getSpinDistance(spinnerNumber, loopLevelFrame, 3600) > 0)) {
             // we are spinning forward and the loop is ahead of the scrub vid
             nowSpinMode = false;
@@ -325,7 +329,7 @@ void ofApp::calculateFrameToShow() {
 
 
 void ofApp::spinnerChanged(const int newSpinnerNumber){
-    if (abs(newSpinnerNumber - spinnerNumber) > spinnerChangedThreshold) {
+    if (abs(newSpinnerNumber - spinnerNumber) > minimumEncoderMovement) {
         prevSpinnerNumber = spinnerNumber;
         spinnerNumber = newSpinnerNumber;
     }
@@ -397,6 +401,9 @@ void ofApp::draw(){
   
     vidBuffer.end();
     bezManager.draw();
+    if (bShowGui) {
+        gui.draw();
+    }
     
     
     ofSetColor(255, 255, 255);

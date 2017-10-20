@@ -53,7 +53,6 @@ class ofApp : public ofBaseApp{
         int posMod(int x, int y);
     
         void spinnerChanged(const int newSpinnerNumber);
-        int spinnerChangedThreshold = 0; // 0 if testing with arrow keys, otherwise test with spinner to fins correct value
     
         int spinnerNumber;
         int prevSpinnerNumber;
@@ -70,7 +69,7 @@ class ofApp : public ofBaseApp{
     
         void calculateFrameToShow();
     
-    
+
     
         vector<Vid> vids_1960;
         vector<string> images_1960;
@@ -150,8 +149,12 @@ class ofApp : public ofBaseApp{
 
         // === Debugging =============================
     
+        ofxPanel gui;
+        ofxIntSlider minimumEncoderMovement;
+        ofxFloatSlider spinModeThreshold;
+    
         ofFbo checkerboardTex;
-        bool bShowGui;
+        bool bShowGui = true;
         bool showGuide;
         ofxBezierWarpManager bezManager;
 
