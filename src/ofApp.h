@@ -78,6 +78,8 @@ class ofApp : public ofBaseApp{
         vector<Vid> vids_2010;
         vector<string> images_2010;
     
+        std::map<string, ofVideoPlayer> loops;
+    
         vector<Vid>* activeVids;
         vector<string>* activeImages;
         int activeVidIndex = -1;

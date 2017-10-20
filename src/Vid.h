@@ -14,8 +14,9 @@ public:
       string name,
       int firstFrame,
       int endFrame,
-      vector <string> loopFiles,
+      vector <string> loopKeys,
       vector <int> loopDelays,
+      map<string, ofVideoPlayer>* loopsPtr,
       string stillLoop,
       string years
     );
@@ -41,10 +42,10 @@ private:
     
     deque<int> frameQ_;
     
-    vector <string> loopFiles_;    // Names of videos
-    vector <int> loopDelays_;      // The delay for each video
-    vector <ofVideoPlayer> videos; // The video player object
-    int loopIndex_ = 0;            // Which loop should be played next
+    vector <string> loopKeys_;      // Names of videos
+    vector <int> loopDelays_;      // Loop delays
+    vector <ofVideoPlayer*> videos; // Keeps pointers to the global loop videos
+    int loopIndex_ = 0;             // Which loop should be played next
     bool hasLoops = false;
     
     void setupStill();

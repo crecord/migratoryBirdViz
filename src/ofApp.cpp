@@ -48,7 +48,7 @@ void ofApp::setup() {
     scheduleOfVideos.load("1960_sched.xml");
     scheduleOfVideos.setTo("VIDEOS");
     for (int i =0; i <scheduleOfVideos.getNumChildren(); i++ ) {
-        vector <string> loopFiles;
+        vector <string> loopKeys;
         vector <int> loopDelays;
         string stillLoop = "";
         string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
@@ -67,14 +67,23 @@ void ofApp::setup() {
             if (loopFlag == "STILL") {
                 stillLoop = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
             } else {
+                string filen = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
+                // add this loop to its vid
+                loopKeys.push_back(filen);
+                // load the loop if not already loaded
+                if (loops.find(filen) == loops.end()) {
+                    ofVideoPlayer loop;
+                    loop.load("videos/"+filen);
+                    loop.setLoopState(OF_LOOP_NONE);
+                    loops.insert(std::pair<string,ofVideoPlayer>(filen, loop));
+                }
                 string delayFlag = scheduleOfVideos.getAttribute("FILENAME[" + ofToString(j) +"][@delay]");
                 if (delayFlag == "") delayFlag = 15000;
                 loopDelays.push_back(ofToInt(delayFlag));
-                loopFiles.push_back(scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]"));
             }
         }
         scheduleOfVideos.setTo("../../");
-        Vid temp(name, firstFrame, endFrame, loopFiles, loopDelays, stillLoop, "1960");
+        Vid temp(name, firstFrame, endFrame, loopKeys, loopDelays, &loops, stillLoop, "1960");
         vids_1960.push_back(temp);
     }
     
@@ -82,7 +91,7 @@ void ofApp::setup() {
     scheduleOfVideos.load("2010_sched.xml");
     scheduleOfVideos.setTo("VIDEOS");
     for (int i =0; i <scheduleOfVideos.getNumChildren(); i++ ) {
-        vector <string> loopFiles;
+        vector <string> loopKeys;
         vector <int> loopDelays;
         string stillLoop = "";
         string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
@@ -101,14 +110,23 @@ void ofApp::setup() {
             if (loopFlag == "STILL") {
                 stillLoop = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
             } else {
+                string filen = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
+                // add this loop to its vid
+                loopKeys.push_back(filen);
+                // load the loop if not already loaded
+                if (loops.find(filen) == loops.end()) {
+                    ofVideoPlayer loop;
+                    loop.load("videos/"+filen);
+                    loop.setLoopState(OF_LOOP_NONE);
+                    loops.insert(std::pair<string,ofVideoPlayer>(filen, loop));
+                }
                 string delayFlag = scheduleOfVideos.getAttribute("FILENAME[" + ofToString(j) +"][@delay]");
                 if (delayFlag == "") delayFlag = 15000;
                 loopDelays.push_back(ofToInt(delayFlag));
-                loopFiles.push_back(scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]"));
             }
         }
         scheduleOfVideos.setTo("../../");
-        Vid temp(name, firstFrame, endFrame, loopFiles, loopDelays, stillLoop, "2010");
+        Vid temp(name, firstFrame, endFrame, loopKeys, loopDelays, &loops, stillLoop, "2010");
         vids_2010.push_back(temp);
     }
 
@@ -119,7 +137,6 @@ void ofApp::setup() {
     for(int i =0; i < dir.size(); i++){
         images_1960.push_back(dir.getPath(i));
     }
-    //ofLog()<<"numOfFiles"<< dir.size();
     
     ofDirectory dir2;
     dir2.listDir("./videos/2010_scrubLevel/");
@@ -128,7 +145,6 @@ void ofApp::setup() {
     for(int i =0; i < dir2.size(); i++){
         images_2010.push_back(dir2.getPath(i));
     }
-    //ofLog()<<"numOfFiles"<< dir.size();
     
 
     // Load Sounds //
