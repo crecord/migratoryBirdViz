@@ -1,5 +1,3 @@
 ofxBezierWarpManager
-ofxCv
 ofxGui
-ofxOpenCv
 ofxXmlSettings
