@@ -8,7 +8,6 @@ void ofApp::setup() {
     // ofSetFrameRate(1);
     //ofSetFullscreen(true);
     
-    
     // Initialize Frames //
     scrubLevelFrame = 0;
     loopLevelFrame = 0;
@@ -22,9 +21,15 @@ void ofApp::setup() {
     isSpinMode = true;
     encoderVal = "nothing yet";
     spinDistanceList.assign(10, 0);
-
+    
+    // Setup GUI //
+    gui.setup(); // most of the time you don't need a name
+    gui.setPosition(1500, 10);
+    gui.add(minimumEncoderMovement.setup("minimumEncoderMovement", 0, 0, 40));
+    gui.add(spinModeThreshold.setup("spinModeThreshold", 0.0, 0.0, 40.0));
     
     // Setup Arduino //
+    //for linux
     ard.connect("/dev/ttyACM0", 57600);
     // listen for EInitialized notification. this indicates that
     // the arduino is ready to receive commands and it is safe to
@@ -48,7 +53,7 @@ void ofApp::setup() {
     scheduleOfVideos.load("1960_sched.xml");
     scheduleOfVideos.setTo("VIDEOS");
     for (int i =0; i <scheduleOfVideos.getNumChildren(); i++ ) {
-        vector <string> loopFiles;
+        vector <string> loopKeys;
         vector <int> loopDelays;
         string stillLoop = "";
         string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
@@ -67,14 +72,23 @@ void ofApp::setup() {
             if (loopFlag == "STILL") {
                 stillLoop = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
             } else {
+                string filen = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
+                // add this loop to its vid
+                loopKeys.push_back(filen);
+                // load the loop if not already loaded
+                if (loops.find(filen) == loops.end()) {
+                    ofVideoPlayer loop;
+                    loop.load("videos/"+filen);
+                    loop.setLoopState(OF_LOOP_NONE);
+                    loops.insert(std::pair<string,ofVideoPlayer>(filen, loop));
+                }
                 string delayFlag = scheduleOfVideos.getAttribute("FILENAME[" + ofToString(j) +"][@delay]");
                 if (delayFlag == "") delayFlag = 15000;
                 loopDelays.push_back(ofToInt(delayFlag));
-                loopFiles.push_back(scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]"));
             }
         }
         scheduleOfVideos.setTo("../../");
-        Vid temp(name, firstFrame, endFrame, loopFiles, loopDelays, stillLoop, "1960");
+        Vid temp(name, firstFrame, endFrame, loopKeys, loopDelays, &loops, stillLoop, "1960");
         vids_1960.push_back(temp);
     }
     
@@ -82,7 +96,7 @@ void ofApp::setup() {
     scheduleOfVideos.load("2010_sched.xml");
     scheduleOfVideos.setTo("VIDEOS");
     for (int i =0; i <scheduleOfVideos.getNumChildren(); i++ ) {
-        vector <string> loopFiles;
+        vector <string> loopKeys;
         vector <int> loopDelays;
         string stillLoop = "";
         string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
@@ -101,14 +115,23 @@ void ofApp::setup() {
             if (loopFlag == "STILL") {
                 stillLoop = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
             } else {
+                string filen = scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]");
+                // add this loop to its vid
+                loopKeys.push_back(filen);
+                // load the loop if not already loaded
+                if (loops.find(filen) == loops.end()) {
+                    ofVideoPlayer loop;
+                    loop.load("videos/"+filen);
+                    loop.setLoopState(OF_LOOP_NONE);
+                    loops.insert(std::pair<string,ofVideoPlayer>(filen, loop));
+                }
                 string delayFlag = scheduleOfVideos.getAttribute("FILENAME[" + ofToString(j) +"][@delay]");
                 if (delayFlag == "") delayFlag = 15000;
                 loopDelays.push_back(ofToInt(delayFlag));
-                loopFiles.push_back(scheduleOfVideos.getValue("FILENAME[" + ofToString(j)+ "]"));
             }
         }
         scheduleOfVideos.setTo("../../");
-        Vid temp(name, firstFrame, endFrame, loopFiles, loopDelays, stillLoop, "2010");
+        Vid temp(name, firstFrame, endFrame, loopKeys, loopDelays, &loops, stillLoop, "2010");
         vids_2010.push_back(temp);
     }
 
@@ -134,9 +157,8 @@ void ofApp::setup() {
         */
 
     }
-   ofLog()<<"loaded all 1960";
 
-
+    
     ofDirectory dir2;
     dir2.listDir("./videos/2010_scrubLevel/");
     //  this will put it in order as long as it has the leading zeros in linux
@@ -150,16 +172,16 @@ void ofApp::setup() {
     }
 
 
-     ofLog()<<"loaded all 2010";
+
 
     // Load Sounds //
-    ambientSound.load("sounds/ambient.mp3");
+    ambientSound.load("sounds/ambientForest.mp3");
     ambientSound.setLoop(true); 
     WTSounds.load("sounds/WT_chirp.mp3");
     JuncoSounds.load("sounds/JUNCO_Chirp.mp3");
     transSound.load("sounds/swooshes/swishSound.wav");
     
-    setTo1960s();
+    setTo2010s();
     
     // this is the time in millis that the white flash happens over
     fadeTime = 1000;
@@ -245,10 +267,10 @@ void ofApp::update(){
     averageSpinDistance = averageOfList(spinDistanceList);
     
     bool nowSpinMode;
-    if (averageSpinDistance == 0.0){
+    if (averageSpinDistance <= spinModeThreshold){
         nowSpinMode = false;
     }
-    else if (abs(averageSpinDistance) > 0.0){
+    else if (abs(averageSpinDistance) > spinModeThreshold){
         if (averageSpinDistance > 0 && (getSpinDistance(spinnerNumber, loopLevelFrame, 3600) > 0)) {
             // we are spinning forward and the loop is ahead of the scrub vid
             nowSpinMode = false;
@@ -333,7 +355,7 @@ void ofApp::calculateFrameToShow() {
 
 
 void ofApp::spinnerChanged(const int newSpinnerNumber){
-    if (abs(newSpinnerNumber - spinnerNumber) > spinnerChangedThreshold) {
+    if (abs(newSpinnerNumber - spinnerNumber) > minimumEncoderMovement) {
         prevSpinnerNumber = spinnerNumber;
         spinnerNumber = newSpinnerNumber;
     }
@@ -407,6 +429,9 @@ void ofApp::draw(){
   
     vidBuffer.end();
     bezManager.draw();
+    if (bShowGui) {
+        gui.draw();
+    }
     
     
     ofSetColor(255, 255, 255);

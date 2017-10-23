@@ -12,8 +12,9 @@ Vid::Vid(
     string name,
     int firstFrame,
     int endFrame,
-    vector <string> loopFiles,
+    vector <string> loopKeys,
     vector <int> loopDelays,
+    map<string, ofVideoPlayer>* loopsPtr,
     string stillLoop,
     string year
 ) {
@@ -25,17 +26,14 @@ Vid::Vid(
     
     still_.load(frameToFilename(stillFrame_, year));
     
-    loopFiles_ = loopFiles;
+    loopKeys_ = loopKeys;
     loopDelays_ = loopDelays;
-    for (int i =0; i< loopFiles.size(); i++){
-        ofVideoPlayer temp;
-        string filen = "videos/"+ loopFiles.at(i);
-        temp.load(filen);
-        temp.setLoopState(OF_LOOP_NONE);
-        videos.push_back(temp);
+    // grab a pointer to each loop in this vid
+    for (int i =0; i< loopKeys.size(); i++) {
+        videos.push_back(&(loopsPtr)->find(loopKeys.at(i))->second); // grab a pointer to the right loop
         hasLoops = true;
    }
-
+    
     // If a short loop should be playing when the scene is 'still' (rare case)
     if (stillLoop != "") {
         stillLoop_.load("videos/"+stillLoop);
@@ -74,8 +72,8 @@ int Vid::calculateFrameToShow() {
     } else if (isPlayingStill_) {
         if (hasLoops && (ofGetElapsedTimeMillis() - startTime_) >= delay_) {
             // no loop is playing but there are loops to play and delay is over
-            videos.at(loopIndex_).setSpeed(1);
-            videos.at(loopIndex_).play();
+            videos.at(loopIndex_)->setSpeed(1);
+            videos.at(loopIndex_)->play();
             delay_ = MAX_DELAY;
             isPlayingLoop_ = true;
             isPlayingStill_ = false;
@@ -86,7 +84,7 @@ int Vid::calculateFrameToShow() {
 
 void Vid::setupTransition(int frame) {
     frameQ_ = {};
-    for (int i = frame + 1; i <= stillFrame_; i+=2) {
+    for (int i = frame + 1; i <= stillFrame_; i++) {
         frameQ_.push_back(i);
     }
     isPlayingTransition_ = true;
@@ -107,11 +105,12 @@ void Vid::setupLooping() {
 }
 
 void Vid::updateLooping() {
-    if (videos.at(loopIndex_).isPlaying()) { // is playing a loop
-        videos.at(loopIndex_).update();
-        if (videos.at(loopIndex_).getCurrentFrame() < 0) { // Check if video done
+    if (videos.at(loopIndex_)->isPlaying()) { // is playing a loop
+        videos.at(loopIndex_)->update();
+        if (videos.at(loopIndex_)->getCurrentFrame() < 0) { // Check if video done
             // Once a loop is done playing: rewind it, stop it, set the delay time before playing the next one
-            videos.at(loopIndex_).stop();
+            videos.at(loopIndex_)->setFrame(0);
+            videos.at(loopIndex_)->stop();
             if ((loopIndex_+ 1) < videos.size()){
                 loopIndex_ += 1;
             } else {
@@ -129,8 +128,9 @@ void Vid::updateLooping() {
 void Vid::stopVideoBlock(){
     delay_ = MAX_DELAY;
     if (stillLoop_.isPlaying()){ stillLoop_.stop(); }
-    if (isPlayingLoop_ && videos.at(loopIndex_).isPlaying()) {
-        videos.at(loopIndex_).stop();
+    if (isPlayingLoop_ && videos.at(loopIndex_)->isPlaying()) {
+        videos.at(loopIndex_)->setFrame(0);
+        videos.at(loopIndex_)->stop();
     }
     isPlayingLoop_ = false;
     isPlayingStill_ = false;
@@ -143,7 +143,7 @@ void Vid::drawVid() {
         stillLoop_.update();
         stillLoop_.draw(0, 0);
     } else if (isPlayingLoop_) {
-        videos.at(loopIndex_).draw(0, 0);
+        videos.at(loopIndex_)->draw(0, 0);
     }
 }
 
