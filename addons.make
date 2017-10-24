@@ -1,5 +1,4 @@
 ofxBezierWarpManager
-ofxCv
 ofxGui
-ofxOpenCv
+ofxTurboJpeg
 ofxXmlSettings

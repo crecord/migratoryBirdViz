@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>MigratoryBirdViz</string>
+	<string>migratoryBirdViz</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.icns</string>
 	<key>CFBundleIdentifier</key>
@@ -31,9 +31,9 @@
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>15A278</string>
+	<string>16C58</string>
 	<key>DTSDKName</key>
-	<string>macosx10.11</string>
+	<string>macosx10.12</string>
 	<key>DTXcode</key>
 	<string>0820</string>
 	<key>DTXcodeBuild</key>

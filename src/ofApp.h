@@ -4,7 +4,7 @@
 #include "ofxGui.h"
 #include "ofxBezierWarpManager.h"
 #include "Vid.h"
-
+#include "ofxTurboJpeg.h"
 
 
 class ofApp : public ofBaseApp{
@@ -88,12 +88,18 @@ class ofApp : public ofBaseApp{
     
         vector<Vid> vids_1960;
         vector<string> images_1960;
+        vector<ofImage> temp_images_1960;
     
         vector<Vid> vids_2010;
         vector<string> images_2010;
+
+        vector<ofImage> temp_images_2010;
+
+
     
         std::map<string, ofVideoPlayer> loops;
     
+
         vector<Vid>* activeVids;
         vector<string>* activeImages;
         int activeVidIndex = -1;
@@ -183,4 +189,6 @@ class ofApp : public ofBaseApp{
         bool debugMode = false;
         ofxBezierWarpManager bezManager;
 
+        ofxTurboJpeg turbo;
+        ofImage frameImage;
 };

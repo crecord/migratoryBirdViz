@@ -28,7 +28,8 @@ void ofApp::setup() {
     gui.add(spinModeThreshold.setup("spinModeThreshold", 0.0, 0.0, 40.0));
     
     // Setup Arduino //
-    ard.connect("tty.usbmodem1421", 57600);
+    //for linux
+    ard.connect("/dev/ttyACM0", 57600);
     // listen for EInitialized notification. this indicates that
     // the arduino is ready to receive commands and it is safe to
     // call setupArduino()
@@ -133,18 +134,40 @@ void ofApp::setup() {
     dir.listDir("./videos/1960_scrubLevel/");
     //  this will put it in order as long as it has the leading zeros in linux
     dir.sort();
+    ofLog()<<"numOfFiles"<< dir.size();
+
+
     for(int i =0; i < dir.size(); i++){
         images_1960.push_back(dir.getPath(i));
+
+        /*
+        if (i < 10) {
+            int starttime = ofGetElapsedTimeMillis();
+            ofImage temp;
+            temp.load(dir.getPath(i));
+            int endtime = ofGetElapsedTimeMillis();
+            ofLog() << "load time = " << endtime - starttime;
+            temp_images_1960.push_back(temp);
+        }
+        */
+
     }
+
     
     ofDirectory dir2;
     dir2.listDir("./videos/2010_scrubLevel/");
     //  this will put it in order as long as it has the leading zeros in linux
+    ofLog()<<"numOfFiles2"<< dir2.size();
     dir2.sort();
     for(int i =0; i < dir2.size(); i++){
         images_2010.push_back(dir2.getPath(i));
+        //ofImage temp;
+        //temp.load(dir2.getPath(i));
+        //temp_images_2010.push_back(temp);
     }
-    
+
+
+
 
     // Load Sounds //
     // ambient noise throughout year (always playing !! :) )
@@ -248,6 +271,7 @@ void ofApp::setupArduino(const int & version) {
 
 void ofApp::update(){
     
+
     // See which vid is in range
     for(int i = 0; i < activeVids->size(); i++) {
         if (activeVids->at(i).isInRange(frameShown)) {
@@ -295,10 +319,12 @@ void ofApp::update(){
     calculateFrameToShow();
 
     // Display frame rate
-    ofSetWindowTitle(ofToString(ofGetFrameRate()));
+
 
     // update the arduino, get any data or messages.
     ard.update();
+
+    ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
 
 void ofApp::updateAudio() {
@@ -392,21 +418,23 @@ int ofApp::getSpinDistance(int prev, int next, int max){
 
 
 void ofApp::draw(){
-
+    
     ofBackground(0);
     ofSetColor(255, 255, 255);
 
     vidBuffer.begin();
     ofClear(0, 0, 0, 0);
     
-    ofImage frameImage;
+
     if (!isSpinMode) {
-        frameImage.load(activeImages->at(loopLevelFrame));
+        turbo.load(frameImage,activeImages->at(loopLevelFrame));
+        //frameImage.load(activeImages->at(loopLevelFrame));
         frameImage.draw(-185, -69, 2362, 1329);
         activeVids->at(activeVidIndex).drawVid();
         frameShown = loopLevelFrame;
     } else {
-        frameImage.load(activeImages->at(scrubLevelFrame));
+        turbo.load(frameImage,activeImages->at(scrubLevelFrame));
+        //frameImage.load(activeImages->at(scrubLevelFrame));
         frameImage.draw(-185, -69, 2362, 1329);
         frameShown = scrubLevelFrame;
     }
@@ -483,7 +511,7 @@ void ofApp::draw(){
         ofDrawRectangle(0, 0, ofGetWidth(),ofGetHeight());
         ofSetColor(255, 255, 255);
     }
-    
+
     
 }
 
