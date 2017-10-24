@@ -139,18 +139,6 @@ void ofApp::setup() {
 
     for(int i =0; i < dir.size(); i++){
         images_1960.push_back(dir.getPath(i));
-
-        /*
-        if (i < 10) {
-            int starttime = ofGetElapsedTimeMillis();
-            ofImage temp;
-            temp.load(dir.getPath(i));
-            int endtime = ofGetElapsedTimeMillis();
-            ofLog() << "load time = " << endtime - starttime;
-            temp_images_1960.push_back(temp);
-        }
-        */
-
     }
 
     
@@ -161,16 +149,13 @@ void ofApp::setup() {
     dir2.sort();
     for(int i =0; i < dir2.size(); i++){
         images_2010.push_back(dir2.getPath(i));
-        //ofImage temp;
-        //temp.load(dir2.getPath(i));
-        //temp_images_2010.push_back(temp);
     }
 
 
 
 
     // Load Sounds //
-    // ambient noise throughout year (always playing !! :) )
+    // ambient noise throughout year
     spring.load("sounds/RainySpring.mp3");
     spring.setLoop(true);
     spring.setVolume(0);
