@@ -2,51 +2,51 @@
     <IS_BEZIER>1</IS_BEZIER>
     <RESOLUTION>10</RESOLUTION>
     <CORNER>
-        <X>104</X>
-        <Y>91</Y>
+        <X>1900</X>
+        <Y>-28</Y>
     </CORNER>
     <CORNER>
-        <X>1348</X>
-        <Y>95</Y>
+        <X>241</X>
+        <Y>15</Y>
     </CORNER>
     <CORNER>
-        <X>1336</X>
-        <Y>846</Y>
+        <X>52</X>
+        <Y>1102</Y>
     </CORNER>
     <CORNER>
-        <X>97</X>
-        <Y>834</Y>
+        <X>1798</X>
+        <Y>1140</Y>
     </CORNER>
     <ANCHOR>
-        <X>95</X>
-        <Y>314</Y>
+        <X>1956</X>
+        <Y>475</Y>
     </ANCHOR>
     <ANCHOR>
-        <X>419</X>
-        <Y>96</Y>
+        <X>1465</X>
+        <Y>6</Y>
     </ANCHOR>
     <ANCHOR>
-        <X>1031</X>
-        <Y>91</Y>
+        <X>401</X>
+        <Y>-63</Y>
     </ANCHOR>
     <ANCHOR>
-        <X>1354</X>
-        <Y>323</Y>
+        <X>-65</X>
+        <Y>266</Y>
     </ANCHOR>
     <ANCHOR>
-        <X>1346</X>
-        <Y>468</Y>
+        <X>-132</X>
+        <Y>804</Y>
     </ANCHOR>
     <ANCHOR>
-        <X>1043</X>
-        <Y>829</Y>
+        <X>544</X>
+        <Y>1147</Y>
     </ANCHOR>
     <ANCHOR>
-        <X>389</X>
-        <Y>852</Y>
+        <X>1353</X>
+        <Y>1116</Y>
     </ANCHOR>
     <ANCHOR>
-        <X>110</X>
-        <Y>616</Y>
+        <X>1949</X>
+        <Y>686</Y>
     </ANCHOR>
 </SCREEN>

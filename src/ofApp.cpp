@@ -5,7 +5,6 @@
 
 
 void ofApp::setup() {
-    // ofSetFrameRate(1);
     ofSetFullscreen(true);
     
     // Initialize Frames //
@@ -45,6 +44,8 @@ void ofApp::setup() {
     bezManager.setup(10); //WarpResolution
     bezManager.addFbo(&vidBuffer);
     bezManager.loadSettings();
+    // start with guide off
+    bezManager.toggleGuideVisible();
     decorativeFrame.load("./Frame.png");
     
     
@@ -55,16 +56,12 @@ void ofApp::setup() {
         vector <string> loopKeys;
         vector <int> loopDelays;
         string stillLoop = "";
+        string soundFlag = "";
         string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
         int firstFrame = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME"));
         int endFrame = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME"));
-        string flag = scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@flag]");
-        if(flag == "WT"){
-            trigWT_sound_1960 = firstFrame;
-        }
-        else if(flag == "JUNCO"){
-            trigJUNCO_sound_1960 = firstFrame;
-        }
+        int soundIndex = ofToInt(scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@sound]"));
+        soundFlag = scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@soundFlag]");
         scheduleOfVideos.setTo("GROUP[" + ofToString(i) +"]/LOOPS");
           for(int j=0; j < scheduleOfVideos.getNumChildren(); j++){
             string loopFlag = scheduleOfVideos.getAttribute("FILENAME[" + ofToString(j) +"][@flag]");
@@ -78,6 +75,7 @@ void ofApp::setup() {
                 if (loops.find(filen) == loops.end()) {
                     ofVideoPlayer loop;
                     loop.load("videos/"+filen);
+                    loop.setVolume(1);
                     loop.setLoopState(OF_LOOP_NONE);
                     loops.insert(std::pair<string,ofVideoPlayer>(filen, loop));
                 }
@@ -87,7 +85,7 @@ void ofApp::setup() {
             }
         }
         scheduleOfVideos.setTo("../../");
-        Vid temp(name, firstFrame, endFrame, loopKeys, loopDelays, &loops, stillLoop, "1960");
+        Vid temp(name, firstFrame, endFrame, loopKeys, loopDelays, &loops, stillLoop, soundIndex, soundFlag, "1960");
         vids_1960.push_back(temp);
     }
     
@@ -98,16 +96,12 @@ void ofApp::setup() {
         vector <string> loopKeys;
         vector <int> loopDelays;
         string stillLoop = "";
+        string soundFlag = "";
         string name = scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/NAME");
         int firstFrame = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/FIRST_FRAME"));
         int endFrame = ofToInt(scheduleOfVideos.getValue("GROUP[" + ofToString(i) +"]/LAST_FRAME"));
-        string flag = scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@flag]");
-        if(flag == "WT"){
-            trigWT_sound_2010 = firstFrame;
-        }
-        else if(flag == "JUNCO"){
-            trigJUNCO_sound_2010 = firstFrame;
-        }
+        int soundIndex = ofToInt(scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@sound]"));
+        soundFlag = scheduleOfVideos.getAttribute("GROUP[" + ofToString(i) +"]/NAME[@soundFlag]");
         scheduleOfVideos.setTo("GROUP[" + ofToString(i) +"]/LOOPS");
         for(int j=0; j < scheduleOfVideos.getNumChildren(); j++){
             string loopFlag = scheduleOfVideos.getAttribute("FILENAME[" + ofToString(j) +"][@flag]");
@@ -121,6 +115,7 @@ void ofApp::setup() {
                 if (loops.find(filen) == loops.end()) {
                     ofVideoPlayer loop;
                     loop.load("videos/"+filen);
+                    loop.setVolume(0);
                     loop.setLoopState(OF_LOOP_NONE);
                     loops.insert(std::pair<string,ofVideoPlayer>(filen, loop));
                 }
@@ -130,7 +125,7 @@ void ofApp::setup() {
             }
         }
         scheduleOfVideos.setTo("../../");
-        Vid temp(name, firstFrame, endFrame, loopKeys, loopDelays, &loops, stillLoop, "2010");
+        Vid temp(name, firstFrame, endFrame, loopKeys, loopDelays, &loops, stillLoop, soundIndex, soundFlag, "2010");
         vids_2010.push_back(temp);
     }
 
@@ -152,10 +147,39 @@ void ofApp::setup() {
     
 
     // Load Sounds //
-    ambientSound.load("sounds/ambientForest.mp3");
-    ambientSound.setLoop(true); 
-    WTSounds.load("sounds/WT_chirp.mp3");
-    JuncoSounds.load("sounds/JUNCO_Chirp.mp3");
+    // ambient noise throughout year (always playing !! :) )
+    spring.load("sounds/RainySpring.mp3");
+    spring.setLoop(true);
+    spring.setVolume(0);
+    spring.play();
+    
+    spring2.load("sounds/EmptySpring.mp3");
+    spring2.setLoop(true);
+    spring2.setVolume(0);
+    spring2.play();
+    
+    summer1.load("sounds/WoodThrushSinging.mp3");
+    summer1.setLoop(true);
+    summer1.setVolume(0);
+    summer1.play();
+    
+    summer2.load("sounds/WoodThrushBabies.mp3");
+    summer2.setLoop(true);
+    summer2.setVolume(0);
+    summer2.play();
+    
+    fall.load("sounds/FallForest.mp3");
+    fall.setLoop(true);
+    fall.setVolume(0);
+    fall.play();
+    
+    winter.load("sounds/WinterJuncos.mp3");
+    winter.setLoop(true);
+    winter.setVolume(0);
+    winter.play();
+    
+    JUNCO.load("sounds/JUNCO.mp3");
+    WT.load("sounds/WT.mp3");
     transSound.load("sounds/swooshes/swishSound.wav");
     
     setTo2010s();
@@ -172,11 +196,8 @@ void ofApp::setTo1960s() {
         }
         spinDistanceList.assign(10, 0);
         isSpinMode = true;
-    
         activeVids = &vids_1960;
         activeImages = &images_1960;
-        trigWT_sound = trigWT_sound_1960;
-        trigJUNCO_sound= trigJUNCO_sound_1960;
         years = "1960s";
         isCurrently1960 = true;
     }
@@ -193,8 +214,6 @@ void ofApp::setTo2010s() {
 
         activeVids = &vids_2010;
         activeImages = &images_2010;
-        trigWT_sound = trigWT_sound_2010;
-        trigJUNCO_sound= trigJUNCO_sound_2010;
         years = "2010s";
         isCurrently1960 = false;
     }
@@ -232,9 +251,15 @@ void ofApp::update(){
     // See which vid is in range
     for(int i = 0; i < activeVids->size(); i++) {
         if (activeVids->at(i).isInRange(frameShown)) {
+             if (activeVidIndex != i) {
+                 soundTriggered = false;
+             }
              activeVidIndex = i;
         }
     }
+    
+    // Update audio
+    updateAudio();
     
     // Update Distance Between Spinner and Scrub Level Frame
     spinDistance = getSpinDistance(scrubLevelFrame, spinnerNumber, 3600);
@@ -243,7 +268,7 @@ void ofApp::update(){
     averageSpinDistance = averageOfList(spinDistanceList);
     
     bool nowSpinMode;
-    if (averageSpinDistance <= spinModeThreshold){
+    if (abs(averageSpinDistance) <= spinModeThreshold){
         nowSpinMode = false;
     }
     else if (abs(averageSpinDistance) > spinModeThreshold){
@@ -256,22 +281,11 @@ void ofApp::update(){
     }
     
     
-    
-    // Trigger sounds to stop or start, if spin mode changes
     if (nowSpinMode != isSpinMode) {
         if (nowSpinMode) {
-            isScrubSoundFadeUp = true;
-            isScrubSoundFadeDown = false;
-            startSoundFade = ofGetElapsedTimeMillis();
-            ambientSound.play();
-            ambientSound.setVolume(0);
-            ambientSound.setPaused(false);
             scrubLevelFrame = loopLevelFrame;
             activeVids->at(activeVidIndex).stopVideoBlock();
         } else {
-            isScrubSoundFadeDown = true;
-            isScrubSoundFadeUp = false;
-            startSoundFade = ofGetElapsedTimeMillis();
             activeVids->at(activeVidIndex).setupTransition(scrubLevelFrame);
         }
         isSpinMode = nowSpinMode;
@@ -285,6 +299,35 @@ void ofApp::update(){
 
     // update the arduino, get any data or messages.
     ard.update();
+}
+
+void ofApp::updateAudio() {
+    if (!soundTriggered && activeVids->at(activeVidIndex).soundFlag_ == "WT" && !WT.isPlaying()) {
+        WT.play();
+        soundTriggered = true;
+    } else if (!soundTriggered && activeVids->at(activeVidIndex).soundFlag_ == "JUNCO" && !JUNCO.isPlaying()) {
+        JUNCO.play();
+        soundTriggered = true;
+    }
+    
+    int soundIndex = activeVids->at(activeVidIndex).soundIndex_;
+    for (int i = 0; i < 6; i++) {
+        if (i == soundIndex) {
+            if (volumes[i] < 1) {
+                volumes[i] = volumes[i] + 0.05;
+            }
+        } else {
+            if (volumes[i] > 0) {
+                volumes[i] = volumes[i] - 0.05;
+            }
+        }
+    }
+    spring.setVolume(volumes[0]);
+    spring2.setVolume(volumes[5]);
+    summer1.setVolume(volumes[1]);
+    summer2.setVolume(volumes[2]);
+    fall.setVolume(volumes[3]);
+    winter.setVolume(volumes[4]);
 }
 
 void ofApp::calculateFrameToShow() {
@@ -314,14 +357,6 @@ void ofApp::calculateFrameToShow() {
                 scrubLevelFrame = posMod(spinnerNumber, 3600);
             }
         }
-        // trigger the tweet sounds at the correct moments
-        if( checkInRange(adjustedSpinnerNumber, trigWT_sound)  & (WTSounds.isPlaying() == false)){
-            WTSounds.play();
-        }
-        if( checkInRange(adjustedSpinnerNumber, trigJUNCO_sound)  & (JuncoSounds.isPlaying() == false)){
-            JuncoSounds.play();
-        }
-        
     } else if (!isSpinMode) {
         loopLevelFrame = activeVids->at(activeVidIndex).calculateFrameToShow();
     }
@@ -357,69 +392,61 @@ int ofApp::getSpinDistance(int prev, int next, int max){
 
 
 void ofApp::draw(){
-    
-    
 
     ofBackground(0);
     ofSetColor(255, 255, 255);
 
     vidBuffer.begin();
-      ofClear(0, 0, 0, 0);
+    ofClear(0, 0, 0, 0);
     
     ofImage frameImage;
     if (!isSpinMode) {
         frameImage.load(activeImages->at(loopLevelFrame));
-        frameImage.draw(0, 0);
+        frameImage.draw(-185, -69, 2362, 1329);
         activeVids->at(activeVidIndex).drawVid();
         frameShown = loopLevelFrame;
     } else {
         frameImage.load(activeImages->at(scrubLevelFrame));
-        frameImage.draw(0, 0);
+        frameImage.draw(-185, -69, 2362, 1329);
         frameShown = scrubLevelFrame;
-        if(isScrubSoundFadeUp){
-            int timeChange = ofGetElapsedTimeMillis() - startSoundFade;
-            float volume = ofMap(timeChange, 0, fadeTime, 0, 1);
-            ambientSound.setVolume(volume);
-            if(volume >= 1){
-                isScrubSoundFadeUp = false;
-            }
-        }
     }
-    if(isScrubSoundFadeDown){
-        int timeChange = ofGetElapsedTimeMillis() - startSoundFade;
-        float volume = ofMap(timeChange, 0, fadeTime, 1, 0);
-        ambientSound.setVolume(volume);
-        if(volume <= 0){
-            ambientSound.setPaused(true);
-            isScrubSoundFadeDown = false;
-        }
+    
+    
+    if (debugMode) {
+      decorativeFrame.draw(-185, -69, 2362, 1329);
     }
 
-    if (showDecorativeFrame) {
-      decorativeFrame.draw(0, 0);
-    }
-  
     vidBuffer.end();
     bezManager.draw();
-    if (bShowGui) {
+
+    if (debugMode) {
         gui.draw();
+        
+        ofSetColor(255, 255, 255);
+        ofDrawBitmapString(encoderVal, 10, 20);
+        ofDrawBitmapString(isSpinMode ? "SPIN MODE" : "LOOP MODE", 200, 20);
+        ofDrawBitmapString("Frame # shown: " + ofToString(frameShown), 10, 40);
+        ofDrawBitmapString("Spinner #: " + ofToString(spinnerNumber), 200, 40);
+        ofDrawBitmapString("Scrub Level Frame #: " + ofToString(scrubLevelFrame), 600, 40);
+        ofDrawBitmapString("Loop #: " + ofToString(loopLevelFrame), 800, 40);
+        ofDrawBitmapString("Spinner Dist: " + ofToString(spinDistance), 600, 60);
+        ofDrawBitmapString("Average Spin Dist" + ofToString(averageSpinDistance), 400, 60);
+        
+        ofDrawBitmapString("month = " + ofToString(mons[(int)trunc((frameShown / 3600.0) * 12)]), 10, 80);
+        ofDrawBitmapString("day = " + ofToString(((frameShown / 10) % 30) + 1), 150, 80);
+        ofDrawBitmapString("years = " + years, 300, 80);
+        
+        ofDrawBitmapString("sound= " + ofToString(activeVids->at(activeVidIndex).soundIndex_), 10, 110);
+        ofDrawBitmapString("springVol = " + ofToString(volumes[0]), 140, 110);
+        ofDrawBitmapString("summer1Vol = " + ofToString(volumes[1]), 250, 110);
+        ofDrawBitmapString("summer2Vol = " + ofToString(volumes[2]), 450, 110);
+        ofDrawBitmapString("fallVol= " + ofToString(volumes[3]), 600, 110);
+        ofDrawBitmapString("winterVol = " + ofToString(volumes[4]), 750, 110);
+        
+        ofDrawBitmapString("handleIndex = " + handleNames[handleIndex], 1000, 1000);
+        ofDrawBitmapString(debugInfo, 10, 100);
     }
     
-    
-    ofSetColor(255, 255, 255);
-    ofDrawBitmapString(encoderVal, 10, 20);
-    ofDrawBitmapString(isSpinMode ? "SPIN MODE" : "LOOP MODE", 200, 20);
-    ofDrawBitmapString("Frame # shown: " + ofToString(frameShown), 10, 40);
-    ofDrawBitmapString("Spinner #: " + ofToString(spinnerNumber), 200, 40);
-    ofDrawBitmapString("Scrub Level Frame #: " + ofToString(scrubLevelFrame), 600, 40);
-    ofDrawBitmapString("Loop #: " + ofToString(loopLevelFrame), 800, 40);
-    ofDrawBitmapString("Spinner Dist: " + ofToString(spinDistance), 600, 60);
-    ofDrawBitmapString("Average Spin Dist" + ofToString(averageSpinDistance), 400, 60);
-
-    ofDrawBitmapString("month = " + ofToString(mons[(int)trunc((frameShown / 3600.0) * 12)]), 10, 80);
-    ofDrawBitmapString("day = " + ofToString(((frameShown / 10) % 30) + 1), 150, 80);
-    ofDrawBitmapString("years = " + years, 300, 80);
-    ofDrawBitmapString(debugInfo, 10, 100);
     
     if(isTransitioning){
         int timeDiff = ofGetElapsedTimeMillis() - startTime;
@@ -474,6 +501,7 @@ void ofApp::keyPressed(int key){
     
     // show / hide guide
     if (key == OF_KEY_RETURN) {
+        debugMode = !debugMode;
         bezManager.toggleGuideVisible();
     }
     // save settings
@@ -507,14 +535,15 @@ void ofApp::keyPressed(int key){
         fakeSpinnerNumber = posMod((fakeSpinnerNumber + 15), 3600);
         spinnerChanged(fakeSpinnerNumber);
     }
-    if (key == 'g'){
-        bShowGui = !bShowGui;
-    }
     if(key == 'h'){
         ard.sendDigital(4, ARD_HIGH);
     }
     if(key == 'j'){
         ard.sendDigital(4, ARD_LOW);
+    }
+    if (key == 'p') {
+        bezManager.nextHandle();
+        handleIndex = (handleIndex + 1) %12;
     }
 }
 

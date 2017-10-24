@@ -50,6 +50,21 @@ class ofApp : public ofBaseApp{
             "december"
         };
     
+        string handleNames[12] = {
+            "topright anchor",
+            "topright-v",
+            "topright-h",
+            "topleft anchor",
+            "topleft-h",
+            "topleft-v",
+            "bottomleft anchor",
+            "bottomleft-v",
+            "bottomleft-h",
+            "bottomright anchor",
+            "bottomright-h",
+            "bottomright-v"
+        };
+    
         int posMod(int x, int y);
     
         void spinnerChanged(const int newSpinnerNumber);
@@ -67,9 +82,9 @@ class ofApp : public ofBaseApp{
         int loopLevelFrame;
         int frameShown;
     
-        void calculateFrameToShow();
+        int handleIndex = 0;
     
-
+        void calculateFrameToShow();
     
         vector<Vid> vids_1960;
         vector<string> images_1960;
@@ -114,11 +129,22 @@ class ofApp : public ofBaseApp{
     
     
         // === Sounds  =============================
+
+        ofSoundPlayer spring; // 0
+        ofSoundPlayer spring2; // 5 (sorry added last)
+        ofSoundPlayer summer1; // 1
+        ofSoundPlayer summer2; // 2
+        ofSoundPlayer fall; // 3
+        ofSoundPlayer winter; // 4
     
-        ofSoundPlayer ambientSound;
-        ofSoundPlayer WTSounds;
-        ofSoundPlayer JuncoSounds;
+        float volumes[6] = {0, 0, 0, 0, 0, 0};
     
+        ofSoundPlayer JUNCO;
+        ofSoundPlayer WT;
+        bool soundTriggered;
+    
+        void updateAudio();
+
         bool isScrubSoundFadeUp;
         bool isScrubSoundFadeDown;
         int startSoundFade;
@@ -154,9 +180,7 @@ class ofApp : public ofBaseApp{
         ofxFloatSlider spinModeThreshold;
     
         ofFbo checkerboardTex;
-        bool bShowGui = true;
-        bool showGuide;
+        bool debugMode = false;
         ofxBezierWarpManager bezManager;
-
 
 };

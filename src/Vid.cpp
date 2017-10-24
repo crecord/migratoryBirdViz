@@ -16,6 +16,8 @@ Vid::Vid(
     vector <int> loopDelays,
     map<string, ofVideoPlayer>* loopsPtr,
     string stillLoop,
+    int soundIndex,
+    string soundFlag,
     string year
 ) {
 
@@ -25,6 +27,9 @@ Vid::Vid(
     stillFrame_ = endFrame - 1;
     
     still_.load(frameToFilename(stillFrame_, year));
+    
+    soundIndex_ = soundIndex;
+    soundFlag_ = soundFlag;
     
     loopKeys_ = loopKeys;
     loopDelays_ = loopDelays;
@@ -37,6 +42,7 @@ Vid::Vid(
     // If a short loop should be playing when the scene is 'still' (rare case)
     if (stillLoop != "") {
         stillLoop_.load("videos/"+stillLoop);
+        stillLoop_.setVolume(0);
         stillLoop_.setLoopState(OF_LOOP_NORMAL);
     }
 }
@@ -141,9 +147,9 @@ void Vid::stopVideoBlock(){
 void Vid::drawVid() {
     if (isPlayingStill_ && stillLoop_.isPlaying()) {
         stillLoop_.update();
-        stillLoop_.draw(0, 0);
+        stillLoop_.draw(-185, -69, 2362, 1329);
     } else if (isPlayingLoop_) {
-        videos.at(loopIndex_)->draw(0, 0);
+        videos.at(loopIndex_)->draw(-185, -69, 2362, 1329);
     }
 }
 

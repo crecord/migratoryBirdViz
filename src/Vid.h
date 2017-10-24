@@ -18,10 +18,14 @@ public:
       vector <int> loopDelays,
       map<string, ofVideoPlayer>* loopsPtr,
       string stillLoop,
+      int soundIndex,
+      string soundFlag,
       string years
     );
     
     string name_;
+    int soundIndex_ = 0;
+    string soundFlag_ = "";
     string debugInfo_;
   
     bool isInRange(int frame);
@@ -37,9 +41,8 @@ public:
     
     void stopVideoBlock();
 
-    
 private:
-    
+
     deque<int> frameQ_;
     
     vector <string> loopKeys_;      // Names of videos
