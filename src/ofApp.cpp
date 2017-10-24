@@ -556,11 +556,11 @@ void ofApp::keyPressed(int key){
         }
     }
     if(key == 'q'){
-        fakeSpinnerNumber = posMod((fakeSpinnerNumber - 15), 3600);
+        fakeSpinnerNumber = posMod((fakeSpinnerNumber - 5), 3600);
         spinnerChanged(fakeSpinnerNumber);
     }
     if(key == 'w'){
-        fakeSpinnerNumber = posMod((fakeSpinnerNumber + 15), 3600);
+        fakeSpinnerNumber = posMod((fakeSpinnerNumber + 5), 3600);
         spinnerChanged(fakeSpinnerNumber);
     }
     if(key == 'h'){
@@ -649,14 +649,6 @@ void ofApp::digitalPinChanged(const int & pinNum) {
         }
     }
 }
-
-
-//----------------------   OTHER   --------------------------//
-
-
-
-
-
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
